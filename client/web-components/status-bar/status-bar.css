@@ -1,0 +1,7 @@
+i-status-bar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 42px;
+    background: #00000059;
+}

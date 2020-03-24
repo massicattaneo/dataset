@@ -1,0 +1,50 @@
+i-notification {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 42px;
+    z-index: 98;
+}
+
+i-notification div {
+    position: relative;
+    width: calc(100% - 6px);
+    max-width: 600px;
+    height: calc(100% - 6px);
+    top: 3px;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+i-notification div {
+    color: black;
+}
+
+i-notification div em {
+    line-height: 19px;
+    vertical-align: super;
+}
+i-notification div span {
+    font-size: 28px;
+    margin: 4px;
+    display: inline-block;
+    border-right: 1px solid black;
+    line-height: 27px;
+    padding: 0 4px;
+}
+
+i-notification.info div {
+    background-color: #c9c9c9
+}
+
+i-notification.warn div {
+    background-color: #d4d498
+}
+
+i-notification.success div {
+    background-color: #a1dea7
+}
+
+i-notification.error div {
+    background-color: #dea1a1
+}
