@@ -1,5 +1,5 @@
-import { addCssClass, removeCssClass } from '../../utils/html';
-import { manifest } from '../../utils/load/manifest';
+import { addCssClass, removeCssClass } from '../../../modules/html/html';
+import { manifest } from '../../../modules/loaders/manifest';
 
 const files = [
     { url: 'assets/fonts/icofont/icofont.ttf', name: 'IconsFont' },

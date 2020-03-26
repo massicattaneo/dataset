@@ -1,9 +1,14 @@
 i-notification {
     width: 100%;
     position: fixed;
-    top: 0;
+    top: -42px;
     height: 42px;
     z-index: 98;
+    transition: top 0.2s linear;
+}
+
+i-notification.show {
+    top: 0;
 }
 
 i-notification div {
@@ -22,7 +27,10 @@ i-notification div {
 
 i-notification div em {
     line-height: 19px;
-    vertical-align: super;
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    font-style: normal;
 }
 i-notification div span {
     font-size: 28px;
@@ -31,6 +39,8 @@ i-notification div span {
     border-right: 1px solid black;
     line-height: 27px;
     padding: 0 4px;
+    width: 27px;
+    height: 27px;
 }
 
 i-notification.info div {

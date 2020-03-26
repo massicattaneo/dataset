@@ -5,7 +5,8 @@ module.exports = function () {
     return {
         process: {
             clientDir: path.resolve(__dirname, '../../../client/'),
-            publicPath: SERVER.ROOT
+            publicPath: SERVER.ROOT,
+            isDevelopment: true
         },
         sessions: {}
     };

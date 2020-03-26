@@ -23,6 +23,10 @@ function getDefaultConfig({ clientDir }) {
                 {
                     test: /\.css$/i,
                     use: ['style-loader', 'css-loader']
+                },
+                {
+                    test: /\.xml$/i,
+                    use: 'raw-loader'
                 }
             ]
         },

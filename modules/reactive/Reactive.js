@@ -1,5 +1,5 @@
-const { EventEmitter } = require('./EventEmitter');
-const { Middleware } = require('./Middleware');
+const { EventEmitter } = require('../event-emitter/EventEmitter');
+const { Middleware } = require('../middleware/Middleware');
 
 function Reactive(entryValue) {
     const emitter = EventEmitter();

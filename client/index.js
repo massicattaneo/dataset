@@ -1,7 +1,7 @@
 import './index.css';
 import { parseStatements } from '../core/core-utils';
-import { Thread } from '../core/Thread';
-import { FunctionalProgramming } from '../core/FunctionalProgramming';
+import { Thread } from '../modules/thread/Thread';
+import { FunctionalProgramming } from '../modules/functional-programming/FunctionalProgramming';
 
 FunctionalProgramming(Function);
 
@@ -11,6 +11,9 @@ const statements = parseStatements(require.context('./statements/', true, /.js/)
 const thread = Thread(statements);
 
 (async function () {
+    await thread.main('init/store').subscribe().then(thread.extend);
+    await thread.main('init/locale').subscribe().then(thread.extend);
+    await thread.main('init/home').subscribe().then(thread.extend);
+    await thread.main('init/errors').subscribe();
     await thread.main('init/resources').subscribe().then(thread.extend);
-    await thread.main('init/home-page').subscribe().then(thread.extend);
 })();

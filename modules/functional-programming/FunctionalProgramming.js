@@ -166,9 +166,16 @@ function FunctionalProgramming(FnObj = {}) {
         };
     };
 
+    /**
+     *
+     * @param maxRetry
+     * @param retryTimeout
+     * @returns {function(...[*]=): Promise<unknown>}
+     */
     proto.retry = function (...args1) {
         const self = getSelf(this, args1);
-        const { maxRetry = 5, retryTimeout = 1000 } = args1[0] || {};
+        const maxRetry = args1[0] || 5;
+        const retryTimeout = args1[1] || 1000;
         return function (...args) {
             return new Promise((resolve, reject) => {
                 const recursivelyRetryLoading = (counter, ...args2) => {

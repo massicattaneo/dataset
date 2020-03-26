@@ -24,7 +24,7 @@ const appendFontStyle = (name, url) => {
     };
 };
 
-const load = ({ name }, extraChars) => {
+const load = ({ name, url }, extraChars) => {
     const tester = document.createElement('span');
     const testFont = 'Comic Sans MS';
     const maxMs = 30 * 1000;
@@ -46,7 +46,7 @@ const load = ({ name }, extraChars) => {
             if (startWidth === loadedFontWidth && newTime - start <= maxMs) {
                 setTimeout(checkFont, 20);
             } else if (newTime - start > maxMs) {
-                reject();
+                reject({ url })
             } else {
                 resolve();
             }
@@ -58,7 +58,7 @@ const load = ({ name }, extraChars) => {
 export const loadFont = ({ name, url }, { extraChars = '' } = {}) => {
     return new Promise((retryResolve, retryReject) => {
         appendFontStyle(name, url);
-        load({ name }, extraChars)
+        load({ name, url }, extraChars)
             .then(retryResolve)
             .catch(retryReject);
     });

@@ -41,7 +41,7 @@ export const loadCss = ({ url }) => {
         document.head.insertBefore(css, document.head.children[0] || null);
 
         const onload = () => resolve();
-        const onerror = error => reject(error);
+        const onerror = error => reject({ url });
 
         if (isOtherAndroidBrowser || !('onload' in css)) {
             waitForCss({
