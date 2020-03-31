@@ -1,10 +1,9 @@
-const appendFontStyle = (name, url) => {
-    const queryString = url.lastIndexOf('?') !== -1 ? url.substr(url.lastIndexOf('?')) : '';
+const appendFontStyle = (name, url, dependencies) => {
     const css = `@font-face {
                             font-family: ${name};
-                            src: url('${url.substr(0, url.lastIndexOf('.'))}.woff2${queryString}') format('woff2'),
-                            url('${url.substr(0, url.lastIndexOf('.'))}.woff${queryString}') format('woff'),
-                            url('${url}${queryString}') format('ttf');
+                            src: url('${dependencies.find(item => item.ext === 'woff2').url}') format('woff2'),
+                            url('${dependencies.find(item => item.ext === 'woff').url}') format('woff'),
+                            url('${url}') format('ttf');
                         }`;
     const head = document.head || document.getElementsByTagName('head')[0];
     const style = document.createElement('style');
@@ -46,7 +45,7 @@ const load = ({ name, url }, extraChars) => {
             if (startWidth === loadedFontWidth && newTime - start <= maxMs) {
                 setTimeout(checkFont, 20);
             } else if (newTime - start > maxMs) {
-                reject({ url })
+                reject({ url });
             } else {
                 resolve();
             }
@@ -55,11 +54,13 @@ const load = ({ name, url }, extraChars) => {
     });
 };
 
-export const loadFont = ({ name, url }, { extraChars = '' } = {}) => {
+const loadFont = ({ name, url, dependencies }, { extraChars = '' } = {}) => {
     return new Promise((retryResolve, retryReject) => {
-        appendFontStyle(name, url);
+        appendFontStyle(name, url, dependencies);
         load({ name, url }, extraChars)
             .then(retryResolve)
             .catch(retryReject);
     });
 };
+
+module.exports = { loadFont };

@@ -2,8 +2,8 @@
     font-family: "IconsFont";
     font-weight: normal;
     font-style: "Regular";
-    src: url("icofont/icofont.woff2") format("woff2"),
-    url("icofont/icofont.woff") format("woff");
+    src: url("icofont.woff2") format("woff2"),
+    url("icofont.woff") format("woff");
 }
 
 [class^="icofont-"], [class*=" icofont-"] {

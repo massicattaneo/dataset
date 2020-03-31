@@ -13,6 +13,7 @@ const mainThread = Thread(parseStatements(context, '.js'));
     await mainThread.main('init/db').subscribe().then(mainThread.extend);
     mainThread.main('init/session').subscribe(mainThread.extend);
     mainThread.main('init/locale').subscribe();
+    mainThread.main('init/router').subscribe();
     await mainThread.main(async function () {
         await this.server.listen();
     }).subscribe();

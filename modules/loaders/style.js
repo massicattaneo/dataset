@@ -1,3 +1,4 @@
+const navigator = process.env ? { userAgent: '' } : window.navigator;
 const { userAgent } = navigator;
 const isChromeBrowser = /CriOS|Chrome/.test(userAgent);
 const isOtherAndroidBrowser =
@@ -32,7 +33,7 @@ const waitForCss = params => {
     nextStep();
 };
 
-export const loadCss = ({ url }) => {
+const loadStyle = ({ url }) => {
     return new Promise(function (resolve, reject) {
         const css = document.createElement('link');
         css.setAttribute('rel', 'stylesheet');
@@ -54,3 +55,5 @@ export const loadCss = ({ url }) => {
         }
     });
 };
+
+module.exports = { loadStyle };
