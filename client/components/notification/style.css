@@ -1,4 +1,4 @@
-i-notification {
+.i-notification {
     width: 100%;
     position: fixed;
     top: -42px;
@@ -7,11 +7,11 @@ i-notification {
     transition: top 0.2s linear;
 }
 
-i-notification.show {
+.i-notification.show {
     top: 0;
 }
 
-i-notification div {
+.i-notification div {
     position: relative;
     width: calc(100% - 6px);
     max-width: 600px;
@@ -19,20 +19,19 @@ i-notification div {
     top: 3px;
     margin: 0 auto;
     border-radius: 10px;
-}
-
-i-notification div {
     color: black;
+    overflow: hidden;
 }
 
-i-notification div em {
+.i-notification div em {
     line-height: 19px;
     vertical-align: top;
     display: inline-block;
     text-align: center;
     font-style: normal;
+    width: calc(100% - 50px);
 }
-i-notification div span {
+.i-notification div span {
     font-size: 28px;
     margin: 4px;
     display: inline-block;
@@ -43,18 +42,18 @@ i-notification div span {
     height: 27px;
 }
 
-i-notification.info div {
+.i-notification.info div {
     background-color: #c9c9c9
 }
 
-i-notification.warn div {
+.i-notification.warn div {
     background-color: #d4d498
 }
 
-i-notification.success div {
+.i-notification.success div {
     background-color: #a1dea7
 }
 
-i-notification.error div {
+.i-notification.error div {
     background-color: #dea1a1
 }

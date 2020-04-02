@@ -5,13 +5,10 @@ import { FunctionalProgramming } from '../modules/functional-programming/Functio
 
 FunctionalProgramming(Function);
 
-parseStatements(require.context('./web-components/', true, /.js/));
-
 const statements = parseStatements(require.context('./statements/', true, /.js/), '.js');
 const thread = Thread(statements);
 
 (async function () {
-    await thread.main('init/home').subscribe().then(thread.extend);
     await thread.main('init/store').subscribe().then(thread.extend);
     await thread.main('init/router').subscribe().then(thread.extend);
     await thread.main('init/locale').subscribe().then(thread.extend);

@@ -29,6 +29,10 @@ function getDefaultConfig({ clientDir }) {
                 {
                     test: /\.xml$/i,
                     use: 'raw-loader'
+                },
+                {
+                    test: /\.html$/i,
+                    use: 'raw-loader'
                 }
             ]
         },
@@ -36,10 +40,7 @@ function getDefaultConfig({ clientDir }) {
             modules: ['node_modules']
         },
         plugins: [
-            new CleanWebpackPlugin(),
-            new webpack.optimize.OccurrenceOrderPlugin(),
-            new webpack.HotModuleReplacementPlugin(),
-            new webpack.NoEmitOnErrorsPlugin(),
+            // new CleanWebpackPlugin(),
             new CopyWebpackPlugin([
                 { from: `${assetsDir}/init/*`, to: `assets/init/[name].[hash].[ext]` }
             ]),
