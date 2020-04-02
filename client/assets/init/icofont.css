@@ -1,13 +1,5 @@
-@font-face {
-    font-family: "IconsFont";
-    font-weight: normal;
-    font-style: "Regular";
-    src: url("icofont.woff2") format("woff2"),
-    url("icofont.woff") format("woff");
-}
-
 [class^="icofont-"], [class*=" icofont-"] {
-    font-family: 'IconsFont' !important;
+    font-family: 'icofont' !important;
     speak: none;
     font-style: normal;
     font-weight: normal;

@@ -10,8 +10,8 @@ const thread = Thread(statements);
 
 (async function () {
     await thread.main('init/store').subscribe().then(thread.extend);
-    await thread.main('init/router').subscribe().then(thread.extend);
     await thread.main('init/locale').subscribe().then(thread.extend);
+    await thread.main('init/router').subscribe().then(thread.extend);
     await thread.main('init/errors').subscribe();
     await thread.main('init/resources').subscribe().then(thread.extend);
 })();

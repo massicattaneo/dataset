@@ -1,7 +1,18 @@
 .i-icon {
-    border: 1px solid white;
-    display: inline-block;
-    width: 56px;
     margin: 1px;
-    height: 56px;
+    height: 58px;
+    font-size: 33px;
+    line-height: 45px;
+    flex: auto;
+    position: relative;
+}
+
+.i-icon span {
+    font-family: var(--font-family);
+    font-size: 10px;
+    display: block;
+    position: absolute;
+    bottom: -12px;
+    width: 100%;
+    color: white;
 }

@@ -1,0 +1,17 @@
+<locales>
+    <locale path="index/menu/icons/trash">
+        <en>Trash</en>
+    </locale>
+    <locale path="index/menu/icons/login">
+        <en>Login</en>
+    </locale>
+    <locale path="index/menu/icons/help">
+        <en>Help</en>
+    </locale>
+    <locale path="index/menu/icons/history">
+        <en>History</en>
+    </locale>
+    <locale path="index/menu/icons/create">
+        <en>Create</en>
+    </locale>
+</locales>

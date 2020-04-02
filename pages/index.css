@@ -6,6 +6,9 @@
     bottom: 0;
     background: black;
     text-align: center;
+    display: flex;
+}
+.page-home .menu .i-icon {
 }
 
 /***************************************************************** STATUS BAR  **/

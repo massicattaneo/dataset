@@ -1,4 +1,5 @@
 import './style.css';
+import template from './template.html';
 import { addCssClass, removeCssClass } from '../../../modules/html/html';
 
 const ICONS = {
@@ -31,7 +32,8 @@ const mixin = element => {
     return element;
 };
 
-const selector = '.i-notification';
-const exports = { selector, mixin };
+const tagName = 'i-notification';
+const selector = `.${tagName}`;
+const exports = { tagName, selector, mixin, template };
 export default exports;
 

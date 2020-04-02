@@ -14,7 +14,8 @@ const getLocales = () => {
         return Object.keys(xml);
     };
     const localesXml = parseStatements(context, '.xml');
-    return xmlToLocales(localesXml.errors);
+    const allLocales = Object.values(localesXml).map(string => string.replace(/<locales>/, '').replace(/<\/locales>/, ''));
+    return xmlToLocales(`<locales>${allLocales}</locales>`);
 };
 
 const loc = getLocales();

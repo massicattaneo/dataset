@@ -1,6 +1,7 @@
 :root {
     --main-color: #d8d8d8;
     --main-bg-color: #3e3e3e;
+    --font-family: 'Arial Narrow';
     /*--secondary-bg-color: #142940;*/
     /*--secondary-color: #5c6071;*/
     /*--accent-color: #389bbb;*/
@@ -8,6 +9,8 @@
 }
 
 body {
+    font-family: var(--font-family);
     background-color: var(--main-bg-color);
     color: var(--main-color);
+    min-width: 320px;
 }

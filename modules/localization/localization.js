@@ -23,6 +23,7 @@ function xmlToLocales(localesXml) {
     }, {});
 }
 
+
 module.exports = {
     xmlToLocales
 };

@@ -1,13 +1,13 @@
 import './style.css';
+import template from './template.html';
 import { addCssClass, removeCssClass } from '../../../modules/html/html';
 
 const mixin = element => {
-
-
     return element;
 };
 
-const selector = '.i-icon';
-const exports = { selector, mixin };
+const tagName = 'i-icon';
+const selector = `.${tagName}`;
+const exports = { tagName, selector, mixin, template };
 export default exports;
 

@@ -30,7 +30,7 @@ function convertValue(value) {
     return isNaN(ret) ? ret : (Number(ret));
 }
 
-function xmlToJson(svgString, root = false, ) {
+function xmlToJson(svgString, root = false) {
     const target = createChild('root');
     let ref = target;
     svgString.replace(/\n/g, '')
@@ -64,7 +64,15 @@ function jsonToXml(json) {
     return `<${json.name} ${Object.keys(json.attributes).map(n => `${n}="${json.attributes[n]}"`).join(' ')}>${json.content}${json.children.map(jsonToXml).join('')}</${json.name}>`;
 }
 
+function xmlToSimpleJson(xml) {
+    const structure = xmlToJson(xml, true);
+    return structure.children.reduce((acc, item) => {
+        return { ...acc, [item.name]: item.content };
+    }, {});
+}
+
 module.exports = {
     xmlToJson,
-    jsonToXml
+    jsonToXml,
+    xmlToSimpleJson
 };
