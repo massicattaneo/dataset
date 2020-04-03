@@ -2,7 +2,13 @@ import { connect } from '../../../modules/reactive/Reactive';
 
 export default async function () {
     const version = this.store.version.get();
-    const locObj = {};
+    const locObj = {
+        manifest: window.manifest.reduce((acc, item) => {
+            acc[item.stage] = acc[item.stage] || {};
+            acc[item.stage][item.name] = item.url;
+            return acc;
+        }, {})
+    };
 
     await (new Promise((resolve) => {
         connect({ language: this.store.language }, async ({ language }) => {

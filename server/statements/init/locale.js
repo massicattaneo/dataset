@@ -1,6 +1,7 @@
 const fs = require('fs');
 const { parseStatements } = require('../../../core/core-utils');
 const { xmlToLocales } = require('../../../modules/localization/localization');
+const { cache } = require('../../utils/cache-middleware');
 
 const getLocales = () => {
     const localeDir = `${__dirname}/../../../locales/`;
@@ -21,9 +22,11 @@ const getLocales = () => {
 const loc = getLocales();
 
 module.exports = async function () {
-    this.app.get('/locale/:version/:language', (req, res) => {
-        const { language } = req.params;
-        const locale = this.process.isDevelopment ? getLocales() : loc;
-        return res.json(locale[language]);
-    });
+    this.app.get('/locale/:version/:language',
+        cache(this),
+        (req, res) => {
+            const { language } = req.params;
+            const locale = this.process.isDevelopment ? getLocales() : loc;
+            return res.json(locale[language]);
+        });
 };

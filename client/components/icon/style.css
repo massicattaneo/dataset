@@ -5,6 +5,12 @@
     line-height: 45px;
     flex: auto;
     position: relative;
+    max-width: 78px;
+    color: var(--main-color);
+}
+
+.i-icon.accent {
+    color: var(--accent-color);
 }
 
 .i-icon span {

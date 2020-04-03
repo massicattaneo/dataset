@@ -1,10 +1,12 @@
 const { loadStyle } = require('./style');
 const { loadFont } = require('./font');
+const { loadImage } = require('./image');
 
 const options = { extraChars: '&#xe803;' };
 const DEPENDENCY_TYPES = {
     STYLE: 'style',
-    FONT: 'font'
+    FONT: 'font',
+    IMAGE: 'image'
 };
 const FONTS_EXTENSIONS = ['ttf', 'woff', 'woff2', 'svg', 'eot'];
 
@@ -29,6 +31,7 @@ const manifest = (array, folders = []) => {
         .filter(({ stage }) => stages.indexOf(stage) !== -1)
         .map((file) => {
             if (file.type === DEPENDENCY_TYPES.STYLE) return () => loadStyle(file);
+            if (file.type === DEPENDENCY_TYPES.IMAGE) return () => loadImage(file);
             if (file.type === DEPENDENCY_TYPES.FONT) return () => loadFont(file, options);
         });
     return Promise.all(loaders.map(loader => {

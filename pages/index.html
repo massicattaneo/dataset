@@ -1,24 +1,24 @@
 <div class="page-home">
-    <div class="status-bar"></div>
-    <i-notification>
-        <id>notification</id>
-    </i-notification>
+    <div class="status-bar">
+        <img src="{{manifest.init.logo}}" />
+    </div>
+    <i-notification data-exposed-as="notification"></i-notification>
 
     <nav class="menu">
-        <i-icon>
-            <icon>icofont-trash</icon>
-            <label>{{index.menu.icons.trash}}</label></i-icon>
         <i-icon>
             <icon>icofont-user</icon>
             <label>{{index.menu.icons.login}}</label></i-icon>
         <i-icon>
-            <icon>icofont-info-circle</icon>
-            <label>{{index.menu.icons.help}}</label></i-icon>
+            <icon>icofont-ui-settings</icon>
+            <label>{{index.menu.icons.settings}}</label></i-icon>
         <i-icon>
-            <icon>icofont-history</icon>
-            <label>{{index.menu.icons.history}}</label></i-icon>
+            <icon>icofont-trash</icon>
+            <label>{{index.menu.icons.trash}}</label></i-icon>
         <i-icon>
-            <icon>icofont-plus-circle</icon>
+            <icon>icofont-ui-message</icon>
+            <label>{{index.menu.icons.message}}</label></i-icon>
+        <i-icon>
+            <icon>icofont-plus-circle accent</icon>
             <label>{{index.menu.icons.create}}</label></i-icon>
     </nav>
 </div>

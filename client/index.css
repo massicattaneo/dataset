@@ -1,16 +1,13 @@
 :root {
-    --main-color: #d8d8d8;
-    --main-bg-color: #3e3e3e;
+    --main-color: #b5ccd8;
+    --contrast-color: #3e3e3e;
+    --accent-color: #d93fa5;
     --font-family: 'Arial Narrow';
-    /*--secondary-bg-color: #142940;*/
-    /*--secondary-color: #5c6071;*/
-    /*--accent-color: #389bbb;*/
-    /*--accent-color-contrast: #0f3542;*/
 }
 
 body {
     font-family: var(--font-family);
-    background-color: var(--main-bg-color);
+    background-color: var(--contrast-color);
     color: var(--main-color);
     min-width: 320px;
 }

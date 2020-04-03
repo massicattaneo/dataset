@@ -1,15 +1,15 @@
-export const loadImage = resource => {
+const loadImage = ({ url }) => {
     const image = new Image();
-    const start = Date.now();
     return new Promise((resolve, reject) => {
         image.onload = () => {
-            resolve({
-                stats: { start, end: Date.now(), resource },
-                resource: simpleObjectExtend({ data: image }, resource)
-            });
+            resolve(image);
         };
-        image.onerror = () => reject({ message: 'ERROR LOADING IMAGE', resource });
+        image.onerror = () => reject({ url });
         image.crossOrigin = 'anonymous';
-        image.src = resource.url;
+        image.src = url;
     });
+};
+
+module.exports = {
+    loadImage
 };

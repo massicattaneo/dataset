@@ -7,8 +7,7 @@
     background: black;
     text-align: center;
     display: flex;
-}
-.page-home .menu .i-icon {
+    justify-content: flex-end;
 }
 
 /***************************************************************** STATUS BAR  **/
@@ -16,6 +15,12 @@
     width: 100%;
     position: fixed;
     top: 0;
-    height: 42px;
+    height: 29px;
     background: #00000059;
+}
+.page-home .status-bar img {
+    width: 17px;
+    margin: 6px 6px;
+    display: inline-block;
+    vertical-align: middle;
 }

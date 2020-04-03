@@ -1,16 +1,15 @@
 import { parseStatements } from '../../../core/core-utils';
-import { Node } from '../../../modules/html/html';
+import { addCssClass, Node } from '../../../modules/html/html';
 import { xmlToSimpleJson } from '../../../modules/xml/xml';
 import { templateParser } from '../../../modules/templating';
+import { attributesRegEx, tagRegEx } from '../../../modules/regexp/regexp';
 
 const htmlPages = parseStatements(require.context('../../../pages/', true, /.html/));
 parseStatements(require.context('../../../pages/', true, /.css/));
 
 const componentsJS = parseStatements(require.context('../../components/', true, /.js/));
 
-const createPage = (path, locales) => {
-    let markup = htmlPages[path];
-
+const createPage = (markup, locales) => {
     Object.values(componentsJS).forEach(bundle => {
         const { template, tagName } = bundle;
         let start = markup.match(new RegExp(`<${tagName}[^^]*>`)).index;
@@ -18,10 +17,12 @@ const createPage = (path, locales) => {
             const end = markup.match(new RegExp(`</${tagName}>`)).index + tagName.length + 3;
             const toSubstitute = markup.substr(start, end - start);
             const params = xmlToSimpleJson(toSubstitute);
-            markup = markup.replace(toSubstitute, templateParser(template, params));
+            const [, firstNode] = toSubstitute.replace(/\n∫/, '').match(tagRegEx);
+            const [attributes] = firstNode.match(attributesRegEx) || [''];
+            const taggedTemplate = template.replace('>', ` ${attributes}>`);
+            markup = markup.replace(toSubstitute, templateParser(taggedTemplate, params));
             start = (markup.match(new RegExp(`<${tagName}[^^]*>`)) || {}).index;
         }
-
     });
 
     const home = Node(templateParser(markup, locales));
@@ -38,10 +39,11 @@ const createPage = (path, locales) => {
 };
 
 export default async function () {
-    const { locale } = this;
+    const { locale, store } = this;
     const router = {};
     const appElement = document.getElementById('app');
-    const home = createPage('index.html', locale.all());
+    const home = createPage(htmlPages['index.html'], locale.all());
+    addCssClass(document.body, store.device.type.get());
 
     appElement.appendChild(home);
     // window.history.replaceState({}, '', `/${this.store.language.get()}/`);

@@ -1,7 +1,12 @@
 export default async function () {
-    const { locales, thread, home } = this;
+    const { thread } = this;
     thread.onError(error => {
-        const text = locale.get({ path: 'error/loading/file', ...error });
-        home.notification.show('error', text);
+        const { locale, home } = this;
+        const text = locale ? locale.get({ path: 'error/loading/file', ...error }) : 'Something went wrong';
+        if (home) {
+            home.notification.show('error', text);
+        } else {
+            alert(text);
+        }
     });
 }
