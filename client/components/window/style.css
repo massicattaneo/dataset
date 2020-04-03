@@ -1,0 +1,71 @@
+.i-window {
+    transition: transform 200ms;
+    margin: auto;
+    box-shadow: -2px 0 15px rgba(0, 0, 0, 0.4);
+    z-index: 20;
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    right: auto;
+    bottom: auto;
+    resize: both;
+    border: 1px solid var(--contrast-color);
+    border-radius: 11px;
+    max-width: initial;
+    background: var(--contrast-color);
+    overflow: hidden;
+    font-family: var(--font-family);
+    color: white;
+}
+
+.i-window .bar {
+    position: relative;
+    background: var(--main-color);
+    height: 24px;
+    width: 100%;
+    overflow: hidden;
+    user-select: none;
+}
+
+.i-window .close {
+    font-size: 16px;
+    position: relative;
+    left: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--accent-color);
+}
+
+.i-window .close:hover {
+    color: #ff4236;
+}
+
+.i-window .drag-area {
+    margin: 4px;
+    border: 1px dotted white;
+    border-radius: 4px;
+    padding: 5px;
+    color: white;
+}
+
+.i-window .title {
+    position: relative;
+    padding-left: 10px;
+    line-height: 24px;
+    font-size: 15px;
+}
+
+.i-window .menu {
+    width: 100%;
+    color: #000;
+}
+
+.i-window .update-area {
+    width: 20px;
+    border: 1px dotted white;
+    margin: 2px;
+    display: inline-block;
+    height: 16px;
+    border-radius: 2px;
+}
+
