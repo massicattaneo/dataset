@@ -1,3 +1,6 @@
+const { xmlToSimpleJson } = require('../xml/xml');
+const { attributesRegEx, tagRegEx } = require('../regexp/regexp');
+
 function loopObjectOnString(...args) {
     const [prefix, action, scope, string] = args.length === 3 ? ['', args[0], args[1], args[2]] : args;
     return Object.keys(scope).reduce(function (s, key) {
@@ -109,6 +112,25 @@ function templateParser(htmlTemplate, variables = {}, parsers = {}) {
         .subscribe(htmlTemplate);
 }
 
+const templateComponents = (markup, components) => {
+    Object.values(components).forEach(bundle => {
+        const { template, tagName } = bundle;
+        let start = markup.match(new RegExp(`<${tagName}[^^]*>`)).index;
+        while (start) {
+            const end = markup.match(new RegExp(`</${tagName}>`)).index + tagName.length + 3;
+            const toSubstitute = markup.substr(start, end - start);
+            const params = xmlToSimpleJson(toSubstitute);
+            const [, firstNode] = toSubstitute.replace(/\n∫/, '').match(tagRegEx);
+            const [attributes] = firstNode.match(attributesRegEx) || [''];
+            const taggedTemplate = template.replace('>', ` ${attributes}>`);
+            markup = markup.replace(toSubstitute, templateParser(taggedTemplate, params));
+            start = (markup.match(new RegExp(`<${tagName}[^^]*>`)) || {}).index;
+        }
+    });
+    return markup;
+};
+
 module.exports = {
-    templateParser
+    templateParser,
+    templateComponents
 };

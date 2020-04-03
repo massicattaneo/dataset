@@ -10,4 +10,5 @@ body {
     background-color: var(--contrast-color);
     color: var(--main-color);
     min-width: 320px;
+    overflow: hidden;
 }

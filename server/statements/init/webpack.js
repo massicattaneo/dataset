@@ -2,6 +2,7 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const WebpackMiddleware = require('webpack-dev-middleware');
+const WebpackHotMiddleware = require("webpack-hot-middleware");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { InlineManifestPlugin } = require('../../webpack/inline-manifest-plugin');
@@ -10,7 +11,7 @@ function getDefaultConfig({ clientDir }) {
     const assetsDir = path.resolve(clientDir, 'assets');
     return {
         entry: {
-            main: [path.resolve(clientDir, './index.js')]
+            main: [path.resolve(clientDir, './index.js'), 'webpack-hot-middleware/client']
         },
         mode: 'development',
         output: {
@@ -44,6 +45,7 @@ function getDefaultConfig({ clientDir }) {
             new CopyWebpackPlugin([
                 { from: `${assetsDir}/init/*`, to: `assets/init/[name].[hash].[ext]` }
             ]),
+            new webpack.HotModuleReplacementPlugin(),
             new InlineManifestPlugin(),
             new HtmlWebpackPlugin({
                 template: path.resolve(clientDir, 'index.html'),
@@ -75,5 +77,6 @@ module.exports = async function () {
     const config = getDefaultConfig(this.process);
     const compiler = webpack(config);
     WebpackMiddleware(compiler, getOptions(this.process));
+    this.app.use(WebpackHotMiddleware(compiler));
     return {};
 };
