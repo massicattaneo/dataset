@@ -5,9 +5,15 @@
     font-size: 33px;
     line-height: 45px;
     flex: auto;
-    position: relative;
     max-width: 78px;
     color: var(--main-color);
+    cursor: pointer;
+}
+
+.i-icon:hover {
+    transform: scale(1.1, 1.1);
+    transform-origin: 50% 100%;
+    transition: transform 0.1s linear;
 }
 
 .i-icon.accent {
