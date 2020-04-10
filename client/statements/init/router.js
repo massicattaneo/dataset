@@ -1,6 +1,7 @@
 import { parseStatements } from '../../../core/core-utils';
 import { addCssClass, Node } from '../../../modules/html/html';
 import { templateParser, templateComponents } from '../../../modules/templating';
+import { touchType } from '../../../modules/device/device-client';
 
 const htmlPages = parseStatements(require.context('../../../pages/', true, /.html/));
 parseStatements(require.context('../../../pages/', true, /.css/));
@@ -23,11 +24,11 @@ const createHtmlPage = (markup, locales) => {
 };
 
 export default async function () {
-    const { locale, store } = this;
+    const { locale } = this;
     const router = {};
     const appElement = document.getElementById('app');
     const home = createHtmlPage(htmlPages['index.html'], locale.all());
-    addCssClass(document.body, store.device.type.get());
+    addCssClass(document.body, touchType);
 
     appElement.appendChild(home);
     // window.history.replaceState({}, '', `/${this.store.language.get()}/`);

@@ -3,6 +3,8 @@
     --contrast-color: #3e3e3e;
     --accent-color: #d93fa5;
     --font-family: 'Arial Narrow';
+    --header-height: 29px;
+    --footer-height: 60px;
 }
 
 body {

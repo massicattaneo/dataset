@@ -3,9 +3,9 @@
     margin: auto;
     box-shadow: -2px 0 15px rgba(0, 0, 0, 0.4);
     z-index: 20;
-    position: fixed;
+    position: absolute;
     left: 10px;
-    top: 10px;
+    top: calc(var(--header-height) + 10px);
     right: auto;
     bottom: auto;
     resize: both;
@@ -16,6 +16,18 @@
     overflow: hidden;
     font-family: var(--font-family);
     color: white;
+    height: 500px;
+    width: 800px;
+}
+
+.mobile .i-window {
+    top: 29px;
+    width: 100%;
+    height: calc(100% - var(--header-height) - var(--footer-height));
+    left: 0;
+    border-radius: 0;
+    border: 0;
+    resize: none;
 }
 
 .i-window .bar {
@@ -25,6 +37,10 @@
     width: 100%;
     overflow: hidden;
     user-select: none;
+}
+
+.mobile .i-window .bar {
+    display: none;
 }
 
 .i-window .close {
@@ -55,11 +71,6 @@
     font-size: 15px;
 }
 
-.i-window .menu {
-    width: 100%;
-    color: #000;
-}
-
 .i-window .update-area {
     width: 20px;
     border: 1px dotted white;
@@ -69,3 +80,10 @@
     border-radius: 2px;
 }
 
+.i-window .content {
+    height: calc(100% - var(--header-height) - 10px);
+}
+
+.mobile .i-window .content {
+    height: 100%;
+}
