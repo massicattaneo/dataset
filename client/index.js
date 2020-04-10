@@ -1,4 +1,4 @@
-import './index.css';
+import './index.scss';
 import { parseStatements } from '../core/core-utils';
 import { Thread } from '../modules/thread/Thread';
 import { FunctionalProgramming } from '../modules/functional-programming/FunctionalProgramming';

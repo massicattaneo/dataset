@@ -1,4 +1,4 @@
-import './style.css';
+import './style.scss';
 import template from './template.html';
 import { addCssClass, removeCssClass } from '../../../modules/html/html';
 

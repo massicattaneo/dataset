@@ -2,10 +2,12 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const WebpackMiddleware = require('webpack-dev-middleware');
-const WebpackHotMiddleware = require("webpack-hot-middleware");
+const WebpackHotMiddleware = require('webpack-hot-middleware');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { InlineManifestPlugin } = require('../../webpack/inline-manifest-plugin');
+const { STYLE } = require('../../../core/constants');
+const { jsToSass } = require('../../webpack/js-to-sass-variables');
 
 function getDefaultConfig({ clientDir }) {
     const assetsDir = path.resolve(clientDir, 'assets');
@@ -24,8 +26,17 @@ function getDefaultConfig({ clientDir }) {
         module: {
             rules: [
                 {
-                    test: /\.css$/i,
-                    use: ['style-loader', 'css-loader']
+                    test: /\.s[ac]ss$/i,
+                    use: [
+                        'style-loader',
+                        'css-loader',
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                prependData: jsToSass(STYLE),
+                            },
+                        }
+                    ]
                 },
                 {
                     test: /\.xml$/i,
@@ -51,7 +62,7 @@ function getDefaultConfig({ clientDir }) {
                 template: path.resolve(clientDir, 'index.html'),
                 inject: false,
                 filename: 'index.html'
-            }),
+            })
         ]
     };
 }

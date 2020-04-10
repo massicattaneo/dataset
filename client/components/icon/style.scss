@@ -6,7 +6,7 @@
     line-height: 45px;
     flex: auto;
     max-width: 78px;
-    color: var(--main-color);
+    color: $mainColor;
     cursor: pointer;
 }
 
@@ -17,11 +17,11 @@
 }
 
 .i-icon.accent {
-    color: var(--accent-color);
+    color: $accentColor;
 }
 
 .i-icon span {
-    font-family: var(--font-family);
+    font-family: $fontFamily;
     font-size: 10px;
     display: block;
     position: absolute;
@@ -36,7 +36,7 @@
     height: 20px;
     background-color: red;
     color: white;
-    font-family: var(--font-family);
+    font-family: $fontFamily;
     font-size: 12px;
     line-height: 20px;
     font-style: normal;

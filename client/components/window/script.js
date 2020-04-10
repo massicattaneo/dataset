@@ -1,4 +1,4 @@
-import './style.css';
+import './style.scss';
 import template from './template.html';
 import { addCssClass, draggable, removeCssClass } from '../../../modules/html/html';
 import { isDesktop, isMobile } from '../../../modules/device/device-client';
