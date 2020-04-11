@@ -4,7 +4,7 @@
   "description": "DATASET",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js"
+    "start": "nodemon server/index.js"
   },
   "repository": {
     "type": "git",
@@ -16,6 +16,9 @@
     "url": "https://github.com/massicattaneo/dataset/issues"
   },
   "homepage": "https://github.com/massicattaneo/dataset#readme",
+  "nodemonConfig": {
+    "ignore": [ "server/static/*", "client/*" ]
+  },
   "dependencies": {
     "babel-plugin-add-module-exports": "^1.0.2",
     "body-parser": "^1.19.0",
@@ -51,6 +54,7 @@
     "copy-webpack-plugin": "^5.1.1",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.13.1",
+    "nodemon": "^2.0.3",
     "sass-loader": "^8.0.2",
     "webpack": "^4.42.1",
     "webpack-dev-middleware": "^3.7.2",

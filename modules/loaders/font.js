@@ -2,6 +2,7 @@ const appendFontStyle = (name, url, dependencies) => {
     const css = `@font-face {
                             font-family: ${name};
                             src: url('${dependencies.find(item => item.ext === 'woff2').url}') format('woff2'),
+                            url('${dependencies.find(item => item.ext === 'woff').url}') format('woff'),
                             url('${url}') format('ttf');
                         }`;
     const head = document.head || document.getElementsByTagName('head')[0];

@@ -14,4 +14,8 @@ const thread = Thread(statements);
     await thread.main('init/locale').subscribe().then(thread.extend);
     await thread.main('init/resources').subscribe().then(thread.extend);
     await thread.main('init/router').subscribe().then(thread.extend);
+    thread.main('api/login-status');
+    thread.main(async function () {
+        this.home.dialog.show('PROVA <br/>PROVA <br/>PROVA <br/>PROVA <br/>PROVA <br/>PROVA <br/>PROVA <br/>PROVA <br/>');
+    });
 })();

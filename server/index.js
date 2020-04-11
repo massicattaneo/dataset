@@ -9,6 +9,7 @@ const mainThread = Thread(parseStatements(context, '.js'));
     mainThread.main('init/process').subscribe(mainThread.extend);
     mainThread.main('init/app').subscribe(mainThread.extend);
     mainThread.main('init/server').subscribe(mainThread.extend);
+    mainThread.main('api/login-services').subscribe();
     mainThread.main('init/webpack');
     await mainThread.main('init/db').subscribe().then(mainThread.extend);
     mainThread.main('init/session').subscribe(mainThread.extend);

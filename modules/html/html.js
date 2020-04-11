@@ -138,3 +138,13 @@ export function downLoadJsonFile({ productInfo }, title, recording) {
     element.setAttribute('href', dataStr);
     element.click();
 }
+
+export function getElementPath(element) {
+    const path = [];
+    let el = element;
+    while (el && el !== window) {
+        path.push(el);
+        el = el.parentNode;
+    }
+    return path;
+}

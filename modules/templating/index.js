@@ -115,7 +115,9 @@ function templateParser(htmlTemplate, variables = {}, parsers = {}) {
 const templateComponents = (markup, components) => {
     Object.values(components).forEach(bundle => {
         const { template, tagName } = bundle;
-        let start = markup.match(new RegExp(`<${tagName}[^^]*>`)).index;
+        const match = markup.match(new RegExp(`<${tagName}[^^]*>`));
+        if (!match) return markup;
+        let start = match.index;
         while (start) {
             const end = markup.match(new RegExp(`</${tagName}>`)).index + tagName.length + 3;
             const toSubstitute = markup.substr(start, end - start);

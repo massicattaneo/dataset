@@ -12,8 +12,8 @@ const ICONS = {
 const types = ['info', 'warn', 'success', 'error'];
 
 const mixin = element => {
+    
     element.show = (type, text, timeout = 0) => {
-        debugger;
         removeCssClass(element, ...types);
         removeCssClass(element.children[0].children[0], ...(types.map(type => ICONS[type])));
         addCssClass(element, type);

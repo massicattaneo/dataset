@@ -19,8 +19,13 @@ const STYLE = {
     HOME_FOOTER_HEIGHT: 60
 };
 
+const API = {
+    LOGIN_STATUS: '/api/login/status'
+};
+
 module.exports = {
     APPLICATION,
     SERVER,
-    STYLE
+    STYLE,
+    API
 };
