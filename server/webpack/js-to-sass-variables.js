@@ -8,7 +8,6 @@ const formatValue = value => {
 
 const jsToSass = jsObj => {
     const result = Object.keys(jsObj).map(key => `$${toCamelCase(key)}: ${(formatValue(jsObj[key]))}`).join(';');
-    console.warn(result)
     return `${result};`;
 };
 

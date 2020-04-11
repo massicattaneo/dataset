@@ -5,14 +5,13 @@
     z-index: 20;
     position: absolute;
     left: 10px;
-    top: calc(#{$homeHeaderHeight} + 10px);
+    top: calc(#{$homeHeaderHeight} + 70px);
     right: auto;
     bottom: auto;
     resize: both;
-    border: 1px solid $contrastColor;
+    border: 1px inset $contrastDecorationColor;
     border-radius: 11px;
     max-width: initial;
-    background: $contrastColor;
     overflow: hidden;
     font-family: $fontFamily;
     color: white;
@@ -43,7 +42,7 @@
     display: none;
 }
 
-.i-window .close {
+.i-window .close, .i-window .expand {
     font-size: 16px;
     position: relative;
     left: 6px;
@@ -52,7 +51,7 @@
     color: $accentColor;
 }
 
-.i-window .close:hover {
+.i-window .close:hover, .i-window .expand:hover {
     color: #ff4236;
 }
 
@@ -69,6 +68,7 @@
     padding-left: 10px;
     line-height: 24px;
     font-size: 15px;
+    color: $contrastColor;
 }
 
 .i-window .update-area {
@@ -82,8 +82,21 @@
 
 .i-window .content {
     height: calc(100% - #{$homeHeaderHeight} - 10px);
+    background: $transparentColor;
 }
 
 .mobile .i-window .content {
     height: 100%;
+}
+
+.i-window .footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    height: 15px;
+    background: $contrastDecorationColor;
+}
+
+.mobile .i-window .footer {
+    display: none;
 }

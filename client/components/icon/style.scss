@@ -8,7 +8,10 @@
     max-width: 78px;
     color: $mainColor;
     cursor: pointer;
+    display: inline-block;
+    text-align: center;
 }
+
 
 .i-icon:hover {
     transform: scale(1.1, 1.1);

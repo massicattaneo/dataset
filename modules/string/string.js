@@ -11,6 +11,7 @@ const capitalize = (s) => {
 };
 
 const toArray = string => {
+    if (string.includes(' ')) return string.split(' ');
     if (string.includes('_')) return string.split('_');
     if (string.includes('-')) return string.split('-');
     if (string.toUpperCase() === string) return string;
@@ -28,16 +29,23 @@ const toDashCase = string => {
     return array.map(capitalize).join('');
 };
 
-const toSnakelCase = string => {
+const toSnakeCase = string => {
     const array = toArray(string);
     return array.map(capitalize).join('');
 };
+
+const toSpaceCase = string => {
+    const array = toArray(string);
+    return array.join(' ');
+};
+
 
 module.exports = {
     padLeft,
     toCamelCase,
     toDashCase,
-    toSnakelCase,
+    toSnakeCase,
+    toSpaceCase,
     capitalize
 
 };
