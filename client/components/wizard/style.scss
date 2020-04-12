@@ -1,14 +1,9 @@
 .i-wizard {
-    position: relative;
-    z-index: 90;
-    background: red;
 }
 
 .i-wizard h3 {
     margin: 0 0 5px 0;
     text-align: center;
-    color: $contrastColor;
-    background: $mainColor;
     height: $homeHeaderHeight;
 }
 
@@ -16,30 +11,8 @@
     width: 100%;
 }
 
-.i-wizard form .input {
-    position: relative;
-    width: 100%;
-    margin: 5px 0;
-}
-
-.i-wizard .button {
-    position: relative;
-    float: right;
-    width: auto;
-    margin: 2px 20px 0 0;
-    padding: 5px 20px;
-    cursor: pointer;
-    border: none;
-    font-size: 15px;
-    color: white;
-}
-
-.i-wizard .button.save {
-    background-color: green;
-}
-
-.i-wizard .button.cancel {
-    background-color: red;
+.i-wizard .i-button {
+    vertical-align: top;
 }
 
 .i-wizard .button:before {
@@ -52,17 +25,6 @@
 }
 
 .i-wizard h4 {
-    margin: 0;
+    margin: 10px;
     text-align: center;
-}
-
-.i-wizard input, .i-wizard textarea, .i-wizard select, .i-wizard label, .i-wizard button{
-    font-size: 20px;
-    margin-left: 20px;
-    padding: 5px;
-    border: none;
-    outline: none;
-    background-color: $mainColor;
-    color: white;
-    width: calc(100% - 200px);
 }

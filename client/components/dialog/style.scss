@@ -1,5 +1,5 @@
 .i-dialog {
-    top: 0;
+    top: $homeHeaderHeight;
     right: 0;
     bottom: 0;
     left: 0;
@@ -8,6 +8,8 @@
     background: rgba(0, 0, 0, 0.5);
     font-size: 15px;
     display: none;
+    opacity: 0;
+    transition: 0.2s opacity linear;
 }
 
 .i-dialog .content {

@@ -14,7 +14,8 @@ const toArray = string => {
     if (string.includes(' ')) return string.split(' ');
     if (string.includes('_')) return string.split('_');
     if (string.includes('-')) return string.split('-');
-    if (string.toUpperCase() === string) return string;
+    if (string.toUpperCase() === string) return [string];
+    if (string.toLowerCase() === string) return [string];
     return string.match(/[A-Z][a-z]+/g);
 };
 

@@ -113,22 +113,26 @@ function templateParser(htmlTemplate, variables = {}, parsers = {}) {
 }
 
 const templateComponents = (markup, components) => {
-    Object.values(components).forEach(bundle => {
-        const { template, tagName } = bundle;
-        const match = markup.match(new RegExp(`<${tagName}[^^]*>`));
-        if (!match) return markup;
-        let start = match.index;
-        while (start) {
-            const end = markup.match(new RegExp(`</${tagName}>`)).index + tagName.length + 3;
-            const toSubstitute = markup.substr(start, end - start);
-            const params = xmlToSimpleJson(toSubstitute);
-            const [, firstNode] = toSubstitute.replace(/\n∫/, '').match(tagRegEx);
-            const [attributes] = firstNode.match(attributesRegEx) || [''];
-            const taggedTemplate = template.replace('>', ` ${attributes}>`);
-            markup = markup.replace(toSubstitute, templateParser(taggedTemplate, params));
-            start = (markup.match(new RegExp(`<${tagName}[^^]*>`)) || {}).index;
-        }
-    });
+    const tagNames = Object.keys(components).map(key => components[key].tagName).map(tag => new RegExp(`<${tag}`));
+    while (tagNames.find(regExp => markup.match(regExp))) {
+        Object.values(components).forEach(bundle => {
+            const { template, tagName } = bundle;
+            const match = markup.match(new RegExp(`<${tagName}[^^]*>`));
+            if (!match) return markup;
+            let start = match.index;
+            while (start) {
+                const end = markup.match(new RegExp(`</${tagName}>`)).index + tagName.length + 3;
+                const toSubstitute = markup.substr(start, end - start);
+                const params = xmlToSimpleJson(toSubstitute);
+                const [, firstNode] = toSubstitute.replace(/\n∫/, '').match(tagRegEx);
+                const [attributes] = firstNode.match(attributesRegEx) || [''];
+                const taggedTemplate = template.replace('>', ` ${attributes}>`);
+                markup = markup.replace(toSubstitute, templateParser(taggedTemplate, params));
+                start = (markup.match(new RegExp(`<${tagName}[^^]*>`)) || {}).index;
+            }
+        });
+    }
+
     return markup;
 };
 

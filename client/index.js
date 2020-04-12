@@ -2,6 +2,7 @@ import './index.scss';
 import { parseStatements } from '../core/core-utils';
 import { Thread } from '../modules/thread/Thread';
 import { FunctionalProgramming } from '../modules/functional-programming/FunctionalProgramming';
+import { WIZARD } from './components/wizard/script';
 
 FunctionalProgramming(Function);
 
@@ -15,4 +16,8 @@ const thread = Thread(statements);
     await thread.main('init/resources').subscribe().then(thread.extend);
     await thread.main('init/router').subscribe().then(thread.extend);
     thread.main('api/login-status');
+    const list = [
+        { type: WIZARD.TYPES.EMAIL, placeholder: 'email', description: 'Enter your email address' }
+    ];
+    thread.main('dialog/wizard', { list, title: 'SIGN IN' });
 })();
