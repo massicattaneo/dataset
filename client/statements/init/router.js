@@ -2,6 +2,7 @@ import { parseStatements } from '../../../core/core-utils';
 import { addCssClass, Node } from '../../../modules/html/html';
 import { templateParser, templateComponents } from '../../../modules/templating';
 import { touchType } from '../../../modules/device/device-client';
+import { formatters } from '../../../modules/templating/formatters';
 
 const htmlPages = parseStatements(require.context('../../../pages/', true, /.html/));
 parseStatements(require.context('../../../pages/', true, /.css/));
@@ -9,8 +10,9 @@ parseStatements(require.context('../../../pages/', true, /.css/));
 const componentsJS = parseStatements(require.context('../../components/', true, /.js/));
 
 const createHtmlPage = (markup, locales) => {
-    const componentsMarkup = templateComponents(markup, componentsJS);
-    const home = Node(templateParser(componentsMarkup, locales));
+    const componentsMarkup = templateComponents(markup, componentsJS, formatters);
+    const parsedMarkup = templateParser(componentsMarkup, locales, formatters);
+    const home = Node(parsedMarkup);
     Object.values(componentsJS).forEach(bundle => {
         const { selector, mixin } = bundle;
         home.querySelectorAll(selector).forEach(element => {
