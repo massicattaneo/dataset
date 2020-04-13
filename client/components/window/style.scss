@@ -9,7 +9,7 @@
     right: auto;
     bottom: auto;
     resize: both;
-    border: 1px inset $contrastDecorationColor;
+    border: 1px inset $contrastColor;
     border-radius: 11px;
     max-width: initial;
     overflow: hidden;
@@ -95,7 +95,7 @@
     position: absolute;
     bottom: 0;
     height: 15px;
-    background: $contrastDecorationColor;
+    background: $contrastColor;
 }
 
 .mobile .i-window .footer {

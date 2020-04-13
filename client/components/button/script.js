@@ -1,8 +1,10 @@
 import './style.scss';
 import template from './template.html';
 import { addCssClass, removeCssClass } from '../../../modules/html/html';
+import { elementSetters } from '../../../modules/templating/mixins';
 
 const mixin = element => {
+    elementSetters(element);
     const onClick = () => {
         const onEnd = () => {
             element.removeEventListener('animationend', onEnd);

@@ -1,7 +1,6 @@
 import './style.scss';
 import template from './template.html';
 import { Node } from '../../../modules/html/html';
-import { toDashCase } from '../../../modules/string/string';
 
 export const WIZARD = {
     TYPES: {
@@ -16,10 +15,6 @@ export const WIZARD = {
         MULTI_CHECK: 'multi-check'
     }
 };
-
-function toSpaceCase(string) {
-    return string.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-}
 
 function getMulticheckMarkup(index, value, label) {
     return `
@@ -57,8 +52,8 @@ const mixin = element => {
         return new Promise(resolve => {
             hideFormElements(element);
             const el = element.querySelector(`[data-type=${type}]`);
-            el.placeholder = toDashCase(placeholder);
-            element.querySelector('h4').innerHTML = description || `${toSpaceCase(placeholder).toUpperCase()}`;
+            element.querySelector('h4').innerHTML = description || '';
+            el.setValue('.placeholder', placeholder || '...');
             switch (type) {
             case WIZARD.TYPES.CONFIRM:
                 break;

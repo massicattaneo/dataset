@@ -139,7 +139,7 @@ export function downLoadJsonFile({ productInfo }, title, recording) {
     element.click();
 }
 
-export function getElementPath(element) {
+export const getElementPath = element => {
     const path = [];
     let el = element;
     while (el && el !== window) {
@@ -147,4 +147,4 @@ export function getElementPath(element) {
         el = el.parentNode;
     }
     return path;
-}
+};

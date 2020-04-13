@@ -102,12 +102,17 @@ function block(tag = '') {
     return { endTag: `{{/${tag}}}`, startTag: `{{#${tag} *}}`, tagMatch: '{{*}}' };
 }
 
+function removeEmptyVariables(template) {
+    return template.replace(/\{\{[^}]*\}\}/g, '');
+}
+
 function templateParser(htmlTemplate, variables = {}, parsers = {}) {
     return Function
         .identity()
         .compose(removeNewLine)
         //.compose(replaceBlocks.partial(conditionBlock, variables, block('if')))
         .compose(loopObjectOnString.partial(replaceVariable.partial(parsers, block()), variables))
+        .compose(removeEmptyVariables)
         //.compose(replaceLoopsOnString.partial(replaceVariable.partial(parsers, block()), variables, block('each')))
         .subscribe(htmlTemplate);
 }

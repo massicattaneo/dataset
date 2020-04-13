@@ -10,8 +10,9 @@ const SERVER = {
 
 const STYLE = {
     MAIN_COLOR: '#b5ccd8',
+    TEXT_COLOR: '#590000',
     CONTRAST_COLOR: '#3e3e3e',
-    CONTRAST_DECORATION_COLOR: '#818181',
+    TEXT_BG_COLOR: '#cccccc',
     ACCENT_COLOR: '#7380d2',
     TRANSPARENT_COLOR: '#767575c2',
     FONT_FAMILY: 'Arial Narrow',
