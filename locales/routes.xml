@@ -1,0 +1,11 @@
+<locales>
+    <locale path="routes/login">
+        <en>/en/account/login/</en>
+    </locale>
+    <locale path="routes/settings">
+        <en>/en/settings/</en>
+    </locale>
+    <locale path="routes/trash">
+        <en>/en/trash/</en>
+    </locale>
+</locales>

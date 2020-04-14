@@ -39,12 +39,14 @@ const mixin = element => {
 
     element.start = async ({ list, title = '' }) => {
         const results = {};
+        element.style.display = 'block';
         element.querySelector('h3').innerHTML = title;
         for (const index in list) {
             const item = list[index];
             const { placeholder } = item;
             Object.assign(results, { [placeholder]: await waitFormSubmit(item) });
         }
+        setTimeout(() => element.style.display = 'none', 500);
         return results;
     };
 

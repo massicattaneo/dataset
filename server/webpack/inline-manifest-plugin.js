@@ -31,7 +31,7 @@ class InlineManifestPlugin {
                     const [, ext] = key.match(/.*\/.*\.(.*)/);
                     const type = getTypeFromExtension(ext);
                     const [, stage] = key.match(/[^/]*\/([^/]*)\//);
-                    return { ...obj, [key]: { url, name, stage, ext, type } };
+                    return { ...obj, [key]: { url: `/${url}`, name, stage, ext, type } };
                 }, {});
             Object.assign(this.assetsManifest, assets);
             const mainBundle = Object.keys(compilation.assets)

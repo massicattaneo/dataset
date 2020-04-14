@@ -1,5 +1,5 @@
 import { parseStatements } from '../../../core/core-utils';
-import { addCssClass } from '../../../modules/html/html';
+import { addCssClass, getElementPath } from '../../../modules/html/html';
 import { touchType } from '../../../modules/device/device-client';
 
 const htmlPages = parseStatements(require.context('../../../pages/', true, /.html/));
@@ -13,6 +13,11 @@ export default async function () {
     addCssClass(document.body, touchType);
 
     appElement.appendChild(home);
-    // window.history.replaceState({}, '', `/${this.store.language.get()}/`);
+    window.addEventListener('click', event => {
+        if (event.custom) {
+            window.history.pushState({}, '', event.custom.href);
+        }
+    });
+    window.history.replaceState({}, '', `/${this.store.language.get()}/`);
     return { router, home };
 }

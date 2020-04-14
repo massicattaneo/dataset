@@ -13,11 +13,26 @@ const formatters = {
     }
 };
 
+function replaceNavigation(locale, htmlTemplate) {
+    const dataNavRegExp = /data-nav="([^"]+)"/;
+    let match = htmlTemplate.match(dataNavRegExp);
+    while (match) {
+        const [, path] = match;
+        const href = locale.get({ path });
+        htmlTemplate = htmlTemplate.replace(dataNavRegExp, `href=${href} onclick="event.preventDefault();event.custom={href: '${href}'}"`);
+        match = htmlTemplate.match(dataNavRegExp);
+    }
+    return htmlTemplate;
+}
+
 export default async function ({ markup }) {
     const { locale } = this;
     const locales = locale.all();
     const componentsMarkup = templateComponents(markup, componentsJS, formatters);
-    const parsedMarkup = templateParser(componentsMarkup, locales, formatters);
+    const parsedMarkup = templateParser
+        .partial(componentsMarkup, locales, formatters)
+        .compose(replaceNavigation.partial(locale))
+        .subscribe();
     const home = Node(parsedMarkup);
 
     Object.values(componentsJS).forEach(bundle => {
