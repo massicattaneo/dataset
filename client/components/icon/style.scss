@@ -1,9 +1,5 @@
 .i-icon {
     position: relative;
-    margin: 1px;
-    height: 58px;
-    font-size: 33px;
-    line-height: 45px;
     flex: auto;
     max-width: 78px;
     color: $mainColor;
@@ -11,16 +7,18 @@
     display: inline-block;
     text-align: center;
     overflow: hidden;
+    user-select: none;
 }
 
-
-.i-icon:hover {
-    transform: scale(1.1, 1.1);
-    transform-origin: 50% 50%;
-    transition: transform 0.1s linear;
+.i-icon .icofont {
+    position: relative;
+    margin: 1px;
+    height: 58px;
+    font-size: 33px;
+    line-height: 45px;
 }
 
-.i-icon.accent {
+.desktop .i-icon:hover {
     color: $accentColor;
 }
 

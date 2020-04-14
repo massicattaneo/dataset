@@ -2,9 +2,8 @@
 }
 
 .i-wizard h3 {
-    margin: 0 0 5px 0;
+    margin: 0;
     text-align: center;
-    height: $homeHeaderHeight;
 }
 
 .i-wizard form {
@@ -27,4 +26,8 @@
 .i-wizard h4 {
     margin: 10px;
     text-align: center;
+}
+
+.i-wizard .i-button, .i-wizard .i-input {
+    margin-top: 10px;
 }

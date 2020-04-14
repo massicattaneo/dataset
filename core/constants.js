@@ -10,11 +10,12 @@ const SERVER = {
 
 const STYLE = {
     MAIN_COLOR: '#b5ccd8',
-    TEXT_COLOR: '#590000',
     CONTRAST_COLOR: '#3e3e3e',
-    TEXT_BG_COLOR: '#cccccc',
     ACCENT_COLOR: '#7380d2',
     TRANSPARENT_COLOR: '#767575c2',
+    TEXT_COLOR: '#5a5588',
+    TEXT_HOVER_COLOR: '#B3DFA5',
+    TEXT_BG_COLOR: '#cccccc',
     FONT_FAMILY: 'Arial Narrow',
     HOME_HEADER_HEIGHT: 29,
     HOME_FOOTER_HEIGHT: 60

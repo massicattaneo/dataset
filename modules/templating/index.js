@@ -11,21 +11,25 @@ function loopObjectOnString(...args) {
     }, string);
 }
 
+function parseWithFormatters(array, formatters, value) {
+    return array.reduce((val, i, index, arr) => {
+        const [helper, param = ''] = i.trim().split(':');
+        return formatters[helper]
+            ? formatters[helper](val, param, (toChange) => index === 0 ? toChange : arr.slice(0, index)
+                .map(i => (val) => {
+                    return formatters[i.trim().split(':')[0]](val, i.trim().split(':')[1]);
+                }).map(c => c(toChange)))
+            : val;
+    }, value);
+}
+
 function replaceVariable(formatters = {}, options = {}, string, key, value) {
     const { tagMatch } = options;
     const [a, b] = tagMatch.split('*');
     const search = `${a}${key}([^${b[b.length - 1]}]+)${b}`;
     const match = string.match(new RegExp(search));
     if (match) {
-        value = match[1].split(',').splice(1).reduce((val, i, index, arr) => {
-            const [helper, param = ''] = i.trim().split(':');
-            return formatters[helper]
-                ? formatters[helper](val, param, (toChange) => index === 0 ? toChange : arr.slice(0, index)
-                    .map(i => (val) => {
-                        return formatters[i.trim().split(':')[0]](val, i.trim().split(':')[1]);
-                    }).map(c => c(toChange)))
-                : val;
-        }, value);
+        value = parseWithFormatters(match[1].split('|').splice(1), formatters, value);
         return string.replace(new RegExp(search, 'g'), value);
     }
     return string.replace(new RegExp(`${a}${key}${b}`, 'g'), value);
@@ -118,7 +122,7 @@ function getTemplateVariables(template) {
     const vars = template.match(/\{\{([^}]+)\}\}/g) || [];
     const aa = vars
         .map(item => item.replace('{{', ``).replace('}}', ''))
-        .map(item => item.split(',')[0])
+        .map(item => item.split('|')[0])
         .reduce((obj, item) => ({ ...obj, [item]: '' }), {});
     return aa;
 }

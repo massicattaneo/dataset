@@ -6,7 +6,7 @@ button.i-button {
     cursor: pointer;
     border: none;
     font-size: 15px;
-    color: black;
+    color: $textColor;
     background: #ffffff;
     font-family: $fontFamily;
     line-height: 24px;
@@ -20,40 +20,3 @@ button.i-button:hover {
 button.i-button span.icon:before {
     padding-right: 10px;
 }
-
-button.i-button:before {
-    content: '';
-    background-color: #ffffffaa;
-    border-radius: 50%;
-    display: block;
-    position: absolute;
-    top: 0%;
-    left: 50%;
-    width: 34px;
-    height: 34px;
-    margin-left: -17px;
-    transform: scale(0.001, 0.001);
-}
-button.i-button.clicked {
-    outline: 0;
-    color: #fff;
-}
-
-button.i-button.clicked:before {
-    animation: Click_Effect 0.6s ease-out;
-}
-@keyframes Click_Effect {
-    50% {
-        transform: scale(3, 3);
-        opacity: 0;
-    }
-    99% {
-        transform: scale(0.001, 0.001);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(0.001, 0.001);
-        opacity: 1;
-    }
-}
-
