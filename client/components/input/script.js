@@ -6,7 +6,7 @@ import { elementSetters } from '../../../modules/templating/mixins';
 const FILL_CLASS = 'fill';
 
 const mixin = element => {
-    elementSetters(element);
+    elementSetters(element, 'input');
     const inputEl = element.querySelector('input');
     inputEl.addEventListener('focus', () => {
         addCssClass(element, FILL_CLASS);

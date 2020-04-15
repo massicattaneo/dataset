@@ -40,6 +40,10 @@ const toSpaceCase = string => {
     return array.join(' ');
 };
 
+const objectToString = obj => {
+    const sequence = Object.keys(obj).map(key =>  `${key}: '${obj[key]}'`).join(',');
+    return `{${sequence}}`;
+};
 
 module.exports = {
     padLeft,
@@ -47,6 +51,6 @@ module.exports = {
     toDashCase,
     toSnakeCase,
     toSpaceCase,
-    capitalize
-
+    capitalize,
+    objectToString
 };

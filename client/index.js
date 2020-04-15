@@ -16,8 +16,4 @@ const thread = Thread(statements);
     await thread.main('init/resources').subscribe().then(thread.extend);
     await thread.main('init/router').subscribe().then(thread.extend);
     thread.main('api/login-status');
-    // const list = [
-    //     { type: WIZARD.TYPES.EMAIL, placeholder: 'Enter you email address' }
-    // ];
-    // thread.main('dialog/wizard', { list, title: 'SIGN IN' });
 })();

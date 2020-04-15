@@ -43,8 +43,8 @@ const mixin = element => {
         element.querySelector('h3').innerHTML = title;
         for (const index in list) {
             const item = list[index];
-            const { placeholder } = item;
-            Object.assign(results, { [placeholder]: await waitFormSubmit(item) });
+            const { name } = item;
+            Object.assign(results, { [name]: await waitFormSubmit(item) });
         }
         setTimeout(() => element.style.display = 'none', 500);
         return results;
@@ -55,7 +55,7 @@ const mixin = element => {
             hideFormElements(element);
             const el = element.querySelector(`[data-type=${type}]`);
             element.querySelector('h4').innerHTML = description || '';
-            el.setValue('.placeholder', placeholder || '...');
+            el.setValue(placeholder || '...', '.placeholder');
             switch (type) {
             case WIZARD.TYPES.CONFIRM:
                 break;
@@ -89,7 +89,7 @@ const mixin = element => {
                     });
                     resolve(values);
                 } else {
-                    resolve(el.value);
+                    resolve(el.getValue());
                 }
             });
         });

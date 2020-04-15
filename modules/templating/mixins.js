@@ -1,6 +1,14 @@
 import { addCssClass, removeCssClass } from '../html/html';
 import './mixins-clickable.scss';
 
+const getElementValue = (element, selector) => {
+    const selected = element.querySelector(selector);
+    if (selected.value) {
+        return selected.value;
+    }
+    return selected.innerText;
+
+};
 const setElementValue = (element, selector, text) => {
     const selected = element.querySelector(selector);
     if (selected.value) {
@@ -15,9 +23,10 @@ const setElementAttribute = (element, selector, name, value) => {
     selected.setAttribute(name, value);
 };
 
-export const elementSetters = element => {
-    element.setValue = (selector, text) => setElementValue(element, selector, text);
-    element.setAttribute = (selector, name, text) => setElementAttribute(element, selector, name, text);
+export const elementSetters = (element, defaultSelector) => {
+    element.getValue = (selector = defaultSelector) => getElementValue(element, selector);
+    element.setValue = (text, selector = defaultSelector) => setElementValue(element, selector, text);
+    element.setAttribute = (name, text, selector = defaultSelector) => setElementAttribute(element, selector, name, text);
 };
 
 export const elementClickable = element => {

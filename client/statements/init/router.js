@@ -16,6 +16,7 @@ export default async function () {
     window.addEventListener('click', event => {
         if (event.custom) {
             window.history.pushState({}, '', event.custom.href);
+            thread.main(event.custom.path)
         }
     });
     window.history.replaceState({}, '', `/${this.store.language.get()}/`);
