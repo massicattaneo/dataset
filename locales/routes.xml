@@ -1,6 +1,9 @@
 <locales>
-    <locale path="routes/login">
+    <locale path="routes/account/login">
         <en>/en/account/login/</en>
+    </locale>
+    <locale path="routes/account/register">
+        <en>/en/account/register/</en>
     </locale>
     <locale path="routes/settings">
         <en>/en/settings/</en>

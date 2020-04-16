@@ -1,8 +1,8 @@
 .i-input {
     position: relative;
-    border: 2px solid $textColor;
+    border: 1px inset #9a9a9a;
     padding: 2px;
-    border-radius: 6px;
+    border-radius: 24px;
     display: inline-block;
     vertical-align: middle;
 }
@@ -42,7 +42,7 @@
     background: transparent;
     border: none;
     font-size: 15px;
-    padding: 4px;
+    padding: 4px 8px;
     width: 272px;
     outline: none;
     z-index: 2;

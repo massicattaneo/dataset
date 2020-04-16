@@ -14,4 +14,8 @@
     <locale path="index/menu/icons/create">
         <en>Create</en>
     </locale>
+    <locale path="error/loading/file">
+        <en>Error loading file {{url}}</en>
+    </locale>
 </locales>
+

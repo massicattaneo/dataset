@@ -135,7 +135,7 @@ const templateComponents = (markup, components, formatters) => {
             const match = markup.match(new RegExp(`<${tagName}[^^]*>`));
             if (!match) return markup;
             let start = match.index;
-            while (start) {
+            while (start !== undefined) {
                 const end = markup.match(new RegExp(`</${tagName}>`)).index + tagName.length + 3;
                 const toSubstitute = markup.substr(start, end - start);
                 const templateVariables = getTemplateVariables(template);

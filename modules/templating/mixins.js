@@ -24,9 +24,9 @@ const setElementAttribute = (element, selector, name, value) => {
 };
 
 export const elementSetters = (element, defaultSelector) => {
-    element.getValue = (selector = defaultSelector) => getElementValue(element, selector);
-    element.setValue = (text, selector = defaultSelector) => setElementValue(element, selector, text);
-    element.setAttribute = (name, text, selector = defaultSelector) => setElementAttribute(element, selector, name, text);
+    element.iGetValue = (selector = defaultSelector) => getElementValue(element, selector);
+    element.iSetValue = (text, selector = defaultSelector) => setElementValue(element, selector, text);
+    element.iSetAttribute = (name, text, selector = defaultSelector) => setElementAttribute(element, selector, name, text);
 };
 
 export const elementClickable = element => {

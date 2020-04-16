@@ -2,6 +2,7 @@ import './style.scss';
 import template from './template.html';
 import { addCssClass, draggable, removeCssClass } from '../../../modules/html/html';
 import { isDesktop, isMobile } from '../../../modules/device/device-client';
+import { elementSetters } from '../../../modules/templating/mixins';
 
 const mixin = element => {
 
@@ -17,6 +18,10 @@ const mixin = element => {
         const remaining = element.content.scrollHeight - element.content.scrollTop - windowHeight;
         const customGap = 350;
         return (remaining + customGap < windowHeight);
+    };
+
+    element.setContent = htmlElement => {
+        element.querySelector('.content').appendChild(htmlElement)
     };
 
     element.onChanges = ({ top, left, width, height }) => {
