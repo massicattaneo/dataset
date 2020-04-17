@@ -11,8 +11,8 @@ const SERVER = {
 const STYLE = {
     MAIN_COLOR: '#819dab',
     CONTRAST_COLOR: '#3e3e3e',
-    ACCENT_COLOR: '#475b86',
-    TEXT_COLOR: '#59312b',
+    ACCENT_COLOR: '#DC911F',
+    TEXT_COLOR: '#590000',
     TEXT_BG_COLOR: '#e5e5e5',
     FONT_FAMILY: 'Arial Narrow',
     HOME_HEADER_HEIGHT: 29,

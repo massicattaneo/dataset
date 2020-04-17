@@ -34,7 +34,8 @@ function getDefaultConfig({ clientDir }) {
                             loader: 'css-loader',
                             options: {
                                 modules: {
-                                    mode: 'local'
+                                    mode: 'local',
+                                    localIdentName: '[hash:base64:5]'
                                 }
                             }
                         },

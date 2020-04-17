@@ -33,7 +33,7 @@
 
 .local :global(.bar) {
     position: relative;
-    background: var(--main-color);
+    background: var(--contrast-color);
     height: 24px;
     width: 100%;
     overflow: hidden;
@@ -50,11 +50,11 @@
     left: 6px;
     cursor: pointer;
     text-decoration: none;
-    color: var(--accent-color);
+    color: var(--main-color);
 }
 
-.local :global(.close:hover), .local :global(.bar:hover) {
-    color: #ff4236;
+.local :global(.close:hover), .local :global(.expand:hover) {
+    color: var(--accent-color);
 }
 
 .local :global(.drag-area) {
