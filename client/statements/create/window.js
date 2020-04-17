@@ -1,6 +1,6 @@
 import { getRouteTemplate } from '../../utils';
 import { getComputed } from '../../../modules/html/html';
-import { STYLE } from '../../../core/constants';
+import { STYLE } from '../../../constants';
 
 function positionWindow(win, options) {
     const { width, height } = options;

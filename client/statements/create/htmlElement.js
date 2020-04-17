@@ -1,6 +1,6 @@
 import { templateComponents, templateParser } from '../../../modules/templating';
 import { Node } from '../../../modules/html/html';
-import { parseStatements } from '../../../core/core-utils';
+import { parseStatements } from '../../../modules/thread/thread-utils';
 import { objectToString } from '../../../modules/string/string';
 import * as formatters from '../../../modules/templating/formatters';
 

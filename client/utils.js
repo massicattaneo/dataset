@@ -1,7 +1,7 @@
-import { parseStatements } from '../core/core-utils';
+import { parseStatements } from '../modules/thread/thread-utils';
 
-const htmlPages = parseStatements(require.context('./statements/routes/', true, /.html/));
-const styles = parseStatements(require.context('./statements/routes/', true, /.css/));
+const htmlPages = parseStatements(require.context('../routes/', true, /.html/));
+const styles = parseStatements(require.context('../routes/', true, /.css/));
 
 const defaultHeaders = { 'Content-Type': 'application/json' };
 

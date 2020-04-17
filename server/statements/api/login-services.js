@@ -1,4 +1,4 @@
-const { API } = require('../../../core/constants');
+const { API } = require('../../../constants');
 
 module.exports = async function () {
     const { app } = this;

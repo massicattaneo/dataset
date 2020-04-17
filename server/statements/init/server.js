@@ -1,6 +1,6 @@
 const fs = require('fs');
 const http = require('http');
-const { SERVER } = require('../../../core/constants');
+const { SERVER } = require('../../../constants');
 
 module.exports = function () {
     const { app } = this;

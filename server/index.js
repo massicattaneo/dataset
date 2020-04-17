@@ -1,8 +1,8 @@
 require('../modules/functional-programming/FunctionalProgramming').FunctionalProgramming(Function);
 const { Thread } = require('../modules/thread/Thread');
 const requireContext = require('require-context');
-const { parseStatements } = require('../core/core-utils');
-const context = requireContext(`${__dirname}/statements`, true, /.js/);
+const { parseStatements } = require('../modules/thread/thread-utils');
+const context = requireContext(`${__dirname}/statements`, true, /\.js/);
 const mainThread = Thread(parseStatements(context, '.js'));
 
 (async function () {

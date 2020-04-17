@@ -1,7 +1,7 @@
 import style from './style.css';
 import { getElementPath } from '../../../modules/html/html';
 import template from './template.html';
-import { STYLE } from '../../../core/constants';
+import { STYLE } from '../../../constants';
 
 const mixin = element => {
     const content = element.querySelector('.content');

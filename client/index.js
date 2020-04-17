@@ -1,12 +1,13 @@
 import './index.css';
-import { parseStatements } from '../core/core-utils';
+import { parseStatements } from '../modules/thread/thread-utils';
 import { Thread } from '../modules/thread/Thread';
 import { FunctionalProgramming } from '../modules/functional-programming/FunctionalProgramming';
 
 FunctionalProgramming(Function);
 
+const routesStatements = parseStatements(require.context('../routes/', true, /.js/), '.js', { prefixPath: 'routes/' });
 const statements = parseStatements(require.context('./statements/', true, /.js/), '.js');
-const thread = Thread(statements);
+const thread = Thread({ ...statements, ...routesStatements });
 
 (async function () {
     await thread.main('init/errors').subscribe();

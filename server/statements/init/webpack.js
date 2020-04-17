@@ -6,7 +6,7 @@ const WebpackHotMiddleware = require('webpack-hot-middleware');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { InlineManifestPlugin } = require('../../webpack/inline-manifest-plugin');
-const { STYLE } = require('../../../core/constants');
+const { STYLE } = require('../../../constants');
 const { handlebarsParser } = require('../../../modules/templating');
 const { toPixels } = require('../../../modules/templating/formatters');
 

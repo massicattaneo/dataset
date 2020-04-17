@@ -1,5 +1,5 @@
 const path = require('path');
-const { SERVER } = require('../../../core/constants');
+const { SERVER } = require('../../../constants');
 
 module.exports = function () {
     return {

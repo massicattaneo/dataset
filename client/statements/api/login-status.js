@@ -1,4 +1,4 @@
-import { API } from '../../../core/constants';
+import { API } from '../../../constants';
 import { fetchGet } from '../../utils';
 
 export default function () {
