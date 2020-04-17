@@ -5,14 +5,10 @@ const { cache } = require('../../utils/cache-middleware');
 
 const getLocales = () => {
     const localeDir = `${__dirname}/../../../locales/`;
-    const customLocaleDir = `${__dirname}/../../../customization/locales/`;
-    const customXml = fs.readdirSync(customLocaleDir).reduce((acc, file) => {
-        return { ...acc, [file]: fs.readFileSync(`${customLocaleDir}${file}`, 'utf8') };
-    }, {});
     const xml = fs.readdirSync(localeDir).reduce((acc, file) => {
         return { ...acc, [file]: fs.readFileSync(`${localeDir}${file}`, 'utf8') };
     }, {});
-    const allXml = { ...xml, ...customXml };
+    const allXml = { ...xml };
     const context = function (key) {
         return allXml[key];
     };
