@@ -24,6 +24,7 @@
 :global(.mobile) .local {
     top: 29px;
     width: 100%;
+    max-width: 100%;
     height: calc(100% - var(--home-header-height) - var(--home-footer-height));
     left: 0;
     border-radius: 0;

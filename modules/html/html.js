@@ -148,3 +148,14 @@ export const getElementPath = element => {
     }
     return path;
 };
+
+export const getComputed = (element, type) => {
+    const style = window.getComputedStyle(element);
+    switch (type) {
+    case 'height':
+    case 'width':
+        return Number(style[type].replace('px', ''));
+    default:
+        return style[type];
+    }
+};

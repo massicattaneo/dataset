@@ -9,10 +9,11 @@ const SERVER = {
 };
 
 const STYLE = {
-    MAIN_COLOR: '#819dab',
+    WHITE_COLOR: '#ffffff',
+    MAIN_COLOR: '#80aec4',
     CONTRAST_COLOR: '#3e3e3e',
-    ACCENT_COLOR: '#DC911F',
-    TEXT_COLOR: '#590000',
+    ACCENT_COLOR: '#dca34b',
+    TEXT_COLOR: '#5a616d',
     TEXT_BG_COLOR: '#e5e5e5',
     FONT_FAMILY: 'Arial Narrow',
     HOME_HEADER_HEIGHT: 29,

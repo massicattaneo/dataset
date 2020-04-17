@@ -1,6 +1,6 @@
 import style from './style.css';
 import template from './template.html';
-import { addCssClass, draggable, removeCssClass } from '../../../modules/html/html';
+import { draggable } from '../../../modules/html/html';
 import { isDesktop, isMobile } from '../../../modules/device/device-client';
 
 const mixin = element => {
