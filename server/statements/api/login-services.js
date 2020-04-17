@@ -1,5 +1,4 @@
 const { API } = require('../../../core/constants');
-const { OWNERS } = require('../../../customization/properties');
 
 module.exports = async function () {
     const { app } = this;
