@@ -1,4 +1,4 @@
-.i-notification {
+.local {
     width: 100%;
     position: fixed;
     top: -42px;
@@ -7,11 +7,11 @@
     transition: top 0.2s linear;
 }
 
-.i-notification.show {
+.local.show {
     top: 0;
 }
 
-.i-notification div {
+.local div {
     position: relative;
     width: calc(100% - 6px);
     max-width: 600px;
@@ -23,7 +23,7 @@
     overflow: hidden;
 }
 
-.i-notification div em {
+.local div em {
     line-height: 33px;
     vertical-align: top;
     display: inline-block;
@@ -31,7 +31,7 @@
     font-style: normal;
     width: calc(100% - 50px);
 }
-.i-notification div span {
+.local div span {
     font-size: 28px;
     margin: 4px;
     display: inline-block;
@@ -42,18 +42,18 @@
     height: 27px;
 }
 
-.i-notification.info div {
+.local.info div {
     background-color: #c9c9c9
 }
 
-.i-notification.warn div {
+.local.warn div {
     background-color: #d4d498
 }
 
-.i-notification.success div {
+.local.success div {
     background-color: #a1dea7
 }
 
-.i-notification.error div {
+.local.error div {
     background-color: #dea1a1
 }

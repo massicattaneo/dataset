@@ -107,6 +107,9 @@ function replaceBlocks(action, variables = {}, options, template) {
 function block(tag = '') {
     return { endTag: `{{/${tag}}}`, startTag: `{{#${tag} *}}`, tagMatch: '{{*}}' };
 }
+function handlebarsBlock(tag = '') {
+    return { endTag: `{{/${tag}}}`, startTag: `{{#${tag} *}}`, tagMatch: '<%= * %>' };
+}
 
 function templateParser(htmlTemplate, variables = {}, formatters = {}) {
     return Function
@@ -115,6 +118,15 @@ function templateParser(htmlTemplate, variables = {}, formatters = {}) {
         //.compose(replaceBlocks.partial(conditionBlock, variables, block('if')))
         .compose(loopObjectOnString.partial(replaceVariable.partial(formatters, block()), variables))
         //.compose(replaceLoopsOnString.partial(replaceVariable.partial(formatters, block()), variables, block('each')))
+        .subscribe(htmlTemplate);
+}
+function handlebarsParser(htmlTemplate, variables = {}, formatters = {}) {
+    return Function
+        .identity()
+        .compose(removeNewLine)
+        //.compose(replaceBlocks.partial(conditionBlock, variables, handlebarsBlock('if')))
+        .compose(loopObjectOnString.partial(replaceVariable.partial(formatters, handlebarsBlock()), variables))
+        //.compose(replaceLoopsOnString.partial(replaceVariable.partial(formatters, handlebarsBlock()), variables, handlebarsBlock('each')))
         .subscribe(htmlTemplate);
 }
 
@@ -131,7 +143,7 @@ const templateComponents = (markup, components, formatters) => {
     const tagNames = Object.keys(components).map(key => components[key].tagName).map(tag => new RegExp(`<${tag}`));
     while (tagNames.find(regExp => markup.match(regExp))) {
         Object.values(components).forEach(bundle => {
-            const { template, tagName } = bundle;
+            const { template, tagName, selector } = bundle;
             const match = markup.match(new RegExp(`<${tagName}[^^]*>`));
             if (!match) return markup;
             let start = match.index;
@@ -142,7 +154,7 @@ const templateComponents = (markup, components, formatters) => {
                 const params = Object.assign(templateVariables, xmlToSimpleJson(toSubstitute));
                 const [, firstNode] = toSubstitute.replace(/\n∫/, '').match(tagRegEx);
                 const [attributes] = firstNode.match(attributesRegEx) || [''];
-                const taggedTemplate = template.replace('>', ` ${attributes}>`);
+                const taggedTemplate = template.replace('>', ` class="${selector.replace('.', '')}" ${attributes}>`);
                 markup = markup
                     .replace(toSubstitute, templateParser(taggedTemplate, params, formatters));
                 start = (markup.match(new RegExp(`<${tagName}[^^]*>`)) || {}).index;
@@ -155,5 +167,6 @@ const templateComponents = (markup, components, formatters) => {
 
 module.exports = {
     templateParser,
-    templateComponents
+    templateComponents,
+    handlebarsParser
 };

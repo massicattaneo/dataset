@@ -1,4 +1,4 @@
-import './style.scss';
+import style from './style.css';
 import template from './template.html';
 import { addCssClass, removeCssClass } from '../../../modules/html/html';
 
@@ -12,15 +12,15 @@ const ICONS = {
 const types = ['info', 'warn', 'success', 'error'];
 
 const mixin = element => {
-    
+
     element.show = (type, text, timeout = 0) => {
-        removeCssClass(element, ...types);
+        removeCssClass(element, ...types.map(type => style[type]));
         removeCssClass(element.children[0].children[0], ...(types.map(type => ICONS[type])));
-        addCssClass(element, type);
+        addCssClass(element, style[type]);
         addCssClass(element.children[0].children[0], ICONS[type]);
         const textEl = element.children[0].children[1];
         textEl.innerHTML = text;
-        setTimeout(() => addCssClass(element, 'show'));
+        setTimeout(() => addCssClass(element, style.show));
         if (timeout) {
             setTimeout(() => element.hide(), timeout);
         }
@@ -32,8 +32,6 @@ const mixin = element => {
     return element;
 };
 
-const tagName = 'i-notification';
-const selector = `.${tagName}`;
-const exports = { tagName, selector, mixin, template };
+const exports = { tagName: 'i-notification', selector: `.${style.local}`, mixin, template };
 export default exports;
 

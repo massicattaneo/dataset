@@ -17,7 +17,10 @@
   },
   "homepage": "https://github.com/massicattaneo/dataset#readme",
   "nodemonConfig": {
-    "ignore": [ "server/static/*", "client/*" ]
+    "ignore": [
+      "server/static/*",
+      "client/*"
+    ]
   },
   "dependencies": {
     "babel-plugin-add-module-exports": "^1.0.2",
@@ -52,6 +55,7 @@
     "@babel/runtime": "^7.0.0-beta.55",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.1.1",
+    "html-loader": "^1.1.0",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.13.1",
     "nodemon": "^2.0.3",

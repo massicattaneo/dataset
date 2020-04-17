@@ -1,5 +1,5 @@
 import { addCssClass, removeCssClass } from '../html/html';
-import './mixins-clickable.scss';
+import './mixins-clickable.css';
 
 const getElementValue = (element, selector) => {
     const selected = element.querySelector(selector);

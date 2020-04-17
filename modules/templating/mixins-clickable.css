@@ -1,13 +1,13 @@
-*.i-clicked {
+*:global(.i-clicked) {
     outline: 0;
     color: #fff;
 }
 
-*.i-clicked:before {
+*:global(.i-clicked):before {
     animation: i-clicked-animation 1s ease-out;
 }
 
-*.i-clicked:before {
+*:global(.i-clicked):before {
     content: '';
     background-color: #ffffffaa;
     border-radius: 50%;

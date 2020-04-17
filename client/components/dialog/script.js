@@ -1,4 +1,4 @@
-import './style.scss';
+import style from './style.css';
 import { getElementPath } from '../../../modules/html/html';
 import template from './template.html';
 import { STYLE } from '../../../core/constants';
@@ -32,9 +32,7 @@ const mixin = element => {
     return element;
 };
 
-const tagName = 'i-dialog';
-const selector = `.${tagName}`;
-const exports = { tagName, selector, mixin, template };
+const exports = { tagName: 'i-dialog', selector: `.${style.local}`, mixin, template };
 export default exports;
 
 

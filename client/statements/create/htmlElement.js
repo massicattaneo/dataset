@@ -1,21 +1,10 @@
 import { templateComponents, templateParser } from '../../../modules/templating';
-import { hasCssClass, Node } from '../../../modules/html/html';
+import { Node } from '../../../modules/html/html';
 import { parseStatements } from '../../../core/core-utils';
 import { objectToString } from '../../../modules/string/string';
-
-const htmlPages = parseStatements(require.context('../routes/', true, /.html/));
-parseStatements(require.context('../routes/', true, /.scss/));
+import * as formatters from '../../../modules/templating/formatters';
 
 const componentsJS = parseStatements(require.context('../../components/', true, /.js/));
-
-const formatters = {
-    default: function (value, param) {
-        return value || param;
-    },
-    pepe: function () {
-        return 1;
-    }
-};
 
 function replaceNavigation(locale, htmlTemplate) {
     const dataNavRegExp = /data-nav="([^"]+)"/;
@@ -39,11 +28,10 @@ const extendMixin = mixin => (element, root) => {
     }
 };
 
-export default async function ({ path = '', markup = '' }) {
+export default async function ({ markup = '' }) {
     const { locale } = this;
     const locales = locale.all();
-    const htmlMarkup = markup || htmlPages[path];
-    const componentsMarkup = templateComponents(htmlMarkup, componentsJS, formatters);
+    const componentsMarkup = templateComponents(markup, componentsJS, formatters);
     const parsedMarkup = templateParser
         .partial(componentsMarkup, locales, formatters)
         .compose(replaceNavigation.partial(locale))

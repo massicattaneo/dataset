@@ -1,4 +1,4 @@
-.i-input {
+.local {
     position: relative;
     border: 1px inset #9a9a9a;
     padding: 2px;
@@ -8,26 +8,26 @@
     margin: 10px;
 }
 
-.i-input em {
+.local em {
     width: 100%;
     height: 2px;
-    background: $textBgColor;
+    background: var(--text-bg-color);
     display: block;
     position: absolute;
     top: 12px;
     left: 0px;
 }
 
-.i-input > span > span {
+.local > span > span {
     position: relative;
 }
 
-.i-input.fill > span {
+.local:global(.fill) > span {
     left: 10px;
     top: -14px;
     font-size: 12px;
 }
-.i-input > span {
+.local > span {
     transition: 0.1s ease-out;
     position: absolute;
     left: 0;
@@ -38,7 +38,7 @@
     z-index: 1;
 }
 
-.i-input input {
+.local input {
     position: relative;
     background: transparent;
     border: none;

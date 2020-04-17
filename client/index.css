@@ -1,0 +1,16 @@
+body {
+    font-family: var(--font-family);
+    background-color: var(--contrast-color);
+    color: var(--main-color);
+    min-width: 320px;
+    overflow: hidden;
+}
+
+* { -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+* { outline: 0; }
+a, a:visited {
+    color: var(--main-color);
+}
+a:hover {
+    color: var(--accent-color);
+}

@@ -1,19 +1,19 @@
-.i-window {
+.local {
     transition: transform 200ms;
     margin: auto;
     box-shadow: -2px 0 15px rgba(0, 0, 0, 0.4);
     z-index: 20;
     position: absolute;
     left: 10px;
-    top: calc(#{$homeHeaderHeight} + 70px);
+    top: calc(var(--home-header-height) + 70px);
     right: auto;
     bottom: auto;
     resize: both;
-    border: 1px inset $contrastColor;
+    border: 1px inset var(--contrast-color);
     border-radius: 11px;
     max-width: initial;
     overflow: hidden;
-    font-family: $fontFamily;
+    font-family: var(--font-family);
     color: white;
     height: 500px;
     width: 800px;
@@ -21,43 +21,43 @@
     min-height: 320px;
 }
 
-.mobile .i-window {
+:global(.mobile) .local {
     top: 29px;
     width: 100%;
-    height: calc(100% - #{$homeHeaderHeight} - #{$homeFooterHeight});
+    height: calc(100% - var(--home-header-height) - var(--home-footer-height));
     left: 0;
     border-radius: 0;
     border: 0;
     resize: none;
 }
 
-.i-window .bar {
+.local :global(.bar) {
     position: relative;
-    background: $mainColor;
+    background: var(--main-color);
     height: 24px;
     width: 100%;
     overflow: hidden;
     user-select: none;
 }
 
-.mobile .i-window .bar {
+.mobile .local :global(.bar) {
     display: none;
 }
 
-.i-window .close, .i-window .expand {
+.local :global(.close), .local :global(.expand) {
     font-size: 16px;
     position: relative;
     left: 6px;
     cursor: pointer;
     text-decoration: none;
-    color: $accentColor;
+    color: var(--accent-color);
 }
 
-.i-window .close:hover, .i-window .expand:hover {
+.local :global(.close:hover), .local :global(.bar:hover) {
     color: #ff4236;
 }
 
-.i-window .drag-area {
+.local :global(.drag-area) {
     margin: 4px;
     border: 1px dotted white;
     border-radius: 4px;
@@ -65,15 +65,15 @@
     color: white;
 }
 
-.i-window .title {
+.local :global(.title) {
     position: relative;
     padding-left: 10px;
     line-height: 24px;
     font-size: 15px;
-    color: $contrastColor;
+    color: var(--contrast-color);
 }
 
-.i-window .update-area {
+.local :global(.update-area) {
     width: 20px;
     border: 1px dotted white;
     margin: 2px;
@@ -82,26 +82,26 @@
     border-radius: 2px;
 }
 
-.i-window .content {
-    height: calc(100% - #{$homeHeaderHeight} - 10px);
-    background: $textBgColor;
-    color: $textColor;
+.local :global(.content) {
+    height: calc(100% - var(--home-header-height) - 10px);
+    background: var(--text-bg-color);
+    color: var(--text-color);
     overflow-y: scroll;
     text-align: center;
 }
 
-.mobile .i-window .content {
+.mobile .local :global(.content) {
     height: 100%;
 }
 
-.i-window .footer {
+.local :global(.footer) {
     width: 100%;
     position: absolute;
     bottom: 0;
     height: 15px;
-    background: $contrastColor;
+    background: var(--contrast-color);
 }
 
-.mobile .i-window .footer {
+.mobile .local :global(.footer) {
     display: none;
 }

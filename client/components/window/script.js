@@ -1,8 +1,7 @@
-import './style.scss';
+import style from './style.css';
 import template from './template.html';
 import { addCssClass, draggable, removeCssClass } from '../../../modules/html/html';
 import { isDesktop, isMobile } from '../../../modules/device/device-client';
-import { elementSetters } from '../../../modules/templating/mixins';
 
 const mixin = element => {
 
@@ -55,8 +54,6 @@ const mixin = element => {
     return element;
 };
 
-const tagName = 'i-window';
-const selector = `.${tagName}`;
-const exports = { tagName, selector, mixin, template };
+const exports = { tagName: 'i-window', selector: `.${style.local}`, mixin, template };
 export default exports;
 

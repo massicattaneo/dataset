@@ -9,6 +9,16 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="#000000">
     <meta name="apple-mobile-web-app-title" content="Dataset">
     <style>
+        :root {
+            --main-color: <%= STYLE.MAIN_COLOR %>;
+            --contrast-color: <%= STYLE.CONTRAST_COLOR %>;
+            --accent-color: <%= STYLE.ACCENT_COLOR %>;
+            --text-color: <%= STYLE.TEXT_COLOR %>;
+            --text-bg-color: <%= STYLE.TEXT_BG_COLOR %>;
+            --font-family: <%= STYLE.FONT_FAMILY %>;
+            --home-header-height: <%= STYLE.HOME_HEADER_HEIGHT|toPixels %>;
+            --home-footer-height: <%= STYLE.HOME_FOOTER_HEIGHT|toPixels %>;
+        }
         body {
             margin: 0;
             padding: 0;

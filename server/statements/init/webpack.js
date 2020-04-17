@@ -7,7 +7,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { InlineManifestPlugin } = require('../../webpack/inline-manifest-plugin');
 const { STYLE } = require('../../../core/constants');
-const { jsToSass } = require('../../webpack/js-to-sass-variables');
+const { handlebarsParser } = require('../../../modules/templating');
+const { toPixels } = require('../../../modules/templating/formatters');
 
 function getDefaultConfig({ clientDir }) {
     const assetsDir = path.resolve(clientDir, 'assets');
@@ -26,16 +27,17 @@ function getDefaultConfig({ clientDir }) {
         module: {
             rules: [
                 {
-                    test: /\.s[ac]ss$/i,
+                    test: /\.css$/i,
                     use: [
                         'style-loader',
-                        'css-loader',
                         {
-                            loader: 'sass-loader',
+                            loader: 'css-loader',
                             options: {
-                                prependData: jsToSass(STYLE),
-                            },
-                        }
+                                modules: {
+                                    mode: 'local'
+                                }
+                            }
+                        },
                     ]
                 },
                 {
@@ -44,7 +46,16 @@ function getDefaultConfig({ clientDir }) {
                 },
                 {
                     test: /\.html$/i,
-                    use: 'raw-loader'
+                    use: [
+                        {
+                            loader: 'html-loader',
+                            options: {
+                                preprocessor: function (content) {
+                                    return handlebarsParser(content, { STYLE }, { toPixels });
+                                }
+                            }
+                        }
+                    ]
                 }
             ]
         },

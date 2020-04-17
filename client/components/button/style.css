@@ -1,4 +1,4 @@
-button.i-button {
+button.local {
     position: relative;
     width: auto;
     margin: 10px;
@@ -6,17 +6,17 @@ button.i-button {
     cursor: pointer;
     border: none;
     font-size: 15px;
-    color: $textColor;
+    color: var(--text-color);
     background: #ffffff;
-    font-family: $fontFamily;
+    font-family: var(--font-family);
     line-height: 24px;
     overflow: hidden;
 }
-button.i-button:hover {
-    background: $accentColor;
+button.local:hover {
+    background: var(--accent-color);
     color: #ffffff;
 }
 
-button.i-button span.icon:before {
+button.local span.icon:before {
     padding-right: 10px;
 }

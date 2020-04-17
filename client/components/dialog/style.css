@@ -1,5 +1,5 @@
-.i-dialog {
-    top: $homeHeaderHeight;
+.local {
+    top: var(--home-header-height);
     right: 0;
     bottom: 0;
     left: 0;
@@ -12,14 +12,14 @@
     transition: 0.2s opacity linear;
 }
 
-.i-dialog .content {
+.local :global(.content) {
     width: 90%;
     min-width: 280px;
     max-width: 600px;
     padding: 10px;
-    background-color: $textBgColor;
-    border: 1px solid $contrastColor;
-    color: $textColor;
+    background-color: var(--text-bg-color);
+    border: 1px solid var(--contrast-color);
+    color: var(--text-color);
     margin: 0 auto;
     position: relative;
     border-radius: 8px;

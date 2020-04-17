@@ -1,7 +1,7 @@
 /***************************************************************** MENU  **/
-.page-home > .menu {
+.local > :global(.menu) {
     position: absolute;
-    height: $homeFooterHeight;
+    height: var(--home-footer-height);
     width: 100%;
     bottom: 0;
     background: black;
@@ -12,7 +12,7 @@
     overflow: hidden;
 }
 
-.desktop .page-home > .menu {
+:global(.desktop) .local > :global(.menu) {
     width: 320px;
     margin-left: 50%;
     left: -160px;
@@ -20,28 +20,26 @@
 }
 
 /***************************************************************** ICONS  **/
-.page-home {
-    .icons {
-        position:relative;
-        width: 100%;
-        height: calc(100% - #{$homeHeaderHeight});
-        top: $homeHeaderHeight;
-        display: flex;
-    }
+.local :global(.icons) {
+    position: relative;
+    width: 100%;
+    height: calc(100% - var(--home-header-height));
+    top: var(--home-header-height);
+    display: flex;
 }
 
 
 /***************************************************************** STATUS BAR  **/
-.page-home > .status-bar {
+.local > :global(.status-bar) {
     width: 100%;
     position: fixed;
     top: 0;
-    height: $homeHeaderHeight;
+    height: var(--home-header-height);
     background: #00000059;
     z-index: 50;
 }
 
-.page-home > .status-bar img {
+.local > :global(.status-bar) img {
     width: 17px;
     margin: 6px 6px;
     display: inline-block;

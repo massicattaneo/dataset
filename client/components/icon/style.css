@@ -1,8 +1,8 @@
-.i-icon {
+.local {
     position: relative;
     flex: auto;
     max-width: 78px;
-    color: $mainColor;
+    color: var(--main-color);
     cursor: pointer;
     display: inline-block;
     text-align: center;
@@ -11,7 +11,7 @@
     text-decoration: none;
 }
 
-.i-icon .icofont {
+.local :global(.icofont) {
     position: relative;
     margin: 1px;
     height: 58px;
@@ -19,12 +19,12 @@
     line-height: 45px;
 }
 
-.desktop .i-icon:hover {
-    color: $accentColor;
+:global(.desktop) .local:hover {
+    color: var(--accent-color);
 }
 
-.i-icon span {
-    font-family: $fontFamily;
+.local span {
+    font-family: var(--font-family);
     font-size: 10px;
     display: block;
     position: absolute;
@@ -33,13 +33,13 @@
     color: white;
 }
 
-.i-icon em {
+.local em {
     display: none;
     width: 20px;
     height: 20px;
     background-color: red;
     color: white;
-    font-family: $fontFamily;
+    font-family: var(--font-family);
     font-size: 12px;
     line-height: 20px;
     font-style: normal;

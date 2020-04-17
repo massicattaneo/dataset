@@ -1,11 +1,12 @@
-import { addCssClass, getElementPath } from '../../../modules/html/html';
+import { addCssClass } from '../../../modules/html/html';
 import { touchType } from '../../../modules/device/device-client';
+import { getRouteTemplate } from '../../utils';
 
 export default async function () {
     const { thread } = this;
     const router = {};
     const appElement = document.getElementById('app');
-    const home = await thread.main('create/page', { path: 'index.html' }).subscribe();
+    const home = await thread.main('create/htmlElement', { markup: getRouteTemplate('index') }).subscribe();
     addCssClass(document.body, touchType);
 
     appElement.appendChild(home);

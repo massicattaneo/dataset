@@ -1,4 +1,4 @@
-import './style.scss';
+import style from './style.css';
 import template from './template.html';
 import { addCssClass, removeCssClass } from '../../../modules/html/html';
 import { elementSetters } from '../../../modules/templating/mixins';
@@ -23,8 +23,6 @@ const mixin = element => {
     return element;
 };
 
-const tagName = 'i-input';
-const selector = `.${tagName}`;
-const exports = { tagName, selector, mixin, template };
+const exports = { tagName: 'i-input', selector: `.${style.local}`, mixin, template };
 export default exports;
 
