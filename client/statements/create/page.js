@@ -32,10 +32,10 @@ function replaceNavigation(locale, htmlTemplate) {
     return htmlTemplate;
 }
 
-const extendMixin = mixin => element => {
+const extendMixin = mixin => (element, root) => {
     const extended = mixin(element);
     if (element.getAttribute('data-expose-as')) {
-        Object.assign(element, { [element.getAttribute('data-expose-as')]: extended });
+        Object.assign(root, { [element.getAttribute('data-expose-as')]: extended });
     }
 };
 
@@ -54,9 +54,11 @@ export default async function ({ path = '', markup = '' }) {
         const { selector, mixin } = bundle;
         const mixer = extendMixin(mixin);
         if (element.matches(selector)) {
-            mixer(element);
+            mixer(element, element);
         }
-        element.querySelectorAll(selector).forEach(mixer);
+        element.querySelectorAll(selector).forEach(function (child) {
+            mixer(child, element);
+        });
     });
 
     return element;
