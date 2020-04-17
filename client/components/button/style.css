@@ -4,16 +4,20 @@ button.local {
     margin: 10px;
     padding: 5px 20px;
     cursor: pointer;
-    border: none;
     font-size: 15px;
     color: #ffffff;
     background: var(--main-color);
     font-family: var(--font-family);
     line-height: 24px;
     overflow: hidden;
+    border: 1px solid var(--main-color);
 }
 button.local:hover {
     background: var(--accent-color);
+    color: #ffffff;
+}
+button.local:focus {
+    border: 1px solid var(--accent-color);
     color: #ffffff;
 }
 
