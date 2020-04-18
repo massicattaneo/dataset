@@ -34,6 +34,19 @@ function FunctionalProgramming(FnObj = {}) {
         };
     };
 
+    proto.filterStack = function (...args1) {
+        const self = getSelf(this, args1);
+        const filter = args1.shift();
+        let counter = 0;
+        return function (callback) {
+            return self(function (...args) {
+                if (filter.call(this, ...args, counter++))
+                    return callback.call(this, ...args);
+                return args.pop()(...args);
+            });
+        };
+    };
+
     proto.map = function (...args1) {
         const self = getSelf(this, args1);
         const map = args1.shift();
