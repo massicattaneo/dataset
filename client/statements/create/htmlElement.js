@@ -3,6 +3,7 @@ import { Node } from '../../../modules/html/html';
 import { parseStatements } from '../../../modules/thread/thread-utils';
 import { objectToString } from '../../../modules/string/string';
 import * as formatters from '../../../modules/templating/formatters';
+import { ROUTES_PATH } from '../../../constants';
 
 const componentsJS = parseStatements(require.context('../../components/', true, /.js/));
 
@@ -11,7 +12,7 @@ function replaceNavigation(locale, htmlTemplate) {
     let match = htmlTemplate.match(dataNavRegExp);
     while (match) {
         const [, basicPath] = match;
-        const path = `routes/${basicPath}`;
+        const path = `${ROUTES_PATH}${basicPath}`;
         const href = locale.get({ path });
         const custom = { path };
         const attr = `href=${href} onclick="event.preventDefault();event.custom=${objectToString(custom)}"`;

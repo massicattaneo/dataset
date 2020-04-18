@@ -2,10 +2,11 @@ import './index.css';
 import { parseStatements } from '../modules/thread/thread-utils';
 import { Thread } from '../modules/thread/Thread';
 import { FunctionalProgramming } from '../modules/functional-programming/FunctionalProgramming';
+import { ROUTES_PATH } from '../constants';
 
 FunctionalProgramming(Function);
 
-const routesStatements = parseStatements(require.context('../routes/', true, /.js/), '.js', { prefixPath: 'routes/' });
+const routesStatements = parseStatements(require.context('../routes/', true, /.js/), '.js', { prefixPath: ROUTES_PATH });
 const statements = parseStatements(require.context('./statements/', true, /.js/), '.js');
 const thread = Thread({ ...statements, ...routesStatements });
 
@@ -13,8 +14,8 @@ const thread = Thread({ ...statements, ...routesStatements });
     thread.before(async function (...args) {
         const next = args.pop();
         const [path, params] = args;
-        if (path.startsWith('routes/') && path !== 'routes/index') {
-            const window = await this.thread.main('create/window', { path: path.replace('routes/', '') }).subscribe();
+        if (path.startsWith(ROUTES_PATH) && path !== `${ROUTES_PATH}index`) {
+            const window = await this.thread.main('create/window', { path: path.replace(ROUTES_PATH, '') }).subscribe();
             return next(path, { window });
         }
         next(...args);

@@ -24,9 +24,12 @@ const API = {
     LOGIN_STATUS: '/api/login/status'
 };
 
+const ROUTES_PATH = 'routes/';
+
 module.exports = {
     APPLICATION,
     SERVER,
     STYLE,
-    API
+    API,
+    ROUTES_PATH
 };

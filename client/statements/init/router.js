@@ -2,12 +2,13 @@ import { addCssClass } from '../../../modules/html/html';
 import { touchType } from '../../../modules/device/device-client';
 import { getRouteTemplate } from '../../utils';
 import { connect } from '../../../modules/reactive/Reactive';
+import { ROUTES_PATH } from '../../../constants';
 
 export default async function () {
     const { thread, locale, store } = this;
     const router = {};
     const homePath = 'index';
-    const href = locale.get({ path: `routes/${homePath}` });
+    const href = locale.get({ path: `${ROUTES_PATH}${homePath}` });
     const appElement = document.getElementById('app');
     const home = await thread.main('create/htmlElement', { markup: getRouteTemplate('index') }).subscribe();
     addCssClass(document.body, touchType);
