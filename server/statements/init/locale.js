@@ -6,22 +6,8 @@ const { cache } = require('../../utils/cache-middleware');
 const requireContext = require('require-context');
 
 const getLocales = () => {
-    const localeDir = `${__dirname}/../../../routes/`;
+    const localeDir = `${__dirname}/../../../routes`;
     const context = requireContext(path.resolve(localeDir), true, /\.xml/);
-    // const xml = fs.readdirSync(localeDir)
-    //     .filter(file => file.endsWith('.xml'))
-    //     .reduce((acc, file) => {
-    //         const xmlString = fs.readFileSync(`${localeDir}${file}`, 'utf8');
-    //         const string = xmlString.replace(/@route/g, 'index/hhh');
-    //         return { ...acc, [file]: string };
-    //     }, {});
-    // const allXml = { ...xml };
-    // const context = function (key) {
-    //     return allXml[key];
-    // };
-    // context.keys = function () {
-    //     return Object.keys(allXml);
-    // };
     const localesXml = parseStatements(context, '.xml', {
         resolver: fileName => {
             const xmlString = fs.readFileSync(path.resolve(localeDir, fileName), 'utf8');

@@ -10,6 +10,16 @@ const statements = parseStatements(require.context('./statements/', true, /.js/)
 const thread = Thread({ ...statements, ...routesStatements });
 
 (async function () {
+    thread.before(async function (...args) {
+        const next = args.pop();
+        const [path, params] = args;
+        if (path.startsWith('routes/') && path !== 'routes/index') {
+            const window = await this.thread.main('create/window', { path: path.replace('routes/', '') }).subscribe();
+            return next(path, { window });
+        }
+        next(...args);
+    });
+
     await thread.main('init/errors').subscribe();
     await thread.main('init/store').subscribe().then(thread.extend);
     await thread.main('init/locale').subscribe().then(thread.extend);

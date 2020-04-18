@@ -20,12 +20,14 @@ function positionWindow(win, options) {
 }
 
 export default async function ({ path }) {
-    const { home } = this;
+    const { home, store } = this;
     const page = await this.thread.main('create/htmlElement', { markup: getRouteTemplate(path) }).subscribe();
-    const win = await this.thread.main('create/htmlElement', { markup: '<i-window></i-window>' }).subscribe();
-    win.setContent(page);
-    home.querySelector('.windows').appendChild(win);
-    positionWindow(win, { width: 500 });
-    win.iOn('close', () => history.back());
-    return win;
+    const frame = await this.thread.main('create/htmlElement', { markup: '<i-window></i-window>' }).subscribe();
+    const item = { frame, path };
+    store.frames.push(item);
+    frame.setContent(page);
+    home.querySelector('.frames').appendChild(frame);
+    positionWindow(frame, { width: 500 });
+    frame.iOn('close', () => store.frames.splice(store.frames.get().indexOf(item), 1));
+    return frame;
 }
