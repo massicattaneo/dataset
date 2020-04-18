@@ -79,7 +79,9 @@ export const draggable = (node, draggableNode, onChange = event => event) => {
 
     draggableNode.addEventListener(pointerDownEvent, pointerDown);
 
-    return node;
+    return () => {
+        draggableNode.removeEventListener(pointerDownEvent, pointerDown);
+    };
 };
 
 export const getQuerySelector = element => {

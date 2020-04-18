@@ -41,7 +41,7 @@
     user-select: none;
 }
 
-.mobile .local :global(.bar) {
+:global(.mobile) .local :global(.bar) {
     display: none;
 }
 
@@ -91,7 +91,7 @@
     text-align: center;
 }
 
-.mobile .local :global(.content) {
+:global(.mobile) .local :global(.content) {
     height: 100%;
 }
 
@@ -103,6 +103,6 @@
     background: var(--contrast-color);
 }
 
-.mobile .local :global(.footer) {
+:global(.mobile) .local :global(.footer) {
     display: none;
 }

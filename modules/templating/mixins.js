@@ -1,5 +1,6 @@
 import { addCssClass, removeCssClass } from '../html/html';
 import './mixins-clickable.css';
+import { EventEmitter } from '../event-emitter/EventEmitter';
 
 const getElementValue = (element, selector) => {
     const selected = element.querySelector(selector);
@@ -39,4 +40,10 @@ export const elementClickable = element => {
         addCssClass(element, 'i-clicked');
     };
     element.addEventListener('click', onClick);
+};
+
+export const elementEmitter = element => {
+    const emitter = EventEmitter();
+    element.iOn = emitter.on;
+    return emitter.emit;
 };

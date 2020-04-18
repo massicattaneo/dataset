@@ -1,5 +1,5 @@
 <locales>
-    <locale path="@route">
-
+    <locale path="@routes">
+        <en>/en/account/login/</en>
     </locale>
 </locales>
