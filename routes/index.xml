@@ -1,5 +1,5 @@
 <locales>
-    <locale path="@routes">
+    <locale path="@routes/href">
         <en>/en/</en>
     </locale>
     <locale path="index/menu/icons/trash">

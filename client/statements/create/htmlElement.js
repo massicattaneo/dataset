@@ -13,7 +13,7 @@ function replaceNavigation(locale, htmlTemplate) {
     while (match) {
         const [, basicPath] = match;
         const path = `${ROUTES_PATH}${basicPath}`;
-        const href = locale.get({ path });
+        const href = locale.href(path);
         const custom = { path };
         const attr = `href=${href} onclick="event.preventDefault();event.custom=${objectToString(custom)}"`;
         htmlTemplate = htmlTemplate.replace(dataNavRegExp, attr);

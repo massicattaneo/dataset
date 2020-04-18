@@ -20,13 +20,15 @@ export default async function () {
     }));
 
     const locale = {
-        get: (parameters) => {
-            const { path } = parameters;
+        get: (path, parameters = {}) => {
             const reduce = path.split('/')
                 .reduce((obj, string) => obj[string], locObj);
             return Object.keys(parameters).reduce((string, key) => {
                 return string.replace(new RegExp(`{{${key}}}`, 'g'), parameters[key]);
             }, reduce);
+        },
+        href: (path) => {
+            return locale.get(`${path}/href`);
         },
         all: () => locObj
     };
