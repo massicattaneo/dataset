@@ -8,13 +8,13 @@ import { ROUTES_PATH } from '../../../constants';
 const componentsJS = parseStatements(require.context('../../components/', true, /.js/));
 
 function replaceNavigation(locale, htmlTemplate) {
-    const dataNavRegExp = /data-nav="([^"]+)"/;
+    const dataNavRegExp = /data-route="([^"]+)"/;
     let match = htmlTemplate.match(dataNavRegExp);
     while (match) {
-        const [, basicPath] = match;
-        const path = `${ROUTES_PATH}${basicPath}`;
-        const href = locale.href(path);
-        const custom = { path };
+        const [, atttribute] = match;
+        const route = `${ROUTES_PATH}${atttribute}`;
+        const { href } = locale.get(route);
+        const custom = { route };
         const attr = `href=${href} onclick="event.preventDefault();event.custom=${objectToString(custom)}"`;
         htmlTemplate = htmlTemplate.replace(dataNavRegExp, attr);
         match = htmlTemplate.match(dataNavRegExp);

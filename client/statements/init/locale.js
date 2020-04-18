@@ -27,9 +27,6 @@ export default async function () {
                 return string.replace(new RegExp(`{{${key}}}`, 'g'), parameters[key]);
             }, reduce);
         },
-        href: (path) => {
-            return locale.get(`${path}/href`);
-        },
         all: () => locObj
     };
     return { locale };

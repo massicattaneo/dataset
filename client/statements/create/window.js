@@ -19,11 +19,11 @@ function positionWindow(win, options) {
     }
 }
 
-export default async function ({ path }) {
+export default async function ({ route }) {
     const { home, store } = this;
-    const page = await this.thread.main('create/htmlElement', { markup: getRouteTemplate(path) }).subscribe();
+    const page = await this.thread.main('create/htmlElement', { markup: getRouteTemplate(route) }).subscribe();
     const frame = await this.thread.main('create/htmlElement', { markup: '<i-window></i-window>' }).subscribe();
-    const item = { frame, path };
+    const item = { frame, route };
     store.frames.push(item);
     frame.setContent(page);
     home.querySelector('.frames').appendChild(frame);

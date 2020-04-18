@@ -1,6 +1,6 @@
 <div>
     <div class="status-bar">
-        <img src="{{manifest.init.logo}}"/>
+        <a data-route="index"><img src="{{manifest.init.logo}}" /></a>
         breadcrumb
     </div>
     <i-notification data-expose-as="notification"></i-notification>
@@ -10,13 +10,13 @@
     <div class="frames"></div>
 
     <nav class="menu">
-        <i-icon data-nav="account/login">
+        <i-icon data-route="account/login">
             <icon>icofont-user</icon>
             <label>{{index.menu.icons.login}}</label></i-icon>
-        <i-icon data-nav="settings">
+        <i-icon data-route="settings">
             <icon>icofont-ui-settings</icon>
             <label>{{index.menu.icons.settings}}</label></i-icon>
-        <i-icon data-nav="trash">
+        <i-icon data-route="trash">
             <icon>icofont-trash</icon>
             <label>{{index.menu.icons.trash}}</label></i-icon>
         <i-icon>

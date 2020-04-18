@@ -13,10 +13,10 @@ const thread = Thread({ ...statements, ...routesStatements });
 (async function () {
     thread.before(async function (...args) {
         const next = args.pop();
-        const [path, params] = args;
-        if (path.startsWith(ROUTES_PATH) && path !== `${ROUTES_PATH}index`) {
-            const window = await this.thread.main('create/window', { path: path.replace(ROUTES_PATH, '') }).subscribe();
-            return next(path, { window });
+        const [route, params] = args;
+        if (route.startsWith(ROUTES_PATH) && route !== `${ROUTES_PATH}index`) {
+            const window = await this.thread.main('create/window', { route }).subscribe();
+            return next(route, { window });
         }
         next(...args);
     });

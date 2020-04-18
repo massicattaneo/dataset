@@ -1,4 +1,5 @@
 import { parseStatements } from '../modules/thread/thread-utils';
+import { ROUTES_PATH } from '../constants';
 
 const htmlPages = parseStatements(require.context('../routes/', true, /.html/));
 const styles = parseStatements(require.context('../routes/', true, /.css/));
@@ -10,7 +11,8 @@ export const fetchGet = (url, headers) => {
         .then(response => response.json());
 };
 
-export const getRouteTemplate = path => {
-    return htmlPages[`${path}.html`].replace('>', ` class="${styles[`${path}.css`].local}">`);
+export const getRouteTemplate = route => {
+    const reduced = route.replace(ROUTES_PATH, '');
+    return htmlPages[`${reduced}.html`].replace('>', ` class="${styles[`${reduced}.css`].local}">`);
 };
 
