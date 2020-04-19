@@ -1,5 +1,12 @@
 <locales>
     <locale path="@routes/href">
         <en>/en/account/login/</en>
+        <es>/es/cuenta/entra/</es>
+        <it>/it/utente/entra/</it>
+    </locale>
+    <locale path="@routes/title">
+        <en>Sign in</en>
+        <es>Entra</es>
+        <it>Entra</it>
     </locale>
 </locales>

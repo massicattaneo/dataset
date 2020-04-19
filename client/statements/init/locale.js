@@ -1,7 +1,9 @@
 import { connect } from '../../../modules/reactive/Reactive';
 
 export default async function () {
-    const version = this.store.version.get();
+    const { store } = this;
+    const version = store.version.get();
+
     const locObj = {
         manifest: window.manifest.reduce((acc, item) => {
             acc[item.stage] = acc[item.stage] || {};
@@ -11,10 +13,11 @@ export default async function () {
     };
 
     await (new Promise((resolve) => {
-        connect({ language: this.store.language }, async ({ language }) => {
+        connect({ language: store.language }, async ({ language }) => {
             const loc = await fetch.partial(`/locale/${version}/${language}`).retry().subscribe()
                 .then(res => res.json()).catch(resolve);
             Object.assign(locObj, loc);
+            window.document.setA
             resolve();
         });
     }));
@@ -29,6 +32,7 @@ export default async function () {
         },
         all: () => locObj
     };
+
     return { locale };
 }
 

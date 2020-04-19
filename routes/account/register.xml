@@ -1,3 +1,12 @@
-<locale path="@routes/href">
-    <en>/en/account/register/</en>
-</locale>
+<locales>
+    <locale path="@routes/href">
+        <en>/en/account/register/</en>
+        <es>/es/cuenta/registrarse/</es>
+        <en>/it/utente/registrazione/</en>
+    </locale>
+    <locale path="@routes/title">
+        <en>Create your account</en>
+        <es>Crea tu cuenta</es>
+        <it>Crea la tua utenza</it>
+    </locale>
+</locales>

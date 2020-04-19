@@ -21,7 +21,6 @@ export default async function () {
     });
     const router = {};
     const homeRoute = 'routes/index';
-    const { href } = locale.get(homeRoute);
     const appElement = document.getElementById('app');
     const home = createHtmlElement({ markup: getRouteTemplate('index'), locale });
     addCssClass(document.body, touchType);
@@ -37,13 +36,14 @@ export default async function () {
     // CLICK ON WINDOW
     window.addEventListener('mousedown', async event => {
         const clickedFrame = getElementPath(event.target).find(el => hasCssClass(el, windowStyle.local));
-        console.warn(clickedFrame);
         if (!clickedFrame) return;
         const index = findIndex(routerStore.frames.get(), el => el.frame === clickedFrame);
         routerStore.frames.push(routerStore.frames.get().splice(index, 1)[0]);
     });
 
+    const { href, title } = locale.get(homeRoute);
     window.history.replaceState({ route: homeRoute }, '', href);
+    document.title = title;
     window.addEventListener('popstate', event => {
         if (event.state.route) {
             const { frame, route } = routerStore.frames.last();
@@ -56,8 +56,9 @@ export default async function () {
         frames.get().filter(el => el).forEach((el, index) => el.frame.style.zIndex = index);
         if (routerStore.route.is(route)) return;
         routerStore.route.set(route);
-        const { href } = locale.get(route);
+        const { href, title } = locale.get(route);
         window.history.pushState({ route }, '', href);
+        document.title = title;
     });
 
     return { router, home };

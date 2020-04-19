@@ -1,21 +1,38 @@
 <locales>
     <locale path="@routes/href">
         <en>/en/</en>
+        <es>/es/</es>
+        <it>/it/</it>
+    </locale>
+    <locale path="@routes/title">
+        <en>Dataset - Organize and share you business</en>
+        <es>Dataset - Organiza y comparte tu business</es>
+        <it>Dataset - Organizza e condividi il tuo business</it>
     </locale>
     <locale path="index/menu/icons/trash">
         <en>Trash</en>
+        <es>Basura</es>
+        <it>Cestino</it>
     </locale>
     <locale path="index/menu/icons/login">
         <en>Login</en>
+        <es>Entra</es>
+        <it>Entra</it>
     </locale>
     <locale path="index/menu/icons/message">
         <en>Messages</en>
+        <es>Mensajes</es>
+        <it>Messaggi</it>
     </locale>
     <locale path="index/menu/icons/settings">
         <en>Settings</en>
+        <es>Adjustes</es>
+        <it>Impostazioni</it>
     </locale>
     <locale path="index/menu/icons/create">
         <en>Create</en>
+        <es>Crear</es>
+        <it>Crea</it>
     </locale>
 </locales>
 

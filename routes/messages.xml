@@ -1,3 +1,12 @@
-<locale path="@routes/href">
-    <en>/en/messages/</en>
-</locale>
+<locales>
+    <locale path="@routes/href">
+        <en>/en/messages/</en>
+        <es>/es/mesajes/</es>
+        <it>/it/messaggi/</it>
+    </locale>
+    <locale path="@routes/title">
+        <en>Messages</en>
+        <es>Mesajes</es>
+        <it>Messaggi</it>
+    </locale>
+</locales>
