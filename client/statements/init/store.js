@@ -4,8 +4,7 @@ export default async function () {
     const store = create({
         version: '1.0.0',
         language: 'en',
-        tables: [],
-        frames: []
+        tables: []
     });
     return { store };
 }

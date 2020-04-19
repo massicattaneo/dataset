@@ -69,7 +69,6 @@ export const draggable = (node, draggableNode, onChange = event => event) => {
     };
 
     const pointerDown = event => {
-        event.preventDefault();
         const data = supportsTouch ? event.targetTouches[0] : event || window.event;
         startPositionX = data.clientX;
         startPositionY = data.clientY;
@@ -144,7 +143,7 @@ export function downLoadJsonFile({ productInfo }, title, recording) {
 export const getElementPath = element => {
     const path = [];
     let el = element;
-    while (el && el !== window) {
+    while (el && el !== window && el !== document) {
         path.push(el);
         el = el.parentNode;
     }

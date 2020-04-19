@@ -63,7 +63,11 @@ function Reactive(entryValue) {
         return res;
     }
 
-    if (Array.isArray(entryValue)) return { push, splice, get, emitter, unshift, emitChange, update };
+    function last() {
+        return  value[value.length - 1];
+    }
+
+    if (Array.isArray(entryValue)) return { push, splice, last, get, emitter, unshift, emitChange, update };
     return {
         set,
         get,

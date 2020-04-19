@@ -21,9 +21,7 @@ const mixin = element => {
         const textEl = element.children[0].children[1];
         textEl.innerHTML = text;
         setTimeout(() => addCssClass(element, style.show));
-        if (timeout) {
-            setTimeout(() => element.hide(), timeout);
-        }
+        if (timeout) setTimeout(() => element.hide(), timeout);
     };
 
     element.hide = () => {

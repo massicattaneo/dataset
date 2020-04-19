@@ -12,13 +12,11 @@ const mixin = element => {
         addCssClass(element, FILL_CLASS);
     });
     inputEl.addEventListener('blur', () => {
-        if (!inputEl.value) {
-            removeCssClass(element, FILL_CLASS);
-        }
+        if (inputEl.value) return;
+        removeCssClass(element, FILL_CLASS);
     });
-    if (inputEl.value) {
-        addCssClass(element, FILL_CLASS);
-    }
+
+    if (inputEl.value) addCssClass(element, FILL_CLASS);
 
     return element;
 };

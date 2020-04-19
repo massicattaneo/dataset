@@ -3,6 +3,7 @@ import { parseStatements } from '../modules/thread/thread-utils';
 import { Thread } from '../modules/thread/Thread';
 import { FunctionalProgramming } from '../modules/functional-programming/FunctionalProgramming';
 import { ROUTES_PATH } from '../constants';
+import { logThreadMiddleware } from './middlewares';
 
 FunctionalProgramming(Function);
 
@@ -11,6 +12,7 @@ const statements = parseStatements(require.context('./statements/', true, /.js/)
 const thread = Thread({ ...statements, ...routesStatements });
 
 (async function () {
+    thread.before(logThreadMiddleware);
     await thread.main('init/errors').subscribe();
     await thread.main('init/store').subscribe().then(thread.extend);
     await thread.main('init/locale').subscribe().then(thread.extend);
