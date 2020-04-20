@@ -1,6 +1,6 @@
 body {
     font-family: var(--font-family);
-    background-color: var(--contrast-color);
+    background-color: #003459;
     color: var(--main-color);
     min-width: 320px;
     overflow: hidden;
