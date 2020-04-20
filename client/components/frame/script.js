@@ -58,10 +58,8 @@ const mixin = element => {
         arguments[0] && emit('close');
     };
 
-    const onClose = () => {
-
-    };
-    closeElement.addEventListener('click', () => element.iClose(true));
+    const onClose = () => element.iClose(true);
+    closeElement.addEventListener('click', onClose);
     element.resize();
 
     return element;

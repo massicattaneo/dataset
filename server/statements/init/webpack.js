@@ -17,6 +17,7 @@ function getDefaultConfig({ clientDir }) {
             main: [path.resolve(clientDir, './index.js'), 'webpack-hot-middleware/client']
         },
         mode: 'development',
+        devtool: 'source-map',
         output: {
             path: path.resolve(clientDir, '../server/static'),
             filename: '[name].[hash].js'

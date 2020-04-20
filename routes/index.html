@@ -1,7 +1,7 @@
 <div>
     <div class="status-bar">
-        <a data-route="index"><img src="{{manifest.init.logo}}" /></a>
-        breadcrumb
+        <a data-route="index"><img class="logo" src="{{manifest.init.logo}}"/></a>
+        <img class="lang {{system.language}}" style="background-image: url('{{manifest.init.flags}}')" />
     </div>
     <i-notification data-expose-as="notification"></i-notification>
     <i-dialog data-expose-as="dialog"></i-dialog>

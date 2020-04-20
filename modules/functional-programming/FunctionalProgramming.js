@@ -1,3 +1,5 @@
+const { findIndex } = require('../array/array');
+
 function FunctionalProgramming(FnObj = {}) {
     const proto = FnObj.prototype || FnObj;
 
@@ -9,6 +11,22 @@ function FunctionalProgramming(FnObj = {}) {
         const self = getSelf(this, args1);
         return function (...args2) {
             return self(...args1, ...args2);
+        };
+    };
+
+    proto.argument = function (...args1) {
+        const self = getSelf(this, args1);
+        return function (...args2) {
+            const args = [];
+            while (args1.length) {
+                args[args1.shift()] = args1.shift();
+            }
+            args2.forEach(item => {
+                let index = 0;
+                while (args[index] !== undefined) index++;
+                args[index] = item;
+            });
+            return self(...args);
         };
     };
 

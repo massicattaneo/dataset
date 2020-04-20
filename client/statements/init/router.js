@@ -5,32 +5,45 @@ import windowStyle from '../../components/frame/style.css';
 import { findIndex } from '../../../modules/array/array';
 import { createHtmlElement, createRouteFrame, getRouteTemplate } from '../../../modules/templating/client';
 
+const { ROUTES_PATH } = require('../../../constants');
+
 const createFrame = (route, { thread, locale }, { frames }) => {
     const frame = createRouteFrame({ route, locale });
     const item = { frame, route };
     frames.push(item);
-    frame.iOn('close', () => frames.splice(frames.get().indexOf(item), 1));
+    frame.iOn('close', () => {
+        frames.splice(frames.get().indexOf(item), 1);
+    });
     return frame;
 };
+
+function getActualRoute(locale) {
+    const route = locale.route(location.pathname);
+    if (!route) return 'routes/error/404';
+    return route;
+}
 
 export default async function () {
     const { locale } = this;
     const routerStore = create({
-        frames: [],
-        route: ''
+        frames: []
     });
     const router = {};
-    const homeRoute = 'routes/index';
     const appElement = document.getElementById('app');
     const home = createHtmlElement({ markup: getRouteTemplate('index'), locale });
     addCssClass(document.body, touchType);
 
     appElement.appendChild(home);
-    window.addEventListener('click', async event => {
-        if (!event.custom || !event.custom.route) return;
-        const frame = createFrame(event.custom.route, this, routerStore);
+
+    const showFrame = route => {
+        const frame = createFrame(route, this, routerStore);
         home.querySelector('.frames').appendChild(frame);
         frame.iPosition({ width: 500 });
+    };
+
+    window.addEventListener('click', async event => {
+        if (!event.custom || !event.custom.route) return;
+        showFrame(event.custom.route);
     });
 
     // CLICK ON WINDOW
@@ -41,9 +54,14 @@ export default async function () {
         routerStore.frames.push(routerStore.frames.get().splice(index, 1)[0]);
     });
 
+    let actualRoute = getActualRoute(locale);
+    const homeRoute = `${ROUTES_PATH}index`;
     const { href, title } = locale.get(homeRoute);
-    window.history.replaceState({ route: homeRoute }, '', href);
+    window.history.replaceState({ route: homeRoute }, title, href);
     document.title = title;
+    if (actualRoute !== homeRoute) showFrame(actualRoute);
+    actualRoute = '';
+
     window.addEventListener('popstate', event => {
         if (event.state.route) {
             const { frame, route } = routerStore.frames.last();
@@ -51,13 +69,13 @@ export default async function () {
         }
     });
 
-    connect(routerStore, ({ frames }) => {
+    connect(({ frames: routerStore.frames }), ({ frames }) => {
         const { route } = frames.last() || { route: homeRoute };
         frames.get().filter(el => el).forEach((el, index) => el.frame.style.zIndex = index);
-        if (routerStore.route.is(route)) return;
-        routerStore.route.set(route);
+        if (actualRoute === route) return;
+        actualRoute = route;
         const { href, title } = locale.get(route);
-        window.history.pushState({ route }, '', href);
+        window.history.pushState({ route }, title, href);
         document.title = title;
     });
 

@@ -43,9 +43,35 @@
     z-index: 50;
 }
 
-.local > :global(.status-bar) img {
+.local :global(.logo) {
     width: 17px;
+    height: 17px;
     margin: 6px 6px;
     display: inline-block;
     vertical-align: middle;
+}
+
+.local :global(.lang.en) {
+    background-position: -5px -8px;
+    display: block;
+}
+.local :global(.lang.es) {
+    background-position: -81px -44px;
+    display: block;
+}
+.local :global(.lang.it) {
+    background-position: -81px -79px;
+    display: block;
+}
+
+.local :global(.lang) {
+    display: none;
+    background-size: 114px;
+    width: 28px;
+    height: 20px;
+    vertical-align: middle;
+    border: none;
+    position: absolute;
+    right: 5px;
+    top: 4px;
 }
