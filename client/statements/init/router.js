@@ -24,7 +24,7 @@ const createFrame = (route, { thread, locale }, { frames }) => {
 };
 
 export default async function () {
-    const { locale } = this;
+    const { locale, thread } = this;
     const homeRoute = `${ROUTES_PATH}index`;
     const routerStore = create({
         frames: []
@@ -40,12 +40,14 @@ export default async function () {
         const frame = createFrame(route, this, routerStore);
         home.querySelector('.frames').appendChild(frame);
         frame.iPosition({ width: 500 });
+        thread.main(route, { frame });
     };
 
     window.addEventListener('click', async event => {
         if (!event.custom || !event.custom.route) return;
         if (event.custom.route === homeRoute) return;
         showFrame(event.custom.route);
+
     });
 
     // CLICK ON WINDOW

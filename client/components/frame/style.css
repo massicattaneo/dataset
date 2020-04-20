@@ -16,8 +16,8 @@
     color: white;
     height: 500px;
     width: 800px;
-    min-width: 320px;
-    min-height: 320px;
+    min-width: 220px;
+    min-height: 220px;
 }
 
 :global(.mobile) .local {

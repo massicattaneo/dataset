@@ -1,0 +1,12 @@
+<locales>
+    <locale path="@routes/href">
+        <en>/en/settings/date-and-time/</en>
+        <es>/es/adjustes/fecha-y-hora/</es>
+        <it>/it/impostazioni/data-e-ora/</it>
+    </locale>
+    <locale path="@routes/title">
+        <en>Date and time</en>
+        <es>Fecha y hora</es>
+        <it>Data e ora</it>
+    </locale>
+</locales>

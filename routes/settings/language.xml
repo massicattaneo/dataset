@@ -1,0 +1,17 @@
+<locales>
+    <locale path="@routes/href">
+        <en>/en/settings/language/</en>
+        <es>/es/adjustes/idioma/</es>
+        <it>/it/impostazioni/lingua/</it>
+    </locale>
+    <locale path="@routes/title">
+        <en>Language</en>
+        <es>Idioma</es>
+        <it>Lingua</it>
+    </locale>
+    <locale path="@routes/select">
+        <en>Select a different language</en>
+        <es>Seleciona un idioma diferente</es>
+        <it>Seleziona un lingua differente</it>
+    </locale>
+</locales>
