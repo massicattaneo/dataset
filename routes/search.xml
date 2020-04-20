@@ -1,0 +1,12 @@
+<locales>
+    <locale path="@routes/href">
+        <en>/en/search/</en>
+        <es>/es/busca/</es>
+        <it>/it/cerca/</it>
+    </locale>
+    <locale path="@routes/title">
+        <en>Search</en>
+        <es>Busca</es>
+        <it>Cerca</it>
+    </locale>
+</locales>

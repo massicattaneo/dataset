@@ -24,10 +24,10 @@
         <es>Mensajes</es>
         <it>Messaggi</it>
     </locale>
-    <locale path="index/menu/icons/settings">
-        <en>Settings</en>
-        <es>Adjustes</es>
-        <it>Impostazioni</it>
+    <locale path="index/menu/icons/search">
+        <en>Search</en>
+        <es>Buscar</es>
+        <it>Cerca</it>
     </locale>
     <locale path="index/menu/icons/create">
         <en>Create</en>
