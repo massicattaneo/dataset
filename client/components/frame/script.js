@@ -2,13 +2,15 @@ import style from './style.css';
 import template from './template.html';
 import { draggable, getComputed } from '../../../modules/html/html';
 import { isDesktop, isMobile } from '../../../modules/device/device-client';
-import { elementEmitter } from '../../../modules/templating/mixins';
+import { elementEmitter, elementSetters } from '../../../modules/templating/mixins';
 import { STYLE } from '../../../constants';
 
 const mixin = element => {
+    elementSetters(element, '.title');
     const emit = elementEmitter(element);
     const closeElement = element.querySelector('.close');
     const content = element.querySelector('.content');
+    const title = element.querySelector('.title');
     const resizeObserver = new ResizeObserver(() => element.resize());
     resizeObserver.observe(element);
 
@@ -33,7 +35,7 @@ const mixin = element => {
     };
 
     element.iSetContent = htmlElement => {
-        element.querySelector('.content').appendChild(htmlElement);
+        content.appendChild(htmlElement);
     };
 
     element.iPosition = ({ width, height }) => {

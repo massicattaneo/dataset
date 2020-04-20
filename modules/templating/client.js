@@ -15,9 +15,9 @@ const replaceNavigation = (locale, htmlTemplate) => {
     while (match) {
         const [, attribute] = match;
         const route = `${ROUTES_PATH}${attribute}`;
-        const { href } = locale.get(route);
+        const { href } = locale.get(route) || {};
         const custom = { route };
-        const attr = `href=${href} onclick="event.preventDefault();event.custom=${objectToString(custom)}"`;
+        const attr = `href="${href}" onclick="event.preventDefault();event.custom=${objectToString(custom)};"`;
         htmlTemplate = htmlTemplate.replace(dataNavRegExp, attr);
         match = htmlTemplate.match(dataNavRegExp);
     }
@@ -29,13 +29,18 @@ const extendMixin = mixin => (element, root) => {
     if (!element.getAttribute(attributeName)) return;
     Object.assign(root, { [element.getAttribute(attributeName)]: extended });
 };
-const createHtmlElement = ({ markup = '', locale }) => {
+
+function createHtmlMarkup({ markup = '', locale }) {
     const componentsMarkup = templateComponents(markup, componentsJS, formatters);
     const parsedMarkup = templateParser
         .partial(componentsMarkup, locale.all(), formatters)
         .compose(replaceNavigation.partial(locale))
         .subscribe();
-    const element = Node(parsedMarkup);
+    return parsedMarkup;
+}
+
+const createHtmlElement = ({ markup = '', locale }) => {
+    const element = Node(createHtmlMarkup({ markup, locale }));
 
     Object.values(componentsJS).forEach(bundle => {
         const { selector, mixin } = bundle;
@@ -56,11 +61,27 @@ const createRouteFrame = ({ route, locale }) => {
     const page = createHtmlElement({ markup: getRouteTemplate(route), locale });
     const frame = createHtmlElement({ markup: '<i-frame></i-frame>', locale });
     frame.iSetContent(page);
+    frame.iSetValue(locale.get(`${route}/title`));
     return frame;
+};
+const createBreadcrumb = (href, route, locale) => {
+    const breadcrumb = href.split('/').filter(i => i);
+    const routes = route.split('/').map((route, index, array) => {
+        return array.slice(0).splice(1, index).join('/');
+    });
+    routes[0] = 'index';
+    return breadcrumb.map((item, index) => {
+        return createHtmlMarkup({
+            markup: `<a data-route="${routes[index]}">${item}</a>`,
+            locale
+        });
+    }).join(' > ');
 };
 
 module.exports = {
     createRouteFrame,
     createHtmlElement,
-    getRouteTemplate
+    getRouteTemplate,
+    createBreadcrumb,
+    createHtmlMarkup
 };

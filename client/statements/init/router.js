@@ -3,7 +3,12 @@ import { touchType } from '../../../modules/device/device-client';
 import { connect, create } from '../../../modules/reactive/Reactive';
 import windowStyle from '../../components/frame/style.css';
 import { findIndex } from '../../../modules/array/array';
-import { createHtmlElement, createRouteFrame, getRouteTemplate } from '../../../modules/templating/client';
+import {
+    createBreadcrumb,
+    createHtmlElement,
+    createRouteFrame,
+    getRouteTemplate
+} from '../../../modules/templating/client';
 
 const { ROUTES_PATH } = require('../../../constants');
 
@@ -17,14 +22,15 @@ const createFrame = (route, { thread, locale }, { frames }) => {
     return frame;
 };
 
-function getActualRoute(locale) {
+const getActualRoute = locale => {
     const route = locale.route(location.pathname);
     if (!route) return 'routes/error/404';
     return route;
-}
+};
 
 export default async function () {
     const { locale } = this;
+    const homeRoute = `${ROUTES_PATH}index`;
     const routerStore = create({
         frames: []
     });
@@ -43,6 +49,7 @@ export default async function () {
 
     window.addEventListener('click', async event => {
         if (!event.custom || !event.custom.route) return;
+        if (event.custom.route === homeRoute) return;
         showFrame(event.custom.route);
     });
 
@@ -55,7 +62,6 @@ export default async function () {
     });
 
     let actualRoute = getActualRoute(locale);
-    const homeRoute = `${ROUTES_PATH}index`;
     const { href, title } = locale.get(homeRoute);
     window.history.replaceState({ route: homeRoute }, title, href);
     document.title = title;
@@ -77,6 +83,7 @@ export default async function () {
         const { href, title } = locale.get(route);
         window.history.pushState({ route }, title, href);
         document.title = title;
+        home.breadcrumb.iSetHtml(createBreadcrumb(href, route, locale));
     });
 
     return { router, home };

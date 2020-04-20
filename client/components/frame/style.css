@@ -70,7 +70,7 @@
     padding-left: 10px;
     line-height: 24px;
     font-size: 15px;
-    color: var(--contrast-color);
+    color: var(--text-bg-color);
 }
 
 .local :global(.update-area) {
