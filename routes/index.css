@@ -71,7 +71,20 @@
     height: 20px;
     vertical-align: middle;
     border: none;
-    position: absolute;
-    right: 5px;
-    top: 4px;
+}
+
+:global(.mobile) .local :global(.datetime) {
+    display: none;
+}
+
+.local :global(.datetime) {
+    margin: 0 15px;
+}
+
+.local :global(.right) {
+    text-decoration: none;
+    float: right;
+    display: inline-block;
+    padding: 4px;
+    line-height: 19px;
 }

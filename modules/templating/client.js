@@ -66,16 +66,18 @@ const createRouteFrame = ({ route, locale }) => {
 };
 const createBreadcrumb = (href, route, locale) => {
     const breadcrumb = href.split('/').filter(i => i);
+    breadcrumb.shift();
     const routes = route.split('/').map((route, index, array) => {
         return array.slice(0).splice(1, index).join('/');
     });
-    routes[0] = 'index';
-    return breadcrumb.map((item, index) => {
+    routes.shift();
+    const string = breadcrumb.map((item, index) => {
         return createHtmlMarkup({
             markup: `<a data-route="${routes[index]}">${item}</a>`,
             locale
         });
     }).join(' > ');
+    return string ? `> ${string}` : ''
 };
 
 const getRouteFromHref = (locale, pathname = location.pathname) => {

@@ -18,5 +18,6 @@ const thread = Thread({ ...statements, ...routesStatements });
     await thread.main('init/locale').subscribe().then(thread.extend);
     await thread.main('init/resources').subscribe().then(thread.extend);
     await thread.main('init/router').subscribe().then(thread.extend);
+    thread.main('init/header-services');
     thread.main('api/login-status');
 })();

@@ -44,7 +44,7 @@
     display: none;
 }
 
-.local :global(.close), .local :global(.expand) {
+.local :global(.close) {
     font-size: 16px;
     position: relative;
     left: 6px;
@@ -53,7 +53,7 @@
     color: var(--main-color);
 }
 
-.local :global(.close:hover), .local :global(.expand:hover) {
+.local :global(.close:hover) {
     color: var(--accent-color);
 }
 
