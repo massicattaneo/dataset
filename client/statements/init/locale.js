@@ -6,7 +6,8 @@ function getRouteMappings(locObj) {
     const { routes } = locObj;
     const routesToObject = (prefix, obj) => Object.keys(obj).map(key => {
         if (!obj[key].href) return [];
-        return [{ href: obj[key].href, route: `${prefix}${key}` }].concat(routesToObject(`${prefix}${key}/`, obj[key]));
+        const items = routesToObject(`${prefix}${key}/`, obj[key]);
+        return [{ href: obj[key].href, route: `${prefix}${key}` }].concat(...items);
     });
     return routesToObject
         .partial(ROUTES_PATH)
