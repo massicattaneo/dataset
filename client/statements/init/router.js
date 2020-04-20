@@ -7,7 +7,8 @@ import {
     createBreadcrumb,
     createHtmlElement,
     createRouteFrame,
-    getRouteTemplate
+    getRouteTemplate,
+    getRouteFromHref
 } from '../../../modules/templating/client';
 
 const { ROUTES_PATH } = require('../../../constants');
@@ -20,12 +21,6 @@ const createFrame = (route, { thread, locale }, { frames }) => {
         frames.splice(frames.get().indexOf(item), 1);
     });
     return frame;
-};
-
-const getActualRoute = locale => {
-    const route = locale.route(location.pathname);
-    if (!route) return 'routes/error/404';
-    return route;
 };
 
 export default async function () {
@@ -61,7 +56,7 @@ export default async function () {
         routerStore.frames.push(routerStore.frames.get().splice(index, 1)[0]);
     });
 
-    let actualRoute = getActualRoute(locale);
+    let actualRoute = getRouteFromHref(locale);
     const { href, title } = locale.get(homeRoute);
     window.history.replaceState({ route: homeRoute }, title, href);
     document.title = title;

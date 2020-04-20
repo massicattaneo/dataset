@@ -78,10 +78,27 @@ const createBreadcrumb = (href, route, locale) => {
     }).join(' > ');
 };
 
+const getRouteFromHref = (locale, pathname = location.pathname) => {
+    const route = locale.route(pathname);
+    if (!route) return 'routes/error/404';
+    return route;
+};
+
+const createHeadInfoMarkup = (locale, pathname = location.pathname) => {
+    const { title } = getRouteFromHref(locale, pathname);
+    const markup = `
+        <link href="{{manifest.init.logo}}" rel="shortcut icon" type="image/x-icon">
+        <title>${title}</title>
+    `;
+    return createHtmlMarkup({ markup, locale });
+};
+
 module.exports = {
     createRouteFrame,
     createHtmlElement,
     getRouteTemplate,
     createBreadcrumb,
-    createHtmlMarkup
+    createHtmlMarkup,
+    createHeadInfoMarkup,
+    getRouteFromHref
 };
