@@ -5,6 +5,35 @@ import { isDesktop, isMobile } from '../../../modules/device/device-client';
 import { elementEmitter, elementSetters } from '../../../modules/templating/mixins';
 import { STYLE } from '../../../constants';
 
+function setLeft(element, availableWidth, position) {
+    const keys = Object.keys(position);
+    const winWidth = getComputed(element, 'width');
+    if (keys.includes('center')) {
+        element.style.left = `${(availableWidth - winWidth) / 2}px`;
+    }
+    if (keys.includes('left')) {
+        element.style.left = `${position.left}px`;
+    }
+    if (keys.includes('right')) {
+        element.style.right = `${position.right}px`;
+    }
+}
+
+function setTop(element, availableHeight, position) {
+    const keys = Object.keys(position);
+    const winHeight = getComputed(element, 'height');
+    if (keys.includes('center')) {
+        element.style.top = `${(availableHeight - winHeight) / 2 + STYLE.HOME_HEADER_HEIGHT}px`;
+    }
+    if (keys.includes('top')) {
+        element.style.top = `${position.top+ STYLE.HOME_HEADER_HEIGHT}px`;
+    }
+
+    if (keys.includes('bottom')) {
+        element.style.bottom = `${position.bottom}px`;
+    }
+}
+
 const mixin = element => {
     elementSetters(element, '.title');
     const emit = elementEmitter(element);
@@ -38,18 +67,14 @@ const mixin = element => {
         content.appendChild(htmlElement);
     };
 
-    element.iPosition = ({ width, height }) => {
+    element.iPosition = ({ width, height, position = { center: 0 } }) => {
         if (!isDesktop) return;
         const availableHeight = window.innerHeight - STYLE.HOME_FOOTER_HEIGHT - STYLE.HOME_HEADER_HEIGHT;
         const availableWidth = window.innerWidth;
         element.style.width = width ? `${Math.min(width, availableWidth)}px` : '';
         element.style.height = height ? `${Math.min(height, availableHeight)}px` : '';
-        const winWidth = getComputed(element, 'width');
-        const winHeight = getComputed(element, 'height');
-        const lft = (availableWidth - winWidth) / 2 + STYLE.HOME_HEADER_HEIGHT;
-        const tp = (availableHeight - winHeight) / 2;
-        element.style.left = `${lft}px`;
-        element.style.top = `${tp}px`;
+        setLeft(element, availableWidth, position);
+        setTop(element, availableHeight, position);
     };
 
     element.iClose = () => {

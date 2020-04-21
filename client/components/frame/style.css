@@ -3,9 +3,6 @@
     margin: auto;
     box-shadow: -2px 0 15px rgba(0, 0, 0, 0.4);
     position: absolute;
-    left: 10px;
-    top: calc(var(--home-header-height) + 70px);
-    right: auto;
     bottom: auto;
     resize: both;
     border: 1px inset var(--contrast-color);
