@@ -24,7 +24,12 @@ if (params.route) {
     createFolderRecursive(absolutePath);
     fs.writeFileSync(`${absolutePath}.html`, '<div></div>');
     fs.writeFileSync(`${absolutePath}.css`, '.local {}');
-    fs.writeFileSync(`${absolutePath}.js`, 'export default async function() {}');
+    fs.writeFileSync(`${absolutePath}.js`, `
+import { pluginBundle } from '../../modules/bundle';
+pluginBundle('routes/${route}', async function ({ frame }) {
+    const { store } = this;
+});
+    `);
     fs.writeFileSync(`${absolutePath}.xml`, `<locales>
     <locale path="@routes/href">
         <en></en>

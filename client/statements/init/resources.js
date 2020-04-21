@@ -5,7 +5,7 @@ import { createHeadInfoMarkup } from '../../../modules/templating/client';
 export default async function () {
     const { locale } = this;
     const element = document.getElementById('loader');
-    await manifest(window.manifest, 'init');
+    await manifest(window.app.assetsManifest, 'init');
     const loadingClass = 'loading';
     const loader = {
         start: () => addCssClass(element, loadingClass),

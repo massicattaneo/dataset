@@ -6,10 +6,11 @@ const setClock = (store, options, home) => {
 };
 
 export default async function () {
-    const { home, store } = this;
+    const { home, store, locale } = this;
     if (isDesktop) {
         const options = { weekday: 'long', hour: 'numeric', minute: 'numeric' };
         setInterval(() => setClock(store, options, home), 5000);
         setClock(store, options, home);
     }
+    document.body.style.backgroundImage = `url('${locale.get('assetsManifest/init/pattern')}')`
 }

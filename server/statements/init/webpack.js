@@ -9,13 +9,15 @@ const { InlineManifestPlugin } = require('../../webpack/inline-manifest-plugin')
 const { STYLE } = require('../../../constants');
 const { handlebarsParser } = require('../../../modules/templating');
 const { toPixels } = require('../../../modules/templating/formatters');
+const requireContext = require('require-context');
+const context = requireContext(`../../routes`, true, /\.js/);
 
 function getDefaultConfig({ clientDir }) {
+    const entry = context.keys().reduce((obj, key) => ({ ...obj, [key.replace('.js', '').replace('/', '-')]: path.resolve(clientDir, 'a/', context.resolve(key)) }), {});
     const assetsDir = path.resolve(clientDir, 'assets');
+    Object.assign(entry, { main: [path.resolve(clientDir, './index.js'), 'webpack-hot-middleware/client'] });
     return {
-        entry: {
-            main: [path.resolve(clientDir, './index.js'), 'webpack-hot-middleware/client']
-        },
+        entry,
         mode: 'development',
         devtool: 'source-map',
         output: {
@@ -39,7 +41,7 @@ function getDefaultConfig({ clientDir }) {
                                     localIdentName: '[hash:base64:5]'
                                 }
                             }
-                        },
+                        }
                     ]
                 },
                 {

@@ -1,14 +1,14 @@
 <div>
     <div class="status-bar">
-        <a data-route="index"><img class="logo" src="{{manifest.init.logo}}"/></a>
+        <a data-route="index"><img class="logo" src="{{assetsManifest.init.logo}}"/></a>
         <i-breadcrumb data-expose-as="breadcrumb"></i-breadcrumb>
         <a data-route="settings/language" class="right">
-            <img class="lang {{system.language}}" style="background-image: url('{{manifest.init.flags}}')" />
+            <img class="lang {{system.language}}" style="background-image: url('{{assetsManifest.init.flags}}')" />
         </a>
         <a data-route="settings/datetime" class="datetime right"></a>
         <a data-route="settings" class="settings icofont-ui-settings right"></a>
         <a data-route="settings/bluetooth" class="icofont-ui-bluetooth right"></a>
-        <a data-route="settings/cookies" class="icofont-ui-browser right"></a>
+        <a data-route="settings/security" class="icofont-ui-browser right"></a>
         <a data-route="settings/location" class="icofont-location-arrow right"></a>
     </div>
     <i-notification data-expose-as="notification"></i-notification>

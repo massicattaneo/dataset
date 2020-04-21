@@ -4,6 +4,7 @@ body {
     color: var(--main-color);
     min-width: 320px;
     overflow: hidden;
+    background-blend-mode: color-burn;
 }
 
 * { -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }

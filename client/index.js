@@ -2,14 +2,12 @@ import './index.css';
 import { parseStatements } from '../modules/thread/thread-utils';
 import { Thread } from '../modules/thread/Thread';
 import { FunctionalProgramming } from '../modules/functional-programming/FunctionalProgramming';
-import { ROUTES_PATH } from '../constants';
 import { logThreadMiddleware } from './middlewares';
 
 FunctionalProgramming(Function);
 
-const routesStatements = parseStatements(require.context('../routes/', true, /.js/), '.js', { prefixPath: ROUTES_PATH });
 const statements = parseStatements(require.context('./statements/', true, /.js/), '.js');
-const thread = Thread({ ...statements, ...routesStatements });
+const thread = Thread(statements);
 
 (async function () {
     thread.before(logThreadMiddleware);

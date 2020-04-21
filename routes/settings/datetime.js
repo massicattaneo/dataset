@@ -1,6 +1,7 @@
 import { initClock } from '../../modules/canvas-clock';
+import { pluginBundle } from '../../modules/bundle';
 
-export default async function ({ frame }) {
+pluginBundle('routes/settings/datetime', async function ({ frame }) {
     const { store } = this;
     frame.iPosition({ width: 220, height: 300 });
     initClock(frame.querySelector('canvas'));
@@ -11,4 +12,5 @@ export default async function ({ frame }) {
         month: 'long'
     }).format(Date.now());
     frame.querySelector('p').innerText = text;
-}
+});
+

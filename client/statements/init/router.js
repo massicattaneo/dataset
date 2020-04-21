@@ -10,6 +10,7 @@ import {
     getRouteTemplate,
     getRouteFromHref
 } from '../../../modules/templating/client';
+import { loadBundle } from '../../../modules/bundle';
 
 const { ROUTES_PATH } = require('../../../constants');
 
@@ -38,9 +39,10 @@ export default async function () {
 
     const showFrame = route => {
         const frame = createFrame(route, this, routerStore);
-        home.querySelector('.frames').appendChild(frame);
-        frame.iPosition({ width: 500 });
-        thread.main(route, { frame });
+        loadBundle(route, frame, this).then(() => {
+            home.querySelector('.frames').appendChild(frame);
+            frame.iPosition({ width: 500 });
+        });
     };
 
     window.addEventListener('click', async event => {

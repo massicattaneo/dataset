@@ -21,7 +21,7 @@ export default async function () {
     const version = store.version.get();
 
     const locObj = {
-        manifest: window.manifest.reduce((acc, item) => {
+        assetsManifest: window.app.assetsManifest.reduce((acc, item) => {
             acc[item.stage] = acc[item.stage] || {};
             acc[item.stage][item.name] = item.url;
             return acc;

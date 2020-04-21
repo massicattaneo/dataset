@@ -17,10 +17,15 @@ const getTypeFromExtension = ext => {
 class InlineManifestPlugin {
     constructor() {
         this.assetsManifest = {};
+        this.chunksManifest = {};
     }
 
     apply(compiler) {
         return compiler.hooks.emit.tapAsync('InlineManifestPlugin', (compilation, callback) => {
+            const chunks = compilation.chunks.reduce((obj, chunk) => {
+                const name = chunk.id;
+                return { ...obj, [name]: { url: `/${chunk.files[0]}`, name, stage: name,  ext: '.js', type: DEPENDENCY_TYPES.SCRIPT} };
+            }, {});
             const assets = Object.keys(compilation.assets)
                 .filter(item => !item.match(/\.html$/))
                 .filter(item => item.match(/\//))
@@ -34,11 +39,13 @@ class InlineManifestPlugin {
                     return { ...obj, [key]: { url: `/${url}`, name, stage, ext, type } };
                 }, {});
             Object.assign(this.assetsManifest, assets);
+            Object.assign(this.chunksManifest, chunks);
             const mainBundle = Object.keys(compilation.assets)
                 .find(item => item.startsWith('main.'));
             compilation.hooks.htmlWebpackPluginAfterHtmlProcessing.tapAsync('InlineManifestPlugin', async (data, cb) => {
                 const manifest = JSON.stringify(objectToArray(this.assetsManifest));
-                const replaceValue = `<head><script>window.manifest = ${manifest}</script>`;
+                const chunksManifest = JSON.stringify(objectToArray(this.chunksManifest));
+                const replaceValue = `<head><script>window.app={};window.app.assetsManifest = ${manifest};window.app.chunksManifest=${chunksManifest}</script>`;
                 const replaceBundle = `<script type="text/javascript" src="/${mainBundle}"></script></body>`;
                 data.html = data.html.replace('<head>', replaceValue);
                 data.html = data.html.replace('</body>', replaceBundle);
