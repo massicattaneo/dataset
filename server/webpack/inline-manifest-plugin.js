@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const { DEPENDENCY_TYPES, FONTS_EXTENSIONS } = require('../../modules/loaders/manifest');
 
 const objectToArray = obj => {
@@ -22,10 +24,26 @@ class InlineManifestPlugin {
 
     apply(compiler) {
         return compiler.hooks.emit.tapAsync('InlineManifestPlugin', (compilation, callback) => {
-            const chunks = compilation.chunks.reduce((obj, chunk) => {
-                const name = chunk.id;
-                return { ...obj, [name]: { url: `/${chunk.files[0]}`, name, stage: name,  ext: '.js', type: DEPENDENCY_TYPES.SCRIPT} };
-            }, {});
+            const chunks = compilation.chunks
+                .filter(chunk => chunk.entryModule.resource)
+                .reduce((obj, chunk) => {
+                    const name = chunk.id;
+                    const dirname = path.dirname(chunk.entryModule.resource);
+                    const basename = path.basename(chunk.entryModule.resource).replace('.js', '.config.json');
+                    const configFile = path.resolve(dirname, basename);
+                    const config = fs.existsSync(configFile) ? JSON.parse(fs.readFileSync(configFile, 'utf8')) : {};
+                    return {
+                        ...obj,
+                        [name]: {
+                            url: `/${chunk.files[0]}`,
+                            name,
+                            stage: name,
+                            ext: '.js',
+                            type: DEPENDENCY_TYPES.SCRIPT,
+                            ...config
+                        }
+                    };
+                }, {});
             const assets = Object.keys(compilation.assets)
                 .filter(item => !item.match(/\.html$/))
                 .filter(item => item.match(/\//))

@@ -39,10 +39,8 @@ export default async function () {
 
     const showFrame = route => {
         const frame = createFrame(route, this, routerStore);
-        loadBundle(route, frame, this).then(() => {
-            home.querySelector('.frames').appendChild(frame);
-            frame.iPosition({ width: 500 });
-        });
+        home.querySelector('.frames').appendChild(frame);
+        loadBundle(route, frame, this);
     };
 
     window.addEventListener('click', async event => {

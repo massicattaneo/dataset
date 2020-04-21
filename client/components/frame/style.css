@@ -20,6 +20,7 @@
     min-height: 220px;
 }
 
+
 :global(.mobile) .local {
     top: 29px;
     width: 100%;

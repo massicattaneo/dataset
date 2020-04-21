@@ -7,14 +7,13 @@ export const pluginBundle = (name, callback) => {
 };
 
 export const loadBundle = (route, frame, context) => {
-    const item = route.replace('routes/', '').replace(/\//g, '-');
-    return manifest(window.app.chunksManifest, item).then(() => {
-        setTimeout(() => {
-            document.dispatchEvent(new CustomEvent(route, {
-                detail: {
-                    inject: plugin => plugin.call(context, { frame })
-                }
-            }));
-        });
+    const stages = route.replace('routes/', '').replace(/\//g, '-');
+    frame.iPosition(window.app.chunksManifest.find(({ stage }) => stage === stages).defaults);
+    return manifest(window.app.chunksManifest, stages).then(() => {
+        document.dispatchEvent(new CustomEvent(route, {
+            detail: {
+                inject: plugin => plugin.call(context, { frame })
+            }
+        }));
     });
 };

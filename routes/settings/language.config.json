@@ -1,0 +1,7 @@
+{
+  "dependencies": [ ],
+  "defaults": {
+    "width": 330,
+    "height": 200
+  }
+}

@@ -17,6 +17,11 @@ const params = argv
     .filter(val => !val.startsWith('--'))
     .reduce((obj, val) => ({ ...obj, [val.split('=')[0]]: val.split('=')[1] }), {});
 
+const config = {
+    dependencies: [],
+    defaults: { width: 500 }
+};
+
 if (params.route) {
     const { route } = params;
     const folders = route.split('/');
@@ -24,6 +29,7 @@ if (params.route) {
     createFolderRecursive(absolutePath);
     fs.writeFileSync(`${absolutePath}.html`, '<div></div>');
     fs.writeFileSync(`${absolutePath}.css`, '.local {}');
+    fs.writeFileSync(`${absolutePath}.config.json`, JSON.stringify(config));
     fs.writeFileSync(`${absolutePath}.js`, `
 import { pluginBundle } from '../../modules/bundle';
 pluginBundle('routes/${route}', async function ({ frame }) {
