@@ -1,0 +1,36 @@
+.local {
+    margin: 20px 0;
+}
+
+/******************************************************** STEPS */
+.local :global(.steps) span {
+    display: inline-block;
+    background-color: var(--text-color);
+    color: var(--text-bg-color);
+    width: 30px;
+    height: 30px;
+    line-height: 28px;
+    border-radius: 50%;
+    font-size: 18px;
+    opacity: 0.3;
+}
+
+.local :global(.steps) span:global(.passed) {
+    opacity: 1;
+}
+
+.local :global(.steps) span:global(.active) {
+    opacity: 1;
+    background-color: var(--main-color);
+}
+
+.local :global(.steps) hr {
+    display: inline-block;
+    width: 80px;
+    margin: 5px;
+    vertical-align: middle;
+}
+/******************************************************** TITLE */
+.local h3 {
+    color: var(--text-color);
+}

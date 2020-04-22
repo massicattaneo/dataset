@@ -1,18 +1,23 @@
 <div>
-    <h3>Sign in</h3>
+    <i-flow>
+        <title>Sign in</title>
+        <content>
+            <form>
+                <i-input data-type="email">
+                    <type>email</type>
+                    <name>email</name>
+                    <placeholder>Email</placeholder>
+                </i-input>
+                <i-button>
+                    <value>PROCEED</value>
+                    <type>submit</type>
+                </i-button>
+            </form>
+            <p>Still not with us? <a data-route="account/register/">Register here</a></p>
+            <hr/>
+            <p>Did you forgot your password? <a data-route="account/register/">Reset here</a></p>
+        </content>
+    </i-flow>
     <p>please enter you email to proceed</p>
-    <form>
-        <i-input data-type="email">
-            <type>email</type>
-            <name>email</name>
-            <placeholder>Email</placeholder>
-        </i-input>
-        <i-button>
-            <value>PROCEED</value>
-            <type>submit</type>
-        </i-button>
-    </form>
-    <p>Still not with us? <a data-route="account/register/">Register here</a></p>
-    <hr/>
-    <p>Did you forgot your password?</p>
+
 </div>

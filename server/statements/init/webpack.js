@@ -12,19 +12,20 @@ const { toPixels } = require('../../../modules/templating/formatters');
 const requireContext = require('require-context');
 const context = requireContext(`../../routes`, true, /\.js/);
 
-function getDefaultConfig({ clientDir }) {
+function getDefaultConfig({ clientDir, publicPath }) {
     const entry = context.keys().reduce((obj, key) => ({
         ...obj,
         [key.replace('.js', '').replace(/\//g, '-')]: path.resolve(clientDir, 'a/', context.resolve(key))
     }), {});
     const assetsDir = path.resolve(clientDir, 'assets');
-    Object.assign(entry, { main: [path.resolve(clientDir, './index.js'), 'webpack-hot-middleware/client'] });
+    Object.assign(entry, { main: [path.resolve(clientDir, './index.js'), 'webpack-hot-middleware/client?reload=true'] });
     return {
         entry,
         mode: 'development',
         devtool: 'source-map',
         output: {
             path: path.resolve(clientDir, '../server/static'),
+            publicPath,
             filename: '[name].[hash].js'
         },
         resolveLoader: {
