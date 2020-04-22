@@ -5,9 +5,11 @@ import { ROUTES_PATH } from '../../../constants';
 function getRouteMappings(locObj) {
     const { routes } = locObj;
     const routesToObject = (prefix, obj) => Object.keys(obj).map(key => {
-        if (!obj[key].href) return [];
+        if (!(obj[key] instanceof Object)) return [];
         const items = routesToObject(`${prefix}${key}/`, obj[key]);
-        return [{ href: obj[key].href, route: `${prefix}${key}` }].concat(...items);
+        const ret = [];
+        if (obj[key].href) ret.push({ href: obj[key].href, route: `${prefix}${key}` });
+        return ret.concat(...items);
     });
     return routesToObject
         .partial(ROUTES_PATH)

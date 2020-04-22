@@ -1,8 +1,8 @@
 <locales>
     <locale path="@routes/href">
-        <en>/account/</en>
-        <es>/cuenta/</es>
-        <it>/utente/</it>
+        <en>/en/account/</en>
+        <es>/es/cuenta/</es>
+        <it>/it/utente/</it>
     </locale>
     <locale path="@routes/title">
         <en>Account</en>

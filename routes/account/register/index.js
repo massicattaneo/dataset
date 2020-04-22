@@ -1,9 +1,9 @@
-import { pluginBundle } from '../../modules/bundle';
+import { pluginBundle } from '../../../modules/bundle';
 import style from './index.css';
 import template from './index.html';
 
 const options = {
-    route: 'routes/error/404',
+    route: 'routes/account/register/index',
     template,
     style
 };

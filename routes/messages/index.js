@@ -3,7 +3,7 @@ import style from './index.css';
 import template from './index.html';
 
 const options = {
-    route: 'routes/error/404',
+    route: 'routes/messages/index',
     template,
     style
 };

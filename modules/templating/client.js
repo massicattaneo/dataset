@@ -11,7 +11,8 @@ const replaceNavigation = (locale, htmlTemplate) => {
     let match = htmlTemplate.match(dataNavRegExp);
     while (match) {
         const [, attribute] = match;
-        const route = `${ROUTES_PATH}${attribute}`;
+        const subPath = attribute.endsWith('/') ? `${attribute}index` : attribute;
+        const route = `${ROUTES_PATH}${subPath}`;
         const { href } = locale.get(route) || {};
         const custom = { route };
         const attr = `href="${href}" onclick="event.preventDefault();event.custom=${objectToString(custom)};"`;
@@ -59,11 +60,11 @@ const createBreadcrumb = (href, route, locale) => {
     routes.shift();
     const string = breadcrumb.map((item, index) => {
         return createHtmlMarkup({
-            markup: `<a data-route="${routes[index]}">${item}</a>`,
+            markup: `<a data-route="${routes[index]}/">${item}</a>`,
             locale
         });
     }).join(' > ');
-    return string ? `> ${string}` : ''
+    return string ? `> ${string}` : '';
 };
 
 const getRouteFromHref = (locale, pathname = location.pathname) => {

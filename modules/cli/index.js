@@ -26,14 +26,25 @@ if (params.route) {
     const { route } = params;
     const folders = route.split('/');
     const absolutePath = path.resolve(__dirname, '../../', ROUTES_PATH, folders.join('/'));
+    const routes = route.split('/');
     createFolderRecursive(absolutePath);
     fs.writeFileSync(`${absolutePath}.html`, '<div></div>');
     fs.writeFileSync(`${absolutePath}.css`, '.local {}');
-    fs.writeFileSync(`${absolutePath}.config.json`, JSON.stringify(config));
-    fs.writeFileSync(`${absolutePath}.js`, `
-import { pluginBundle } from '../../modules/bundle';
-pluginBundle('routes/${route}', async function ({ frame }) {
-    const { store } = this;
+    fs.writeFileSync(`${absolutePath}.config.json`, JSON.stringify(config, null, 2));
+    fs.writeFileSync(`${absolutePath}.js`,
+        `import { pluginBundle } from '${routes.map(() => '../').join('')}modules/bundle';
+import style from './index.css';
+import template from './index.html';
+
+const options = {
+    route: 'routes/${route}',
+    template,
+    style
+};
+
+pluginBundle(options, async function () {
+    const { frame } = this;
+    const { store } = this.sharedContext;
 });
     `);
     fs.writeFileSync(`${absolutePath}.xml`, `<locales>

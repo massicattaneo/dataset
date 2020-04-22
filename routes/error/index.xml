@@ -1,0 +1,12 @@
+<locales>
+    <locale path="@routes/href">
+        <en>/en/error/</en>
+        <es>/es/error/</es>
+        <it>/it/errore/</it>
+    </locale>
+    <locale path="@routes/title">
+        <en>Dataset - Page not found</en>
+        <es>Dataset - Pagina no encontrada</es>
+        <it>Dataset - Pagina inesistente</it>
+    </locale>
+</locales>

@@ -26,6 +26,7 @@ class InlineManifestPlugin {
         return compiler.hooks.emit.tapAsync('InlineManifestPlugin', (compilation, callback) => {
             const chunks = compilation.chunks
                 .filter(chunk => chunk.entryModule.resource)
+                .filter(chunk => chunk.entryModule.resource.endsWith('.js'))
                 .reduce((obj, chunk) => {
                     const name = chunk.id;
                     const dirname = path.dirname(chunk.entryModule.resource);
@@ -53,7 +54,7 @@ class InlineManifestPlugin {
                     const [, name] = key.match(/.*\/(.*)\..*/);
                     const [, ext] = key.match(/.*\/.*\.(.*)/);
                     const type = getTypeFromExtension(ext);
-                    const [, stage] = key.match(/[^/]*\/([^/]*)\//);
+                    const [, stage] = key.match(/[^/]*\/([^/]*)\//) || [];
                     return { ...obj, [key]: { url: `/${url}`, name, stage, ext, type } };
                 }, {});
             Object.assign(this.assetsManifest, assets);
