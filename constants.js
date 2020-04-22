@@ -25,11 +25,13 @@ const API = {
 };
 
 const ROUTES_PATH = 'routes/';
+const DEFAULT_LANGUAGE = 'en';
 
 module.exports = {
     APPLICATION,
     SERVER,
     STYLE,
     API,
-    ROUTES_PATH
+    ROUTES_PATH,
+    DEFAULT_LANGUAGE
 };

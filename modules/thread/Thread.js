@@ -10,6 +10,16 @@ function getFunction(statements, statement) {
     return statements[statement];
 }
 
+function createWorker(workerFunc) {
+    if (!(workerFunc instanceof Function)) {
+        throw new Error('Argument must be function');
+    }
+    const src = `(${workerFunc})();`;
+    const blob = new Blob([src], { type: 'application/javascript' });
+    const url = URL.createObjectURL(blob);
+    return new Worker(url);
+}
+
 function Thread(statements = {}, sharedContext = {}, { name = pointer++, clean = [] } = {}) {
     const thread = {};
     const middleware = Middleware();
@@ -33,6 +43,9 @@ function Thread(statements = {}, sharedContext = {}, { name = pointer++, clean =
         },
         context
     );
+    thread.worker = (statement) => {
+        return createWorker(getFunction(statements, statement))
+    };
     thread.extend = (...args) => Object.assign(context, ...args);
     thread.exit = err => {
         if (err && process) process.exit();

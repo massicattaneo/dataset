@@ -69,6 +69,7 @@ const createBreadcrumb = (href, route, locale) => {
 
 const getRouteFromHref = (locale, pathname = location.pathname) => {
     const route = locale.route(pathname);
+    if (pathname === '/') return 'routes/index';
     if (!route) return 'routes/error/404';
     return route;
 };
