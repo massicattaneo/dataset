@@ -1,3 +1,4 @@
+import { markup } from '../../../routes/index.js';
 import { addCssClass, getElementPath, hasCssClass } from '../../../modules/html/html';
 import { touchType } from '../../../modules/device/device-client';
 import { connect, create } from '../../../modules/reactive/Reactive';
@@ -6,23 +7,12 @@ import { findIndex } from '../../../modules/array/array';
 import {
     createBreadcrumb,
     createHtmlElement,
-    createRouteFrame,
-    getRouteTemplate,
     getRouteFromHref
 } from '../../../modules/templating/client';
 import { loadBundle } from '../../../modules/bundle';
+import { Thread } from '../../../modules/thread/Thread';
 
 const { ROUTES_PATH } = require('../../../constants');
-
-const createFrame = (route, { thread, locale }, { frames }) => {
-    const frame = createRouteFrame({ route, locale });
-    const item = { frame, route };
-    frames.push(item);
-    frame.iOn('close', () => {
-        frames.splice(frames.get().indexOf(item), 1);
-    });
-    return frame;
-};
 
 export default async function () {
     const { locale, thread } = this;
@@ -32,15 +22,28 @@ export default async function () {
     });
     const router = {};
     const appElement = document.getElementById('app');
-    const home = createHtmlElement({ markup: getRouteTemplate('index'), locale });
+
+    const home = createHtmlElement({ markup: markup(), locale });
     addCssClass(document.body, touchType);
 
     appElement.appendChild(home);
 
     const showFrame = route => {
-        const frame = createFrame(route, this, routerStore);
+        const frame = createHtmlElement({ markup: '<i-frame></i-frame>', locale });
+        frame.iSetValue(locale.get(`${route}/title`));
+        const item = { frame, route };
+        routerStore.frames.push(item);
+        frame.iOn('close', () => {
+            routerStore.frames.splice(routerStore.frames.get().indexOf(item), 1);
+        });
         home.querySelector('.frames').appendChild(frame);
-        loadBundle(route, frame, this);
+        loadBundle(route, frame, this).then(({ markup, bootstrap }) => {
+            const frameThread = Thread(thread.getStatements(), this);
+            const page = createHtmlElement({ markup, locale });
+            frame.iSetContent(page);
+            frameThread.extend({ frame });
+            frameThread.main(bootstrap);
+        });
     };
 
     window.addEventListener('click', async event => {

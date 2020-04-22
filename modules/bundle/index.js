@@ -1,19 +1,18 @@
 import { manifest } from '../loaders/manifest';
 
-export const pluginBundle = (name, callback) => {
-    document.addEventListener(name, event => {
-        event.detail.inject(callback);
+export const pluginBundle = ({ route, template, style }, bootstrap) => {
+    const markup = template.replace('>', ` class="${style.local}">`);
+    document.addEventListener(route, event => {
+        event.detail.inject({ bootstrap, markup, style });
     });
 };
 
 export const loadBundle = (route, frame, context) => {
     const stages = route.replace('routes/', '').replace(/\//g, '-');
     frame.iPosition(window.app.chunksManifest.find(({ stage }) => stage === stages).defaults || {});
-    return manifest(window.app.chunksManifest, stages).then(() => {
-        document.dispatchEvent(new CustomEvent(route, {
-            detail: {
-                inject: plugin => plugin.call(context, { frame })
-            }
-        }));
+    return new Promise((inject, reject) => {
+        manifest(window.app.chunksManifest, stages).then(() => {
+            document.dispatchEvent(new CustomEvent(route, { detail: { inject } }));
+        }).catch(reject);
     });
 };

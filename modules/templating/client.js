@@ -4,9 +4,6 @@ const { templateComponents, templateParser } = require('./index');
 const { parseStatements } = require('../thread/thread-utils');
 const { ROUTES_PATH } = require('../../constants');
 const { objectToString } = require('../string/string');
-
-const htmlPages = parseStatements(require.context('../../routes/', true, /.html/));
-const styles = parseStatements(require.context('../../routes/', true, /.css/));
 const componentsJS = parseStatements(require.context('../../client/components/', true, /.js/));
 
 const replaceNavigation = (locale, htmlTemplate) => {
@@ -53,17 +50,6 @@ const createHtmlElement = ({ markup = '', locale }) => {
 
     return element;
 };
-const getRouteTemplate = route => {
-    const reduced = route.replace(ROUTES_PATH, '');
-    return htmlPages[`${reduced}.html`].replace('>', ` class="${styles[`${reduced}.css`].local}">`);
-};
-const createRouteFrame = ({ route, locale }) => {
-    const page = createHtmlElement({ markup: getRouteTemplate(route), locale });
-    const frame = createHtmlElement({ markup: '<i-frame></i-frame>', locale });
-    frame.iSetContent(page);
-    frame.iSetValue(locale.get(`${route}/title`));
-    return frame;
-};
 const createBreadcrumb = (href, route, locale) => {
     const breadcrumb = href.split('/').filter(i => i);
     breadcrumb.shift();
@@ -96,9 +82,7 @@ const createHeadInfoMarkup = (locale, pathname = location.pathname) => {
 };
 
 module.exports = {
-    createRouteFrame,
     createHtmlElement,
-    getRouteTemplate,
     createBreadcrumb,
     createHtmlMarkup,
     createHeadInfoMarkup,
