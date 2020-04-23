@@ -11,7 +11,7 @@ const thread = Thread(statements);
 
 (async function () {
     thread.before(logThreadMiddleware);
-    await thread.main('init/errors').subscribe();
+    await thread.main('init/notifications').subscribe();
     await thread.main('init/store').subscribe().then(thread.extend);
     await thread.main('init/locale').subscribe().then(thread.extend);
     await thread.main('init/resources').subscribe().then(thread.extend);

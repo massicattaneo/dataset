@@ -25,7 +25,7 @@ const mixin = element => {
     };
 
     element.hide = () => {
-        removeCssClass(element, 'show');
+        removeCssClass(element, style.show);
     };
     return element;
 };

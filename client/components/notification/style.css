@@ -2,7 +2,7 @@
     width: 100%;
     position: fixed;
     top: -42px;
-    height: 42px;
+    height: 29px;
     z-index: 98;
     transition: top 0.2s linear;
 }
@@ -24,7 +24,7 @@
 }
 
 .local div em {
-    line-height: 33px;
+    line-height: 23px;
     vertical-align: top;
     display: inline-block;
     text-align: center;
@@ -32,14 +32,14 @@
     width: calc(100% - 50px);
 }
 .local div span {
-    font-size: 28px;
+    font-size: 21px;
     margin: 4px;
     display: inline-block;
     border-right: 1px solid black;
-    line-height: 27px;
-    padding: 0 4px;
+    line-height: 16px;
+    padding: 0 0 0 8px;
     width: 27px;
-    height: 27px;
+    height: 16px;
 }
 
 .local.info div {

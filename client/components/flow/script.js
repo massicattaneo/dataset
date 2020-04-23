@@ -2,13 +2,17 @@ import style from './style.css';
 import template from './template.html';
 import { addCssClass, getComputed, removeCssClass } from '../../../modules/html/html';
 import { findIndex } from '../../../modules/array/array';
+import { wait } from '../../../modules/wait/wait';
 
 const mixin = element => {
+    const pageIndex = element.querySelector('[name=pageIndex]');
     const legendSteps = Array.prototype.slice.call(element.querySelectorAll('.legend-step'));
     const contentSteps = Array.prototype.slice.call(element.querySelectorAll('.content-step'));
     let actualStep = 0;
     let parentWidth = 0;
+
     element.iGoToPage = (nextPage = (actualStep + 1)) => {
+        pageIndex.value = nextPage;
         legendSteps.forEach((el, index) => {
             removeCssClass(el, style.done);
             removeCssClass(el, style.active);
@@ -22,6 +26,10 @@ const mixin = element => {
             }
         });
         actualStep = nextPage;
+        return wait.cssTransition(element).then(() => {
+            const options = { detail: { fieldset: contentSteps[actualStep] } };
+            element.dispatchEvent(new CustomEvent('change-page', options));
+        });
     };
 
     element.addEventListener('click', event => {

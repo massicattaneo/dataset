@@ -46,4 +46,19 @@
             <p>Hai dimenticato la password? <a data-route="account/register/">Cambiala qui</a></p>
         </it>
     </locale>
+    <locale path="@path/password/legend">
+        <en>please enter your passwrod to proceed</en>
+        <es>Por favor ingresa la contraseña para proceder</es>
+        <it>Per favore immetti la password per procedere</it>
+    </locale>
+    <locale path="@path/password/placeholder">
+        <en>Password</en>
+        <es>Contraseña</es>
+        <it>Password</it>
+    </locale>
+    <locale path="@path/password/proceed">
+        <en>PROCEED</en>
+        <es>SEGUIR</es>
+        <it>AVANTI</it>
+    </locale>
 </locales>

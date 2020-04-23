@@ -41,8 +41,9 @@ export default async function () {
             const frameThread = Thread(thread.getStatements(), this);
             const page = createHtmlElement({ markup, locale });
             frame.iSetContent(page);
-            frameThread.extend({ frame, page });
+            frameThread.extend({ frame, page, home, locale });
             frameThread.main(bootstrap);
+            frameThread.main('init/notifications')
         });
     };
 

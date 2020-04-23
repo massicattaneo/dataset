@@ -34,5 +34,15 @@
         <es>Crear</es>
         <it>Crea</it>
     </locale>
+    <locale path="notifications/warn/wrong-format">
+        <en>The field " {{placeholder}} " is in a wrong format</en>
+        <es></es>
+        <it></it>
+    </locale>
+    <locale path="notifications/warn/required">
+        <en>The field " {{placeholder}} " is required</en>
+        <es>Rellena el campo " {{placeholder}} "</es>
+        <it>Il campo " {{placeholder}} " é obbligatorio</it>
+    </locale>
 </locales>
 
