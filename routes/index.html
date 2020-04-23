@@ -1,7 +1,7 @@
 <div>
     <div class="status-bar">
         <a data-route="index"><img class="logo" src="{{assetsManifest.init.logo}}"/></a>
-        <i-breadcrumb data-expose-as="breadcrumb"></i-breadcrumb>
+        <ibreadcrumb data-expose-as="breadcrumb"></ibreadcrumb>
         <a data-route="settings/language" class="right">
             <img class="lang {{system.language}}" style="background-image: url('{{assetsManifest.init.flags}}')" />
         </a>
@@ -11,27 +11,27 @@
         <a data-route="settings/security" class="icofont-ui-browser right"></a>
         <a data-route="settings/location" class="icofont-location-arrow right"></a>
     </div>
-    <i-notification data-expose-as="notification"></i-notification>
-    <i-dialog data-expose-as="dialog"></i-dialog>
+    <inotification data-expose-as="notification"></inotification>
+    <idialog data-expose-as="dialog"></idialog>
 
     <div class="icons"></div>
     <div class="frames"></div>
 
     <nav class="menu">
-        <i-icon data-route="account/login/">
+        <iicon data-route="account/login/">
             <icon>icofont-user</icon>
-            <label>{{index.menu.icons.login}}</label></i-icon>
-        <i-icon data-route="trash/">
+            <label>{{index.menu.icons.login}}</label></iicon>
+        <iicon data-route="trash/">
             <icon>icofont-trash</icon>
-            <label>{{index.menu.icons.trash}}</label></i-icon>
-        <i-icon data-route="messages/">
+            <label>{{index.menu.icons.trash}}</label></iicon>
+        <iicon data-route="messages/">
             <icon>icofont-ui-message</icon>
-            <label>{{index.menu.icons.message}}</label></i-icon>
-        <i-icon data-route="search/">
+            <label>{{index.menu.icons.message}}</label></iicon>
+        <iicon data-route="search/">
             <icon>icofont-search-2</icon>
-            <label>{{index.menu.icons.search}}</label></i-icon>
-        <i-icon>
+            <label>{{index.menu.icons.search}}</label></iicon>
+        <iicon>
             <icon>icofont-plus-circle</icon>
-            <label>{{index.menu.icons.create}}</label></i-icon>
+            <label>{{index.menu.icons.create}}</label></iicon>
     </nav>
 </div>

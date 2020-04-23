@@ -9,4 +9,9 @@
         <es>Entra</es>
         <it>Entra</it>
     </locale>
+    <locale path="@path/title">
+        <en>Sign in</en>
+        <en>Entra</en>
+        <en>Entra</en>
+    </locale>
 </locales>

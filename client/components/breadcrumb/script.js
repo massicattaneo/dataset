@@ -7,6 +7,6 @@ const mixin = element => {
     return element;
 };
 
-const exports = { tagName: 'i-breadcrumb', selector: `.${style.local}`, mixin, template };
+const exports = { tagName: 'ibreadcrumb', selector: `.${style.local}`, mixin, template };
 export default exports;
 

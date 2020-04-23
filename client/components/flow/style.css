@@ -2,8 +2,12 @@
     margin: 20px 0;
 }
 
+.local fieldset {
+    border: none;
+}
+
 /******************************************************** STEPS */
-.local :global(.steps) span {
+.local :global(.legend) span {
     display: inline-block;
     background-color: var(--text-color);
     color: var(--text-bg-color);
@@ -15,16 +19,23 @@
     opacity: 0.3;
 }
 
-.local :global(.steps) span:global(.passed) {
+.local :global(.pages) :global(.content-step) {
+    display: none;
+}
+.local :global(.pages) :global(.content-step).active {
+    display: block;
+}
+
+.local :global(.legend) span.done {
     opacity: 1;
 }
 
-.local :global(.steps) span:global(.active) {
+.local :global(.legend) span.active {
     opacity: 1;
     background-color: var(--main-color);
 }
 
-.local :global(.steps) hr {
+.local :global(.legend) hr {
     display: inline-block;
     width: 80px;
     margin: 5px;

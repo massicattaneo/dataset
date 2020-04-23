@@ -36,7 +36,7 @@ function replaceVariable(formatters = {}, options = {}, string, key, value) {
 }
 
 function removeNewLine(string) {
-    return string.replace(/\n/g, ' ');
+    return string.replace(/\n/g, '');
 }
 
 function indexes(template, search) {
@@ -107,6 +107,7 @@ function replaceBlocks(action, variables = {}, options, template) {
 function block(tag = '') {
     return { endTag: `{{/${tag}}}`, startTag: `{{#${tag} *}}`, tagMatch: '{{*}}' };
 }
+
 function handlebarsBlock(tag = '') {
     return { endTag: `{{/${tag}}}`, startTag: `{{#${tag} *}}`, tagMatch: '<%= * %>' };
 }
@@ -120,6 +121,7 @@ function templateParser(htmlTemplate, variables = {}, formatters = {}) {
         //.compose(replaceLoopsOnString.partial(replaceVariable.partial(formatters, block()), variables, block('each')))
         .subscribe(htmlTemplate);
 }
+
 function handlebarsParser(htmlTemplate, variables = {}, formatters = {}) {
     return Function
         .identity()
@@ -152,16 +154,14 @@ const templateComponents = (markup, components, formatters) => {
                 const toSubstitute = markup.substr(start, end - start);
                 const templateVariables = getTemplateVariables(template);
                 const params = Object.assign(templateVariables, xmlToSimpleJson(toSubstitute));
-                const [, firstNode] = toSubstitute.replace(/\n∫/, '').match(tagRegEx);
+                const [firstNode] = toSubstitute.replace(/\n∫/, '').match(tagRegEx);
                 const [attributes] = firstNode.match(attributesRegEx) || [''];
                 const taggedTemplate = template.replace('>', ` class="${selector.replace('.', '')}" ${attributes}>`);
-                markup = markup
-                    .replace(toSubstitute, templateParser(taggedTemplate, params, formatters));
+                markup = markup.replace(toSubstitute, templateParser(taggedTemplate, params, formatters));
                 start = (markup.match(new RegExp(`<${tagName}[^^]*>`)) || {}).index;
             }
         });
     }
-
     return markup;
 };
 

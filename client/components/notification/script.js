@@ -30,6 +30,6 @@ const mixin = element => {
     return element;
 };
 
-const exports = { tagName: 'i-notification', selector: `.${style.local}`, mixin, template };
+const exports = { tagName: 'inotification', selector: `.${style.local}`, mixin, template };
 export default exports;
 

@@ -61,13 +61,12 @@ function xmlToJson(svgString, root = false) {
 }
 
 function jsonToXml(json) {
-    return `<${json.name} ${Object.keys(json.attributes).map(n => `${n}="${json.attributes[n]}"`).join(' ')}>${json.content}${json.children.map(jsonToXml).join('')}</${json.name}>`;
+    return `<${json.name} ${Object.keys(json.attributes).map(n => `${n}="${json.attributes[n]}"`).join(' ')}>${json.content} ${json.children.map(jsonToXml).join('')}</${json.name}>`;
 }
 
 function xmlToSimpleJson(xml) {
-    const structure = xmlToJson(xml, true);
+    const structure = xmlToJson(xml);
     return structure.children.reduce((acc, item) => {
-        if (item.children[0]) console.warn(item.children)
         const content = item.content + item.children.map(jsonToXml).join('');
         return { ...acc, [item.name]: content };
     }, {});

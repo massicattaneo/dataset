@@ -1,0 +1,11 @@
+{
+  "dependencies": [],
+  "defaults": {
+    "width": 400,
+    "height": 700,
+    "position": {
+      "left": 0,
+      "top": 0
+    }
+  }
+}

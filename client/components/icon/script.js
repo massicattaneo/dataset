@@ -7,6 +7,6 @@ const mixin = element => {
     return element;
 };
 
-const exports = { tagName: 'i-icon', selector: `.${style.local}`, mixin, template };
+const exports = { tagName: 'iicon', selector: `.${style.local}`, mixin, template };
 export default exports;
 

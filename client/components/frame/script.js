@@ -92,6 +92,6 @@ const mixin = element => {
     return element;
 };
 
-const exports = { tagName: 'i-frame', selector: `.${style.local}`, mixin, template };
+const exports = { tagName: 'iwindow', selector: `.${style.local}`, mixin, template };
 export default exports;
 

@@ -8,6 +8,6 @@ const mixin = element => {
     return element;
 };
 
-const exports = { tagName: 'i-button', selector: `.${style.local}`, mixin, template };
+const exports = { tagName: 'ibutton', selector: `.${style.local}`, mixin, template };
 export default exports;
 

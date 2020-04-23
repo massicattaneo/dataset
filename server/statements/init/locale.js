@@ -12,7 +12,9 @@ const getLocales = () => {
     const localesXml = parseStatements(context, '.xml', {
         resolver: fileName => {
             const xmlString = fs.readFileSync(path.resolve(localeDir, fileName), 'utf8');
-            return xmlString.replace(new RegExp(`@routes`, 'g'), `${ROUTES_PATH}${fileName.replace('.xml', '')}`);
+            return xmlString
+                .replace(new RegExp(`@path`, 'g'), `${fileName.replace('.xml', '')}`)
+                .replace(new RegExp(`@routes`, 'g'), `${ROUTES_PATH}${fileName.replace('.xml', '')}`);
         }
     });
     const allLocales = Object.values(localesXml).map(string => string.replace(/<locales>/, '').replace(/<\/locales>/, ''));

@@ -29,7 +29,7 @@ export default async function () {
     appElement.appendChild(home);
 
     const showFrame = route => {
-        const frame = createHtmlElement({ markup: '<i-frame></i-frame>', locale });
+        const frame = createHtmlElement({ markup: '<iwindow></iwindow>', locale });
         frame.iSetValue(locale.get(`${route}/title`));
         const item = { frame, route };
         routerStore.frames.push(item);
@@ -41,7 +41,7 @@ export default async function () {
             const frameThread = Thread(thread.getStatements(), this);
             const page = createHtmlElement({ markup, locale });
             frame.iSetContent(page);
-            frameThread.extend({ frame });
+            frameThread.extend({ frame, page });
             frameThread.main(bootstrap);
         });
     };

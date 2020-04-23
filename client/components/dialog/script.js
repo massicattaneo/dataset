@@ -32,7 +32,7 @@ const mixin = element => {
     return element;
 };
 
-const exports = { tagName: 'i-dialog', selector: `.${style.local}`, mixin, template };
+const exports = { tagName: 'idialog', selector: `.${style.local}`, mixin, template };
 export default exports;
 
 

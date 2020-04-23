@@ -21,6 +21,6 @@ const mixin = element => {
     return element;
 };
 
-const exports = { tagName: 'i-input', selector: `.${style.local}`, mixin, template };
+const exports = { tagName: 'iinput', selector: `.${style.local}`, mixin, template };
 export default exports;
 
