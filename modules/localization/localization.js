@@ -1,4 +1,4 @@
-const { xmlToJson } = require('../xml/xml');
+const { xmlToJson, jsonToXml } = require('../xml/xml');
 
 function xmlToLocales(localesXml) {
     const loc = xmlToJson(localesXml);
@@ -9,7 +9,7 @@ function xmlToLocales(localesXml) {
 
     return loc.children.reduce((acc, item) => {
         languages.forEach(function (language) {
-            const find = item.children.find(o => o.name === language) || { content: '' };
+            const find = item.children.find(o => o.name === language) || { content: '', children: [] };
             acc[language] = acc[language] || {};
             const paths = item.attributes.path.split('/');
             const id = paths.splice(paths.length - 1, 1);
@@ -17,7 +17,7 @@ function xmlToLocales(localesXml) {
                 acc[path] = acc[path] || {};
                 return acc[path];
             }, acc[language]);
-            obj[id] = find.content;
+            obj[id] = find.content + find.children.map(jsonToXml).join('');
         });
         return acc;
     }, {});

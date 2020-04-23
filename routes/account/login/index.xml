@@ -11,7 +11,39 @@
     </locale>
     <locale path="@path/title">
         <en>Sign in</en>
-        <en>Entra</en>
-        <en>Entra</en>
+        <es>Entra</es>
+        <it>Entra</it>
+    </locale>
+    <locale path="@path/email/legend">
+        <en>please enter your email to proceed</en>
+        <es>Por favor ingresa tu correo eletronico para proceder</es>
+        <it>Per favore immetti l'indirizzo di posta elettronica per procedere</it>
+    </locale>
+    <locale path="@path/email/placeholder">
+        <en>Email</en>
+        <es>Email</es>
+        <it>Email</it>
+    </locale>
+    <locale path="@path/email/proceed">
+        <en>PROCEED</en>
+        <es>SEGUIR</es>
+        <it>AVANTI</it>
+    </locale>
+    <locale path="@path/email/footer">
+        <en>
+            <p>Still not with us? <a data-route="account/register/">Register here</a></p>
+            <hr/>
+            <p>Did you forgot your password? <a data-route="account/register/">Reset here</a></p>
+        </en>
+        <es>
+            <p>Aun no tienes una cuenta? <a data-route="account/register/">Creane una aquì</a></p>
+            <hr/>
+            <p>¿Has olvidado tu contraseña? <a data-route="account/register/">Cambiala aquì</a></p>
+        </es>
+        <it>
+            <p>Non sei ancora dei nostri? <a data-route="account/register/">Registrati qui</a></p>
+            <hr/>
+            <p>Hai dimenticato la password? <a data-route="account/register/">Cambiala qui</a></p>
+        </it>
     </locale>
 </locales>

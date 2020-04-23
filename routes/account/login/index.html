@@ -12,19 +12,19 @@
         </title>
         <pages>
             <fieldset class="content-step">
-                <legend>please enter you email to proceed</legend>
+                <legend>{{account.login.index.email.legend}}</legend>
                 <iinput data-type="email">
                     <type>email</type>
                     <name>email</name>
-                    <placeholder>Email</placeholder>
+                    <placeholder>{{account.login.index.email.placeholder}}</placeholder>
                 </iinput>
                 <ibutton>
-                    <value>PROCEED</value>
+                    <value>{{account.login.index.email.proceed}}</value>
                     <type>submit</type>
                 </ibutton>
-                <p>Still not with us? <a data-route="account/register/">Register here</a></p>
-                <hr/>
-                <p>Did you forgot your password? <a data-route="account/register/">Reset here</a></p>
+                <div>
+                    {{account.login.index.email.footer}}
+                </div>
             </fieldset>
             <fieldset class="content-step">
                 2

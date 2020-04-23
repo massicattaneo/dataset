@@ -39,7 +39,6 @@ const mixin = element => {
     const emit = elementEmitter(element);
     const closeElement = element.querySelector('.close');
     const content = element.querySelector('.content');
-    const title = element.querySelector('.title');
     const resizeObserver = new ResizeObserver(() => element.resize());
     resizeObserver.observe(element);
 
@@ -53,6 +52,7 @@ const mixin = element => {
         if (isMobile) return;
         emit('layout', window.getComputedStyle(element));
         element.iShouldLoadContent() && element.load && element.load();
+        element.dispatchEvent(new CustomEvent('resize'))
     };
 
     element.iShouldLoadContent = () => {
