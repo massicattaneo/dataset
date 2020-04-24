@@ -11,6 +11,14 @@ const wait = {
         };
         element.addEventListener('transitionend', onTransitionEnd, false);
         setTimeout(resolve, timeout);
+    }),
+    cssAnimation: (element, timeout = 550) => new Promise(resolve => {
+        const onAnimationnEnd = () => {
+            element.removeEventListener('animationnend', onAnimationnEnd, false);
+             resolve()
+        };
+        element.addEventListener('animationnend', onAnimationnEnd, false);
+        setTimeout(resolve, timeout);
     })
 };
 

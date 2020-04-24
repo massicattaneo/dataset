@@ -1,9 +1,10 @@
 import style from './style.css';
 import template from './template.html';
-import { draggable, getComputed } from '../../../modules/html/html';
+import { addCssClass, draggable, getComputed, removeCssClass } from '../../../modules/html/html';
 import { isDesktop, isMobile } from '../../../modules/device/device-client';
 import { elementEmitter, elementSetters } from '../../../modules/templating/mixins';
 import { STYLE } from '../../../constants';
+import { wait } from '../../../modules/wait/wait';
 
 function setLeft(element, availableWidth, position) {
     const keys = Object.keys(position);
@@ -26,7 +27,7 @@ function setTop(element, availableHeight, position) {
         element.style.top = `${(availableHeight - winHeight) / 2 + STYLE.HOME_HEADER_HEIGHT}px`;
     }
     if (keys.includes('top')) {
-        element.style.top = `${position.top+ STYLE.HOME_HEADER_HEIGHT}px`;
+        element.style.top = `${position.top + STYLE.HOME_HEADER_HEIGHT}px`;
     }
 
     if (keys.includes('bottom')) {
@@ -52,7 +53,7 @@ const mixin = element => {
         if (isMobile) return;
         emit('layout', window.getComputedStyle(element));
         element.iShouldLoadContent() && element.load && element.load();
-        element.dispatchEvent(new CustomEvent('resize'))
+        element.dispatchEvent(new CustomEvent('resize'));
     };
 
     element.iShouldLoadContent = () => {
@@ -81,14 +82,21 @@ const mixin = element => {
         closeElement.removeEventListener('click', onClose);
         dragDisposer();
         resizeObserver.unobserve(element);
-        element.parentNode.removeChild(element);
-        arguments[0] && emit('close');
+
+        addCssClass(element, 'close');
+        return wait.cssAnimation(element).then(() => {
+            element.style.display = 'none';
+            removeCssClass(element, 'close');
+            element.parentNode.removeChild(element);
+            arguments[0] && emit('close');
+        });
     };
 
     const onClose = () => element.iClose(true);
     closeElement.addEventListener('click', onClose);
     element.resize();
-
+    addCssClass(element, 'open');
+    wait.cssAnimation(element).then(() => removeCssClass(element, 'open'));
     return element;
 };
 
