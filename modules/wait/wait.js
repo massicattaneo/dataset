@@ -4,7 +4,7 @@ const wait = {
             setTimeout(resolve, time);
         });
     },
-    cssTransition: (element, timeout = 550) => new Promise(resolve => {
+    cssTransition: (element, timeout = 1000) => new Promise(resolve => {
         const onTransitionEnd = () => {
             element.removeEventListener('transitionend', onTransitionEnd, false);
             setTimeout(resolve, 200);
@@ -12,12 +12,12 @@ const wait = {
         element.addEventListener('transitionend', onTransitionEnd, false);
         setTimeout(resolve, timeout);
     }),
-    cssAnimation: (element, timeout = 550) => new Promise(resolve => {
+    cssAnimation: (element, timeout = 1000) => new Promise(resolve => {
         const onAnimationnEnd = () => {
-            element.removeEventListener('animationnend', onAnimationnEnd, false);
+            element.removeEventListener('animationend', onAnimationnEnd, false);
              resolve()
         };
-        element.addEventListener('animationnend', onAnimationnEnd, false);
+        element.addEventListener('animationend', onAnimationnEnd, false);
         setTimeout(resolve, timeout);
     })
 };

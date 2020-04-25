@@ -83,7 +83,8 @@ function getDefaultConfig({ clientDir, publicPath }) {
         plugins: [
             // new CleanWebpackPlugin(),
             new CopyWebpackPlugin([
-                { from: `${assetsDir}/init/*`, to: `assets/init/[name].[hash].[ext]` }
+                { from: `${assetsDir}/init/*`, to: `assets/init/[name].[hash].[ext]` },
+                { from: `${assetsDir}/sounds/*`, to: `assets/sounds/[name].[hash].[ext]` }
             ]),
             new webpack.HotModuleReplacementPlugin(),
             new InlineManifestPlugin(),

@@ -36,8 +36,8 @@
     </locale>
     <locale path="notifications/warn/wrong-format">
         <en>The field " {{placeholder}} " is in a wrong format</en>
-        <es></es>
-        <it></it>
+        <es>Revisa el campo " {{placeholder}} "</es>
+        <it>Il formato del campo " {{placeholder}} " é incorretto</it>
     </locale>
     <locale path="notifications/warn/required">
         <en>The field " {{placeholder}} " is required</en>

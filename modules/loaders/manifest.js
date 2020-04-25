@@ -2,9 +2,11 @@ const { loadStyle } = require('./style');
 const { loadFont } = require('./font');
 const { loadImage } = require('./image');
 const { loadScript } = require('./script');
+const { loadSound } = require('./sound');
 
 const options = { extraChars: '&#xe803;' };
 const DEPENDENCY_TYPES = {
+    SOUND: 'sound',
     STYLE: 'style',
     FONT: 'font',
     IMAGE: 'image',
@@ -36,6 +38,7 @@ const manifest = (array, folders = []) => {
             if (file.type === DEPENDENCY_TYPES.IMAGE) return () => loadImage(file);
             if (file.type === DEPENDENCY_TYPES.FONT) return () => loadFont(file, options);
             if (file.type === DEPENDENCY_TYPES.SCRIPT) return () => loadScript(file);
+            if (file.type === DEPENDENCY_TYPES.SOUND) return () => loadSound(file);
         });
     return Promise.all(loaders.map(loader => {
         return loader.retry().subscribe();

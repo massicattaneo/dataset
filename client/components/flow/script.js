@@ -13,20 +13,26 @@ const mixin = element => {
 
     element.iGoToPage = (nextPage = (actualStep + 1)) => {
         pageIndex.value = nextPage;
-        legendSteps.forEach((el, index) => {
-            removeCssClass(el, style.done);
-            removeCssClass(el, style.active);
-            contentSteps.forEach(item => {
-                item.style.left = `${-nextPage * parentWidth}px`;
+        contentSteps[nextPage].style.display = 'inline-block';
+        setTimeout(() => {
+            legendSteps.forEach((el, index) => {
+                removeCssClass(el, style.done);
+                removeCssClass(el, style.active);
+                contentSteps.forEach(item => {
+                    item.style.left = `${-nextPage * parentWidth}px`;
+                });
+                if (index === nextPage) {
+                    addCssClass(el, style.active);
+                } else if (index < nextPage) {
+                    addCssClass(el, style.done);
+                }
             });
-            if (index === nextPage) {
-                addCssClass(el, style.active);
-            } else if (index < nextPage) {
-                addCssClass(el, style.done);
-            }
         });
         actualStep = nextPage;
         return wait.cssTransition(element).then(() => {
+            contentSteps.forEach((step, index) => {
+                if (index > actualStep) step.style.display = 'none';
+            });
             const options = { detail: { fieldset: contentSteps[actualStep] } };
             element.dispatchEvent(new CustomEvent('change-page', options));
         });

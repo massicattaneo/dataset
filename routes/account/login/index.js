@@ -6,6 +6,7 @@ export default async function () {
 
     page.flow.addEventListener('submit', event => {
         event.preventDefault();
+        event.stopPropagation();
         switch (event.target.pageIndex.value) {
         case '0':
             thread
