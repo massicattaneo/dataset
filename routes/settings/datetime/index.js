@@ -1,4 +1,4 @@
-import { initClock } from '../../modules/canvas-clock';
+import { initClock } from '../../../modules/canvas-clock';
 
 export default async function () {
     const { frame } = this;

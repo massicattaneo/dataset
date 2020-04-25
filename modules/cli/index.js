@@ -32,21 +32,10 @@ if (params.route) {
     fs.writeFileSync(`${absolutePath}.css`, '.local {}');
     fs.writeFileSync(`${absolutePath}.config.json`, JSON.stringify(config, null, 2));
     fs.writeFileSync(`${absolutePath}.js`,
-        `import { pluginBundle } from '${routes.map(() => '../').join('')}modules/bundle';
-import style from './index.css';
-import template from './index.html';
-
-const options = {
-    route: 'routes/${route}',
-    template,
-    style
-};
-
-pluginBundle(options, async function () {
+        `export default async function () {
     const { frame } = this;
     const { store } = this.sharedContext;
-});
-    `);
+}`);
     fs.writeFileSync(`${absolutePath}.xml`, `<locales>
     <locale path="@routes/href">
         <en></en>
