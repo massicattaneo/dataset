@@ -20,6 +20,7 @@
   "nodemonConfig": {
     "ignore": [
       "server/static/*",
+      "routes/*",
       "modules/*",
       "client/*"
     ]

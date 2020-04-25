@@ -10,5 +10,6 @@ export default async function () {
         day: 'numeric',
         month: 'long'
     }).format(Date.now());
-    frame.querySelector('p').innerText = text;
+    frame.querySelector('.date').innerText = text;
+    frame.querySelector('.calendar');
 }

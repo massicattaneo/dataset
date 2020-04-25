@@ -15,7 +15,7 @@ const context = requireContext(`../../routes`, true, /\.js/);
 function getDefaultConfig({ clientDir, publicPath }) {
     const entry = context.keys().reduce((obj, key) => ({
         ...obj,
-        [key.replace('.js', '').replace(/\//g, '-')]: path.resolve(clientDir, 'a/', context.resolve(key))
+        [key.replace('.js', '').replace(/\//g, '-')]: [path.resolve(clientDir, 'a/', context.resolve(key)),'webpack-hot-middleware/client?reload=true']
     }), {});
     const assetsDir = path.resolve(clientDir, 'assets');
     Object.assign(entry, { main: [path.resolve(clientDir, './index.js'), 'webpack-hot-middleware/client?reload=true'] });
@@ -81,11 +81,13 @@ function getDefaultConfig({ clientDir, publicPath }) {
             modules: ['node_modules']
         },
         plugins: [
-            // new CleanWebpackPlugin(),
+            new CleanWebpackPlugin({
+                cleanStaleWebpackAssets: false
+            }),
             new CopyWebpackPlugin([
                 { from: `${assetsDir}/init/*`, to: `assets/init/[name].[hash].[ext]` },
                 { from: `${assetsDir}/sounds/*`, to: `assets/sounds/[name].[hash].[ext]` }
-            ]),
+            ], {force: true}),
             new webpack.HotModuleReplacementPlugin(),
             new InlineManifestPlugin(),
             new HtmlWebpackPlugin({

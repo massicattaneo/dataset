@@ -25,12 +25,16 @@ class InlineManifestPlugin {
     apply(compiler) {
         return compiler.hooks.emit.tapAsync('InlineManifestPlugin', (compilation, callback) => {
             const chunks = compilation.chunks
-                .filter(chunk => chunk.entryModule.resource)
-                .filter(chunk => chunk.entryModule.resource.endsWith('.js'))
+                .map(chunk => {
+                    console.warn(chunk.entryModule.dependencies[0].module.resource);
+                    return chunk;
+                })
+                .filter(chunk => chunk.entryModule.dependencies[0].module.resource)
+                .filter(chunk => chunk.entryModule.dependencies[0].module.resource.endsWith('.js'))
                 .reduce((obj, chunk) => {
                     const name = chunk.id;
-                    const dirname = path.dirname(chunk.entryModule.resource);
-                    const basename = path.basename(chunk.entryModule.resource).replace('.js', '.config.json');
+                    const dirname = path.dirname(chunk.entryModule.dependencies[0].module.resource);
+                    const basename = path.basename(chunk.entryModule.dependencies[0].module.resource).replace('.js', '.config.json');
                     const configFile = path.resolve(dirname, basename);
                     const config = fs.existsSync(configFile) ? JSON.parse(fs.readFileSync(configFile, 'utf8')) : {};
                     return {
