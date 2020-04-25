@@ -9,7 +9,7 @@
         <es>Idioma</es>
         <it>Lingua</it>
     </locale>
-    <locale path="@routes/select">
+    <locale path="@path/select">
         <en>Select a different language</en>
         <es>Seleciona un idioma diferente</es>
         <it>Seleziona un lingua differente</it>
