@@ -97,7 +97,9 @@ const mixin = element => {
     element.resize();
     addCssClass(element, 'open');
     wait.cssAnimation(element).then(() => removeCssClass(element, 'open'));
-    return element;
+    return () => {
+        closeElement.removeEventListener('click', onClose);
+    };
 };
 
 const exports = { tagName: 'iwindow', selector: `.${style.local}`, mixin, template };

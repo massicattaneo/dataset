@@ -26,7 +26,6 @@ if (params.route) {
     const { route } = params;
     const folders = route.split('/');
     const absolutePath = path.resolve(__dirname, '../../', ROUTES_PATH, folders.join('/'));
-    const routes = route.split('/');
     createFolderRecursive(absolutePath);
     fs.writeFileSync(`${absolutePath}.html`, '<div></div>');
     fs.writeFileSync(`${absolutePath}.css`, '.local {}');
@@ -35,6 +34,7 @@ if (params.route) {
         `export default async function () {
     const { frame } = this;
     const { store } = this.sharedContext;
+    return () => {}
 }`);
     fs.writeFileSync(`${absolutePath}.xml`, `<locales>
     <locale path="@routes/href">
@@ -48,5 +48,24 @@ if (params.route) {
         <it></it>
     </locale>
 </locales>`);
+}
+
+if (params.component) {
+    const { component } = params;
+    const absolutePath = path.resolve(__dirname, `../../client/components/${component}`);
+    createFolderRecursive(`${absolutePath}/void`);
+    fs.writeFileSync(`${absolutePath}/template.html`, '<div></div>');
+    fs.writeFileSync(`${absolutePath}/style.css`, '.local {}');
+    fs.writeFileSync(`${absolutePath}/script.js`,
+        `import style from './style.css';
+import template from './template.html';
+
+const mixin = element => {
+    return () => {};
+};
+
+const exports = { tagName: 'i${component}', selector: \`.\${style.local}\`, mixin, template };
+export default exports;
+`);
 }
 

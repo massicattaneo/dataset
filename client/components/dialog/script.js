@@ -29,7 +29,9 @@ const mixin = element => {
         if (path[0] === element) element.close();
     };
 
-    return element;
+    return () => {
+        element.removeEventListener('click', bgClick);
+    };
 };
 
 const exports = { tagName: 'idialog', selector: `.${style.local}`, mixin, template };

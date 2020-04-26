@@ -27,7 +27,7 @@ const mixin = element => {
     element.hide = () => {
         removeCssClass(element, style.show);
     };
-    return element;
+    return () => {};
 };
 
 const exports = { tagName: 'inotification', selector: `.${style.local}`, mixin, template };

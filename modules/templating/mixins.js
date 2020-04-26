@@ -41,6 +41,7 @@ export const elementClickable = element => {
         addCssClass(element, 'i-clicked');
     };
     element.addEventListener('click', onClick);
+    return () => element.removeEventListener('click', onClick);
 };
 
 export const elementEmitter = element => {

@@ -4,7 +4,7 @@ export default async function () {
     const { frame, page, thread } = this;
     const { store } = this.sharedContext;
 
-    page.flow.addEventListener('submit', event => {
+    const onSubmit = event => {
         event.preventDefault();
         event.stopPropagation();
         switch (event.target.pageIndex.value) {
@@ -21,20 +21,26 @@ export default async function () {
                 .then(() => page.flow.iGoToPage());
             break;
         }
-    });
+    };
 
-    page.flow.addEventListener('change-page', ({ detail }) => {
+    const onChangePage = ({ detail }) => {
         const querySelector = detail.fieldset.querySelector('input');
         querySelector && querySelector.focus();
-    });
+    };
 
     const resize = () => {
         const width = getComputed(frame, 'width');
         page.flow.resize(width);
     };
 
+    page.flow.addEventListener('submit', onSubmit);
+    page.flow.addEventListener('change-page', onChangePage);
     frame.addEventListener('resize', resize);
     resize();
     page.flow.iGoToPage(0);
-
+    return () => {
+        page.flow.removeEventListener('submit', onSubmit);
+        page.flow.removeEventListener('change-page', onChangePage);
+        frame.removeEventListener('resize', resize);
+    };
 }

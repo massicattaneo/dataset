@@ -4,7 +4,7 @@ import { elementSetters } from '../../../modules/templating/mixins';
 
 const mixin = element => {
     elementSetters(element, '.content');
-    return element;
+    return () => {};
 };
 
 const exports = { tagName: 'ibreadcrumb', selector: `.${style.local}`, mixin, template };

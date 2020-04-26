@@ -1,5 +1,6 @@
 const { Node } = require('../html/html');
 const formatters = require('./formatters');
+const { flat } = require('../array/array');
 const { templateComponents, templateParser } = require('./index');
 const { parseStatements } = require('../thread/thread-utils');
 const { ROUTES_PATH } = require('../../constants');
@@ -21,11 +22,12 @@ const replaceNavigation = (locale, htmlTemplate) => {
     }
     return htmlTemplate;
 };
-const extendMixin = mixin => (element, root) => {
-    const extended = mixin(element);
+const extendMixin = (mixin, context) => (element, root) => {
+    const destroy = mixin(element, context);
     const attributeName = 'data-expose-as';
-    if (!element.getAttribute(attributeName)) return;
-    Object.assign(root, { [element.getAttribute(attributeName)]: extended });
+    if (!element.getAttribute(attributeName)) return destroy;
+    Object.assign(root, { [element.getAttribute(attributeName)]: element });
+    return destroy;
 };
 
 function createHtmlMarkup({ markup = '', locale }) {
@@ -37,19 +39,21 @@ function createHtmlMarkup({ markup = '', locale }) {
     return parsedMarkup;
 }
 
-const createHtmlElement = ({ markup = '', locale }) => {
+const createHtmlElement = ({ markup = '' }, context) => {
+    const { locale } = context;
     const element = Node(createHtmlMarkup({ markup, locale }));
 
-    Object.values(componentsJS).forEach(bundle => {
+    const array = flat(Object.values(componentsJS).map(bundle => {
         const { selector, mixin } = bundle;
-        const mixer = extendMixin(mixin);
+        const mixer = extendMixin(mixin, context);
         if (element.matches(selector)) mixer(element, element);
-        element.querySelectorAll(selector).forEach(function (child) {
-            mixer(child, element);
+        const selectors = Array.prototype.slice.call(element.querySelectorAll(selector));
+        return selectors.map(function (child) {
+            return mixer(child, element);
         });
-    });
-
-    return element;
+    }));
+    const destroy = () => array.forEach(cb => cb());
+    return { element, destroy };
 };
 const createBreadcrumb = (href, route, locale) => {
     const breadcrumb = href.split('/').filter(i => i);

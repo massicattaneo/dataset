@@ -23,27 +23,33 @@ export default async function () {
     const router = {};
     const appElement = document.getElementById('app');
 
-    const home = createHtmlElement({ markup: markup(), locale });
+    const { element: home } = createHtmlElement({ markup: markup() }, this);
     addCssClass(document.body, touchType);
 
     appElement.appendChild(home);
 
     const showFrame = route => {
-        const frame = createHtmlElement({ markup: '<iwindow></iwindow>', locale });
+        const { element: frame, destroy: destroyFrame } = createHtmlElement({ markup: '<iwindow></iwindow>' }, this);
         frame.iSetValue(locale.get(`${route}/title`));
         const item = { frame, route };
         routerStore.frames.push(item);
         frame.iOn('close', () => {
-            routerStore.frames.splice(routerStore.frames.get().indexOf(item), 1);
+            const [{ destroy }] = routerStore.frames.splice(routerStore.frames.get().indexOf(item), 1);
+            destroy();
         });
         home.querySelector('.frames').appendChild(frame);
-        loadBundle(route, frame, this).then(({ markup, bootstrap }) => {
+        loadBundle(route, frame, this).then(async ({ markup, bootstrap }) => {
             const frameThread = Thread(thread.getStatements(), this);
-            const page = createHtmlElement({ markup, locale });
+            const { element: page, destroy: destroyPage } = createHtmlElement({ markup }, this);
             frame.iSetContent(page);
             frameThread.extend({ frame, page, home, locale });
-            frameThread.main(bootstrap);
-            frameThread.main('init/notifications')
+            const destroyBundle = await frameThread.main(bootstrap).subscribe();
+            frameThread.main('init/notifications');
+            item.destroy = () => {
+                destroyPage();
+                destroyFrame();
+                destroyBundle();
+            };
         });
     };
 

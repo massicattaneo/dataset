@@ -1,0 +1,57 @@
+:local {
+}
+
+:local table {
+    margin: 2px;
+    width: calc(100% - 4px);
+    font-size: 13px;
+}
+
+:local table thead {
+    background-color: var(--main-color);
+    color: var(--text-bg-color);
+}
+
+:local table td {
+    padding: 2px;
+}
+
+:local table td:global(.today) {
+    border-radius: 110px;
+    background: var(--accent-color);
+}
+
+:local h4 {
+    width: calc(100% - 4px);
+    font-size: 14px;
+    line-height: 32px;
+    padding: 0;
+    margin: 2px;
+    color: var(--text-bg-color);
+    background-color: var(--contrast-color);
+    border-radius: 4px;
+}
+
+:local h4 select {
+    vertical-align: middle;
+    background: none;
+    border: none;
+    color: white;
+}
+
+:local h4 :global(.prev-month) {
+    font-size: 30px;
+    float: left;
+    cursor: pointer;
+}
+
+:local h4 :global(.next-month) {
+    font-size: 30px;
+    float: right;
+    cursor: pointer;
+}
+
+:local h4 :global(.month) {
+    color: var(--main-color);
+}
+

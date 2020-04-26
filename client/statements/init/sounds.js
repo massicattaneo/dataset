@@ -3,6 +3,13 @@ import { getElementPath } from '../../../modules/html/html';
 
 export default async function () {
     const sounds = {};
+    const audioPlayer = {
+        playSound: (soundName, { loop = false } = {}) => {
+            if (!sounds[soundName]) return;
+            sounds[soundName].loop = loop;
+            sounds[soundName].play();
+        }
+    };
 
     manifest(window.app.assetsManifest, 'sounds').then(audios => {
         audios.forEach(audio => {
@@ -12,11 +19,10 @@ export default async function () {
 
     window.addEventListener('click', event => {
         const path = getElementPath(event.target);
-        if (!sounds['button-click']) return;
         if (path.find(item => item.tagName === 'BUTTON') || path.find(item => item.tagName === 'A')) {
-            sounds['button-click'].play();
+            audioPlayer.playSound('button-click');
         }
     });
 
-    return {};
+    return { audioPlayer };
 }

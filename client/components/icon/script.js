@@ -3,8 +3,10 @@ import template from './template.html';
 import { elementClickable } from '../../../modules/templating/mixins';
 
 const mixin = element => {
-    elementClickable(element);
-    return element;
+    const dispose = elementClickable(element);
+    return () => {
+        dispose();
+    };
 };
 
 const exports = { tagName: 'iicon', selector: `.${style.local}`, mixin, template };

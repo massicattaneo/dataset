@@ -4,8 +4,10 @@ import { elementClickable, elementSetters } from '../../../modules/templating/mi
 
 const mixin = element => {
     elementSetters(element);
-    elementClickable(element);
-    return element;
+    const dispose = elementClickable(element);
+    return () => {
+        dispose();
+    };
 };
 
 const exports = { tagName: 'ibutton', selector: `.${style.local}`, mixin, template };

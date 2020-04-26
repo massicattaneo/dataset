@@ -8,17 +8,22 @@ const FILL_CLASS = 'fill';
 const mixin = element => {
     elementSetters(element, 'input');
     const inputEl = element.querySelector('input');
-    inputEl.addEventListener('focus', () => {
+    const onFocus = () => {
         addCssClass(element, FILL_CLASS);
-    });
-    inputEl.addEventListener('blur', () => {
+    };
+    const onBlur = () => {
         if (inputEl.value) return;
         removeCssClass(element, FILL_CLASS);
-    });
+    };
 
     if (inputEl.value) addCssClass(element, FILL_CLASS);
+    inputEl.addEventListener('focus', onFocus);
+    inputEl.addEventListener('blur', onBlur);
 
-    return element;
+    return () => {
+        inputEl.removeEventListener('focus', onFocus);
+        inputEl.removeEventListener('blur', onBlur);
+    };
 };
 
 const exports = { tagName: 'iinput', selector: `.${style.local}`, mixin, template };

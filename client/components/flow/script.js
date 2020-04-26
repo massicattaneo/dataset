@@ -38,12 +38,12 @@ const mixin = element => {
         });
     };
 
-    element.addEventListener('click', event => {
+    const onClick = event => {
         if (legendSteps.includes(event.target)) {
             const index = findIndex(legendSteps, item => item === event.target);
             element.iGoToPage(index);
         }
-    });
+    };
 
     element.resize = (width, height) => {
         parentWidth = width;
@@ -51,7 +51,11 @@ const mixin = element => {
         element.querySelector('.pages').style.width = `${width * legendSteps.length}px`;
     };
 
-    return element;
+    element.addEventListener('click', onClick);
+
+    return () => {
+        element.removeEventListener('click', onClick);
+    };
 };
 
 const exports = { tagName: 'iflow', selector: `.${style.local}`, mixin, template };

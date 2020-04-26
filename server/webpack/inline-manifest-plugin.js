@@ -25,10 +25,6 @@ class InlineManifestPlugin {
     apply(compiler) {
         return compiler.hooks.emit.tapAsync('InlineManifestPlugin', (compilation, callback) => {
             const chunks = compilation.chunks
-                .map(chunk => {
-                    console.warn(chunk.entryModule.dependencies[0].module.resource);
-                    return chunk;
-                })
                 .filter(chunk => chunk.entryModule.dependencies[0].module.resource)
                 .filter(chunk => chunk.entryModule.dependencies[0].module.resource.endsWith('.js'))
                 .reduce((obj, chunk) => {
