@@ -1,13 +1,12 @@
 *:global(.i-clicked) {
     outline: 0;
-    color: #fff;
 }
 
-*:global(.i-clicked):before {
+*:global(.i-clicked):after {
     animation: i-clicked-animation 1s ease-out;
 }
 
-*:global(.i-clicked):before {
+*:global(.i-clicked):after {
     content: '';
     background-color: #ffffffaa;
     border-radius: 50%;

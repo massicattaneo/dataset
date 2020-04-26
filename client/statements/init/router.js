@@ -1,6 +1,6 @@
 import { markup } from '../../../routes/index.js';
 import { addCssClass, getElementPath, hasCssClass } from '../../../modules/html/html';
-import { touchType } from '../../../modules/device/device-client';
+import { isMobile, touchType } from '../../../modules/device/device-client';
 import { connect, create } from '../../../modules/reactive/Reactive';
 import windowStyle from '../../components/frame/style.css';
 import { findIndex } from '../../../modules/array/array';
@@ -14,6 +14,11 @@ import { Thread } from '../../../modules/thread/Thread';
 
 const { ROUTES_PATH } = require('../../../constants');
 
+function setFrameAsActive(routerStore, clickedFrame) {
+    const index = findIndex(routerStore.frames.get(), el => el.frame === clickedFrame);
+    routerStore.frames.push(routerStore.frames.get().splice(index, 1)[0]);
+}
+
 export default async function () {
     const { locale, thread } = this;
     const homeRoute = `${ROUTES_PATH}index`;
@@ -22,7 +27,6 @@ export default async function () {
     });
     const router = {};
     const appElement = document.getElementById('app');
-
     const { element: home } = createHtmlElement({ markup: markup() }, this);
     addCssClass(document.body, touchType);
 
@@ -34,7 +38,7 @@ export default async function () {
         const item = { frame, route };
         routerStore.frames.push(item);
         frame.iOn('close', () => {
-            const [{ destroy }] = routerStore.frames.splice(routerStore.frames.get().indexOf(item), 1);
+            const [{ destroy = (e => e) }] = routerStore.frames.splice(routerStore.frames.get().indexOf(item), 1);
             destroy();
         });
         home.querySelector('.frames').appendChild(frame);
@@ -56,29 +60,39 @@ export default async function () {
     window.addEventListener('click', async event => {
         if (!event.custom || !event.custom.route) return;
         if (event.custom.route === homeRoute) return;
-        showFrame(event.custom.route);
-
+        const { route } = routerStore.frames.last() || {};
+        if (route && route === event.custom.route) {
+            return history.back();
+        }
+        if (route && routerStore.frames.get().find(item => item.route === event.custom.route)) {
+            const { frame: clickedFrame } = routerStore.frames.get().find(item => item.route === event.custom.route);
+            return setFrameAsActive(routerStore, clickedFrame);
+        }
+        if (isMobile && route) {
+            history.back();
+        }
+        setTimeout(() => showFrame(event.custom.route), 50);
     });
 
     // CLICK ON WINDOW
     window.addEventListener('mousedown', async event => {
         const clickedFrame = getElementPath(event.target).find(el => hasCssClass(el, windowStyle.local));
         if (!clickedFrame) return;
-        const index = findIndex(routerStore.frames.get(), el => el.frame === clickedFrame);
-        routerStore.frames.push(routerStore.frames.get().splice(index, 1)[0]);
+        setFrameAsActive(routerStore, clickedFrame);
     });
 
     let actualRoute = getRouteFromHref(locale);
-    const { href, title } = locale.get(homeRoute);
-    window.history.replaceState({ route: homeRoute }, title, href);
+    const { href, title } = locale.get(actualRoute);
+    window.history.replaceState({ route: actualRoute }, title, href);
     document.title = title;
     if (actualRoute !== homeRoute) showFrame(actualRoute);
-    actualRoute = '';
 
     window.addEventListener('popstate', event => {
-        if (event.state.route) {
+        if (event.state.route && routerStore.frames.last()) {
             const { frame, route } = routerStore.frames.last();
             frame.iClose();
+        } else {
+            showFrame(event.state.route);
         }
     });
 

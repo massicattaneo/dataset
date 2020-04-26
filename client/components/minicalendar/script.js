@@ -2,6 +2,7 @@ import style from './style.css';
 import template from './template.html';
 import { connect, create } from '../../../modules/reactive/Reactive';
 import { addCssClass, hasCssClass, removeCssClass } from '../../../modules/html/html';
+import { elementClickable } from '../../../modules/templating/mixins';
 
 const mixin = (element, { store }) => {
     const weekdayFormatter = new Intl.DateTimeFormat(store.language.get(), { weekday: 'short' });
@@ -9,6 +10,9 @@ const mixin = (element, { store }) => {
     const month = element.querySelector('.month');
     const headerDays = element.querySelectorAll('table .header-day');
     const days = element.querySelectorAll('table .day');
+    const disposePrev = elementClickable(element.querySelector('.prev-month'));
+    const disposeNext = elementClickable(element.querySelector('.next-month'));
+
     const cmpStore = create({
         selected: Date.now()
     });
@@ -58,6 +62,8 @@ const mixin = (element, { store }) => {
 
     return () => {
         disconnect();
+        disposeNext();
+        disposePrev();
     };
 };
 

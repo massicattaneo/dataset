@@ -79,10 +79,6 @@ const mixin = element => {
     };
 
     element.iClose = () => {
-        closeElement.removeEventListener('click', onClose);
-        dragDisposer();
-        resizeObserver.unobserve(element);
-
         addCssClass(element, 'close');
         return wait.cssAnimation(element).then(() => {
             element.style.display = 'none';
@@ -99,6 +95,8 @@ const mixin = element => {
     wait.cssAnimation(element).then(() => removeCssClass(element, 'open'));
     return () => {
         closeElement.removeEventListener('click', onClose);
+        dragDisposer();
+        resizeObserver.unobserve(element);
     };
 };
 

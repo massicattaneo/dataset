@@ -43,12 +43,18 @@
     font-size: 30px;
     float: left;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: block;
 }
 
 :local h4 :global(.next-month) {
     font-size: 30px;
     float: right;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: block;
 }
 
 :local h4 :global(.month) {
