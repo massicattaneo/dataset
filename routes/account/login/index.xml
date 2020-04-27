@@ -33,17 +33,17 @@
         <en>
             <p>Still not with us? <a data-route="account/register/">Register here</a></p>
             <hr/>
-            <p>Did you forgot your password? <a data-route="account/register/">Reset here</a></p>
+            <p>Did you forgot your password? <a data-route="account/reset/">Reset here</a></p>
         </en>
         <es>
             <p>Aun no tienes una cuenta? <a data-route="account/register/">Creane una aquì</a></p>
             <hr/>
-            <p>¿Has olvidado tu contraseña? <a data-route="account/register/">Cambiala aquì</a></p>
+            <p>¿Has olvidado tu contraseña? <a data-route="account/reset/">Cambiala aquì</a></p>
         </es>
         <it>
             <p>Non sei ancora dei nostri? <a data-route="account/register/">Registrati qui</a></p>
             <hr/>
-            <p>Hai dimenticato la password? <a data-route="account/register/">Cambiala qui</a></p>
+            <p>Hai dimenticato la password? <a data-route="account/reset/">Cambiala qui</a></p>
         </it>
     </locale>
     <locale path="@path/password/legend">

@@ -81,7 +81,7 @@ const getRouteFromHref = (locale, pathname = location.pathname) => {
 const createHeadInfoMarkup = (locale, pathname = location.pathname) => {
     const { title } = getRouteFromHref(locale, pathname);
     const markup = `
-        <link href="{{assetsManifest.init.logo}}" rel="shortcut icon" type="image/x-icon">
+        <link href="{{assetsManifest.init.logo}}" rel="icon">
         <title>${title}</title>
     `;
     return createHtmlMarkup({ markup, locale });

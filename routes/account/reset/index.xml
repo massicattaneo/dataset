@@ -1,0 +1,27 @@
+<locales>
+    <locale path="@routes/href">
+        <en>/en/account/reset-password/</en>
+        <es>/es/cuenta/restablecer-contrasena/</es>
+        <it>/it/utente/recupera-password/</it>
+    </locale>
+    <locale path="@routes/title">
+        <en>Reset your password</en>
+        <es>Restablecer tu contraseña</es>
+        <it>Ristabilisci la tua password</it>
+    </locale>
+    <locale path="@path/title">
+        <en>Reset your password in 2 easy steps:</en>
+        <es>Restablece tu contraseña en 2 simple pasos:</es>
+        <it>Ristabilisci la tua password in 2 semplici passaggi:</it>
+    </locale>
+    <locale path="@path/email/placeholder">
+        <en>Email</en>
+        <es>Correo</es>
+        <it>Email</it>
+    </locale>
+    <locale path="@path/button/submit">
+        <en>Submit</en>
+        <es>Crea</es>
+        <it>Vai</it>
+    </locale>
+</locales>

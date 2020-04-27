@@ -3,7 +3,7 @@
 }
 
 /******************************************************** STEPS */
-.local :global(.legend) span {
+.local :global(.legend) :global(.legend-step) {
     display: inline-block;
     background-color: var(--text-color);
     color: var(--text-bg-color);
@@ -23,17 +23,17 @@
 .local :global(.pages) :global(.content-step).active {
 }
 
-.local :global(.legend) span.done {
+.local :global(.legend) :global(.legend-step).done {
     opacity: 1;
     cursor: pointer;
     pointer-events: all;
 }
 
-.local :global(.legend) span.done:hover {
+.local :global(.legend) :global(.legend-step).done:hover {
     background-color: var(--accent-color);
 }
 
-.local :global(.legend) span.active {
+.local :global(.legend) :global(.legend-step).active {
     opacity: 1;
     background-color: var(--main-color);
 }

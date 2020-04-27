@@ -2,9 +2,9 @@
   "dependencies": [],
   "defaults": {
     "width": 370,
-    "height": 600,
+    "height": 300,
     "position": {
-      "left": 30,
+      "right": 30,
       "top": 30
     }
   }
