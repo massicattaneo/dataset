@@ -21,6 +21,6 @@ button.local:focus {
     color: #ffffff;
 }
 
-button.local span.icon:before {
+button.local :global(.icon:before) {
     padding-right: 10px;
 }

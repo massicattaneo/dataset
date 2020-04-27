@@ -1,3 +1,53 @@
 <div>
-
+    <iflow data-expose-as="flow">
+        <legend>
+            <span class="legend-step">1</span>
+            <hr/>
+            <span class="legend-step">2</span>
+        </legend>
+        <title>
+            {{account.register.index.title}}
+        </title>
+        <pages>
+            <fieldset class="content-step">
+                <iinput>
+                    <type>text</type>
+                    <name>firstname</name>
+                    <placeholder>{{account.register.index.firstname.placeholder}}</placeholder>
+                </iinput>
+                <br/>
+                <iinput>
+                    <type>text</type>
+                    <name>surname</name>
+                    <placeholder>{{account.register.index.surname.placeholder}}</placeholder>
+                </iinput>
+                <br/>
+                <iinput>
+                    <type>text</type>
+                    <name>email</name>
+                    <placeholder>{{account.register.index.email.placeholder}}</placeholder>
+                </iinput>
+                <br/>
+                <iinput>
+                    <type>password</type>
+                    <name>password</name>
+                    <placeholder>{{account.register.index.password.placeholder}}</placeholder>
+                </iinput>
+                <br/>
+                <iswitcher>
+                    <name>privacy</name>
+                    <placeholder>Privacy</placeholder>
+                    <label>My Text here should be ok My Text here should be ok My Text here should be ok</label>
+                </iswitcher>
+                <br/>
+                <ibutton>
+                    <type>submit</type>
+                    <value>{{account.register.index.button.submit}}</value>
+                </ibutton>
+            </fieldset>
+            <fieldset class="content-step">
+                PEPE
+            </fieldset>
+        </pages>
+    </iflow>
 </div>

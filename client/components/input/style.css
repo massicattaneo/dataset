@@ -12,7 +12,7 @@
     border: 1px solid var(--accent-color);
 }
 
-.local em {
+.local :global(.line) {
     width: 100%;
     height: 2px;
     background: var(--text-bg-color);
@@ -22,17 +22,17 @@
     left: 0px;
 }
 
-.local > span > span {
+.local :global(.placeholder) {
     position: relative;
 }
 
-.local:global(.fill) > span {
+.local:global(.fill) :global(.wrapper) {
     left: 10px;
     top: -14px;
     font-size: 12px;
     color: var(--accent-color);
 }
-.local > span {
+.local :global(.wrapper) {
     transition: 0.1s ease-out;
     position: absolute;
     left: 0;
@@ -44,7 +44,7 @@
     color: var(--main-color)
 }
 
-.local input {
+.local :global(.input) {
     position: relative;
     background: transparent;
     border: none;

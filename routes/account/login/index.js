@@ -28,10 +28,7 @@ export default async function () {
         querySelector && querySelector.focus();
     };
 
-    const resize = () => {
-        const width = getComputed(frame, 'width');
-        page.flow.resize(width);
-    };
+    const resize = () => page.flow.resize(getComputed(frame, 'width'));
 
     page.flow.addEventListener('submit', onSubmit);
     page.flow.addEventListener('change-page', onChangePage);

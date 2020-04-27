@@ -2,10 +2,6 @@
     margin: 20px 0;
 }
 
-.local fieldset {
-    border: none;
-}
-
 /******************************************************** STEPS */
 .local :global(.legend) span {
     display: inline-block;
@@ -49,7 +45,7 @@
     vertical-align: middle;
 }
 /******************************************************** TITLE */
-.local h3 {
+.local :global(.title) {
     color: var(--text-color);
 }
 

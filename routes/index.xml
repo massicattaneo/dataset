@@ -44,5 +44,10 @@
         <es>Rellena el campo " {{placeholder}} "</es>
         <it>Il campo " {{placeholder}} " é obbligatorio</it>
     </locale>
+    <locale path="notifications/warn/min-length">
+        <en>Field " {{placeholder}} " should be {{minLength}} characters minimum</en>
+        <es>Campo " {{placeholder}} "! Minimo {{minLength}} caracters</es>
+        <it>Campo " {{placeholder}} "! Minimo {{minLength}} caratteri</it>
+    </locale>
 </locales>
 

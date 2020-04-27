@@ -23,7 +23,7 @@
     color: var(--accent-color);
 }
 
-.local span {
+.local :global(.label) {
     font-family: var(--font-family);
     font-size: 10px;
     display: block;
@@ -33,7 +33,7 @@
     color: white;
 }
 
-.local em {
+.local :global(.notification) {
     display: none;
     width: 20px;
     height: 20px;

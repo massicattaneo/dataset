@@ -2,11 +2,41 @@
     <locale path="@routes/href">
         <en>/en/account/register/</en>
         <es>/es/cuenta/registrarse/</es>
-        <en>/it/utente/registrazione/</en>
+        <it>/it/utente/registrazione/</it>
     </locale>
     <locale path="@routes/title">
         <en>Create your account</en>
         <es>Crea tu cuenta</es>
         <it>Crea la tua utenza</it>
+    </locale>
+    <locale path="@path/title">
+        <en>Create your accont in 2 easy steps:</en>
+        <es>Crea una cuenta en 2 simple pasos:</es>
+        <it>Crea una utenza in 2 semplici passaggi:</it>
+    </locale>
+    <locale path="@path/firstname/placeholder">
+        <en>Name</en>
+        <es>Nombre</es>
+        <it>Nome</it>
+    </locale>
+    <locale path="@path/surname/placeholder">
+        <en>Surname</en>
+        <es>Appelido</es>
+        <it>Cognome</it>
+    </locale>
+    <locale path="@path/email/placeholder">
+        <en>Email</en>
+        <es>Correo</es>
+        <it>Email</it>
+    </locale>
+    <locale path="@path/password/placeholder">
+        <en>Password</en>
+        <es>Contraseña</es>
+        <it>Password</it>
+    </locale>
+    <locale path="@path/button/submit">
+        <en>Submit</en>
+        <es>Crea</es>
+        <it>Vai</it>
     </locale>
 </locales>

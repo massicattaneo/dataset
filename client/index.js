@@ -15,6 +15,7 @@ const thread = Thread(statements);
     await thread.main('init/keyboard').subscribe().then(thread.extend);
     await thread.main('init/store').subscribe().then(thread.extend);
     await thread.main('init/locale').subscribe().then(thread.extend);
+    await thread.main('init/web-socket').subscribe().then(thread.extend);
     await thread.main('init/resources').subscribe().then(thread.extend);
     await thread.main('init/sounds').subscribe().then(thread.extend);
     await thread.main('init/router').subscribe().then(thread.extend);

@@ -11,7 +11,7 @@
     top: 0;
 }
 
-.local div {
+.local :global(.notification) {
     position: relative;
     width: calc(100% - 6px);
     max-width: 600px;
@@ -23,7 +23,7 @@
     overflow: hidden;
 }
 
-.local div em {
+.local :global(.notification) em {
     line-height: 23px;
     vertical-align: top;
     display: inline-block;
@@ -32,7 +32,7 @@
     width: calc(100% - 50px);
 }
 
-.local div span {
+.local :global(.notification) span {
     font-size: 21px;
     margin: 4px;
     display: inline-block;
@@ -43,18 +43,18 @@
     height: 16px;
 }
 
-.local.info div {
+.local.info :global(.notification) {
     background-color: #c9c9c9
 }
 
-.local.warn div {
+.local.warn :global(.notification) {
     background-color: var(--accent-color)
 }
 
-.local.success div {
+.local.success :global(.notification) {
     background-color: #a1dea7
 }
 
-.local.error div {
+.local.error :global(.notification) {
     background-color: #dea1a1
 }
