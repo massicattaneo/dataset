@@ -1,12 +1,12 @@
 <locales>
     <locale path="@routes/href">
-        <en></en>
-        <es></es>
-        <it></it>
+        <en>/en/settings/sounds/</en>
+        <es>/es/adjustes/sonidos/</es>
+        <it>/it/impostazioni/suoni/</it>
     </locale>
     <locale path="@routes/title">
-        <en></en>
-        <es></es>
-        <it></it>
+        <en>Sounds</en>
+        <es>Sonidos</es>
+        <it>Suoni</it>
     </locale>
 </locales>

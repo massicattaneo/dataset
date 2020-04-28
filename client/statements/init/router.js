@@ -20,7 +20,7 @@ function setFrameAsActive(routerStore, clickedFrame) {
 }
 
 export default async function () {
-    const { locale, thread } = this;
+    const { locale, thread, loader } = this;
     const homeRoute = `${ROUTES_PATH}index`;
     const routerStore = create({
         frames: []
@@ -30,6 +30,7 @@ export default async function () {
     const { element: home } = createHtmlElement({ markup: markup() }, this);
     addCssClass(document.body, touchType);
 
+    document.getElementById('start-logo').style.display = 'none';
     appElement.appendChild(home);
 
     const showFrame = route => {
@@ -42,6 +43,7 @@ export default async function () {
             destroy();
         });
         home.querySelector('.frames').appendChild(frame);
+        loader.start();
         loadBundle(route, frame, this).then(async ({ markup, bootstrap }) => {
             const frameThread = Thread(thread.getStatements(), this);
             const { element: page, destroy: destroyPage } = createHtmlElement({ markup }, this);
@@ -54,6 +56,7 @@ export default async function () {
                 destroyFrame();
                 destroyBundle();
             };
+            loader.stop();
         });
     };
 
