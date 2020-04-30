@@ -61,7 +61,9 @@ function xmlToJson(svgString, root = false) {
 }
 
 function jsonToXml(json) {
-    return `<${json.name} ${Object.keys(json.attributes).map(n => `${n}="${json.attributes[n]}"`).join(' ')}>${json.content} ${json.children.map(jsonToXml).join('')}</${json.name}>`;
+    const children = json.children.length ? json.children.map(jsonToXml).join('\n') : '';
+    const content = json.content.trim() ? `${json.content.trim()} `: '';
+    return `<${json.name} ${Object.keys(json.attributes).map(n => `${n}="${json.attributes[n]}"`).join(' ')}>${content.trim()}${children.trim()}</${json.name}> `;
 }
 
 function xmlToSimpleJson(xml) {

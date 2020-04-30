@@ -23,7 +23,8 @@ const mixin = (element, { store }) => {
     }, ({ today, selected }) => {
         const todayDate = new Date(today);
         const selectedDate = new Date(selected);
-        const firstDayOfMonth = new Date(new Date().setDate(1));
+        const firstDayOfMonth = new Date(selectedDate);
+        firstDayOfMonth.setDate(1);
         const lastDayOfMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 0);
         month.innerText = monthFormatter.format(selectedDate);
         headerDays.forEach((child, index) => {
@@ -39,6 +40,7 @@ const mixin = (element, { store }) => {
             ) {
                 addCssClass(child, 'today');
             }
+            child.innerText = '';
             if (date > 0 && date <= lastDayOfMonth.getDate()) {
                 child.innerText = date;
             } else if (date > lastDayOfMonth.getDate()) {

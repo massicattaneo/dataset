@@ -16,6 +16,7 @@ const STYLE = {
     GREEN_COLOR: '#58be55',
     CONTRAST_COLOR: '#3e3e3e',
     ACCENT_COLOR: '#dca34b',
+    SOFT_GRAY_COLOR: '#d4d1d1',
     TEXT_COLOR: '#5a616d',
     TEXT_BG_COLOR: '#e5e5e5',
     FONT_FAMILY: 'Arial Narrow',

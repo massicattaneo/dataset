@@ -13,7 +13,7 @@ export default async function () {
             await thread.main('validate', event.target.surname, ['required']).subscribe();
             await thread.main('validate', event.target.email, ['required', 'email']).subscribe();
             await thread.main('validate', event.target.password, ['required', 'length|8']).subscribe();
-            await thread.main('validate', event.target.privacy, ['checked']).subscribe();
+            await thread.main('validate', event.target.terms, ['checked']).subscribe();
             page.flow.iGoToPage();
             break;
         case '1':

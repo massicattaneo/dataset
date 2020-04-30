@@ -35,9 +35,13 @@
                 </iinput>
                 <br/>
                 <iswitcher>
-                    <name>privacy</name>
-                    <placeholder>Privacy</placeholder>
-                    <label>My Text here should be ok My Text here should be ok My Text here should be ok</label>
+                    <name>terms</name>
+                    <placeholder>Terms&Conditions</placeholder>
+                    <label>
+                        <i>I Accept the</i>
+                        <a data-route="account/terms-and-conditions/">Conditions</a>
+                        <i>of this service</i>
+                    </label>
                 </iswitcher>
                 <br/>
                 <ibutton>
@@ -46,7 +50,18 @@
                 </ibutton>
             </fieldset>
             <fieldset class="content-step">
-                PEPE
+                <p>
+                    We sent an email to your address. Please review it and click on the link to activate your account.
+                </p>
+                <p>
+                    In the mean-while you can select your settings preferences.
+                </p>
+                <hr/>
+                <iswitcher>
+                    <name>newsletter</name>
+                    <placeholder>Newsletter</placeholder>
+                    <label>I want to receive updates & news from this Application.</label>
+                </iswitcher>
             </fieldset>
         </pages>
     </iflow>

@@ -1,10 +1,12 @@
 .local {
+    font-family: digital;
 }
 
 .local :global(.table) {
     margin: 2px;
     width: calc(100% - 4px);
     font-size: 13px;
+    line-height: 15px;
 }
 
 .local :global(.table) thead {
@@ -53,6 +55,7 @@
 }
 
 .local :global(.title) :global(.month) {
+    font-size: 18px;
     color: var(--main-color);
 }
 

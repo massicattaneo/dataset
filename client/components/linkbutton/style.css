@@ -1,0 +1,61 @@
+.local {
+    text-align: left;
+    display: block;
+    font-size: 16px;
+    position: relative;
+}
+
+.local a {
+    display: inline-block;
+    padding: 15px 15px 15px 60px;
+    width: calc(100% - 75px);
+    height: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.local:hover {
+    background-color: var(--soft-gray-color);
+    cursor: pointer;
+}
+
+.local a:active {
+    color: var(--white-color);
+    background-color: var(--accent-color);
+}
+.local:active {
+    color: var(--white-color);
+    background-color: var(--accent-color);
+}
+
+.local span:before {
+    text-decoration: initial;
+}
+
+.local span {
+    display: block;
+    position: absolute;
+    margin: 0 20px 0 0;
+    text-decoration: initial !important;
+    font-size: 29px;
+    vertical-align: middle;
+    top: 5px;
+    left: 10px;
+}
+
+
+.local em {
+    display: block;
+    position: absolute;
+    text-decoration: initial !important;
+    font-size: 33px;
+    vertical-align: middle;
+    top: 5px;
+    right: 0;
+    color: var(--soft-gray-color);
+    width: 40px;
+}
+
+.local:hover em {
+    color: var(--text-color);
+}

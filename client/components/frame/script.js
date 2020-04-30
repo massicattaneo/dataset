@@ -1,6 +1,6 @@
 import style from './style.css';
 import template from './template.html';
-import { addCssClass, draggable, getComputed, removeCssClass } from '../../../modules/html/html';
+import { addCssClass, draggable, getComputed, removeCssClass, Node } from '../../../modules/html/html';
 import { isDesktop, isMobile } from '../../../modules/device/device-client';
 import { elementEmitter, elementSetters } from '../../../modules/templating/mixins';
 import { STYLE } from '../../../constants';
@@ -35,13 +35,15 @@ function setTop(element, availableHeight, position) {
     }
 }
 
-const mixin = element => {
+const mixin = (element, { locale }) => {
     elementSetters(element, '.title');
     const emit = elementEmitter(element);
     const closeElement = element.querySelector('.close');
     const content = element.querySelector('.content');
     const resizeObserver = new ResizeObserver(() => element.resize());
     resizeObserver.observe(element);
+
+    content.appendChild(Node(`<img style="width: 50px; margin-top: 50px;" src="${locale.get('assetsManifest/init/loading-logo')}" />`));
 
     const dragDisposer = isDesktop ? draggable(element, element.querySelector('.bar'), (x, y) => {
         element.style.left = `${x}px`;
@@ -65,6 +67,7 @@ const mixin = element => {
     };
 
     element.iSetContent = htmlElement => {
+        content.innerHTML = '';
         content.appendChild(htmlElement);
     };
 

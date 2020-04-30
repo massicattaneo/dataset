@@ -1,0 +1,12 @@
+<locales>
+    <locale path="@routes/href">
+        <en></en>
+        <es></es>
+        <it></it>
+    </locale>
+    <locale path="@routes/title">
+        <en></en>
+        <es></es>
+        <it></it>
+    </locale>
+</locales>

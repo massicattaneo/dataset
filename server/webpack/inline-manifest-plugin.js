@@ -11,6 +11,7 @@ const objectToArray = obj => {
 const getTypeFromExtension = ext => {
     if (ext === 'css') return DEPENDENCY_TYPES.STYLE;
     if (ext === 'png') return DEPENDENCY_TYPES.IMAGE;
+    if (ext === 'gif') return DEPENDENCY_TYPES.IMAGE;
     if (ext === 'jpg') return DEPENDENCY_TYPES.IMAGE;
     if (ext === 'mp3') return DEPENDENCY_TYPES.SOUND;
     if (FONTS_EXTENSIONS.indexOf(ext) !== -1) return DEPENDENCY_TYPES.FONT;
