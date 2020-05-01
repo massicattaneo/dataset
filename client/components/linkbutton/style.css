@@ -47,11 +47,10 @@
 .local em {
     display: block;
     position: absolute;
-    text-decoration: initial !important;
     font-size: 33px;
     vertical-align: middle;
     top: 5px;
-    right: 0;
+    right: 11px;
     color: var(--soft-gray-color);
     width: 40px;
 }
