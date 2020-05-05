@@ -31,19 +31,19 @@
     </locale>
     <locale path="@path/email/footer">
         <en>
-            <p>Still not with us? <a data-route="account/register/">Register here</a></p>
+            <p><span>Still not with us?</span> <a data-route="account/register/">Register here</a></p>
             <hr/>
-            <p>Did you forgot your password? <a data-route="account/reset/">Reset here</a></p>
+            <p><span>Did you forgot your password?</span> <a data-route="account/reset/">Reset here</a></p>
         </en>
         <es>
-            <p>Aun no tienes una cuenta? <a data-route="account/register/">Creane una aquì</a></p>
+            <p><span>Aun no tienes una cuenta?</span> <a data-route="account/register/">Creane una aquì</a></p>
             <hr/>
-            <p>¿Has olvidado tu contraseña? <a data-route="account/reset/">Cambiala aquì</a></p>
+            <p><span>¿Has olvidado tu contraseña?</span> <a data-route="account/reset/">Cambiala aquì</a></p>
         </es>
         <it>
-            <p>Non sei ancora dei nostri? <a data-route="account/register/">Registrati qui</a></p>
+            <p><span>Non sei ancora dei nostri?</span> <a data-route="account/register/">Registrati qui</a></p>
             <hr/>
-            <p>Hai dimenticato la password? <a data-route="account/reset/">Cambiala qui</a></p>
+            <p><span>Hai dimenticato la password?</span> <a data-route="account/reset/">Cambiala qui</a></p>
         </it>
     </locale>
     <locale path="@path/password/legend">

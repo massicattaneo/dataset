@@ -1,6 +1,6 @@
 import { API } from '../../../constants';
-import { fetchGet } from '../../fetch-utils';
+import { fetchGetJSON } from '../../fetch-utils';
 
 export default function () {
-    return fetchGet(API.LOGIN_STATUS)
+    return fetchGetJSON(API.LOGIN_STATUS)
 }

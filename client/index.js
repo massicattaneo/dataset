@@ -4,6 +4,18 @@ import { Thread } from '../modules/thread/Thread';
 import { FunctionalProgramming } from '../modules/functional-programming/FunctionalProgramming';
 import { logThreadMiddleware } from './middlewares';
 
+// TODO: for IE11 add:
+// missing support for css variables
+// import '@babel/polyfill';
+// import ResizeObserver from 'resize-observer-polyfill';
+// import 'custom-event-polyfill';
+// if (!window.ResizeObserver) {
+//     window.ResizeObserver = ResizeObserver;
+// }
+// if (!Element.prototype.matches) {
+//     Element.prototype.matches = Element.prototype.msMatchesSelector;
+// }
+
 FunctionalProgramming(Function);
 
 const statements = parseStatements(require.context('./statements/', true, /.js/), '.js');

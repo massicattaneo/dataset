@@ -1,0 +1,12 @@
+<locales>
+    <locale path="@routes/href">
+        <en>/en/account/settings/</en>
+        <es>/es/cuenta/adjustes/</es>
+        <it>/it/utente/impostazioni/</it>
+    </locale>
+    <locale path="@routes/title">
+        <en></en>
+        <es></es>
+        <it></it>
+    </locale>
+</locales>

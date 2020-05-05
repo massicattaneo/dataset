@@ -1,6 +1,7 @@
 import { connect } from '../../../modules/reactive/Reactive';
 import { arrayToObject, flat } from '../../../modules/array/array';
 import { ROUTES_PATH } from '../../../constants';
+import { fetchGetJSON } from '../../fetch-utils';
 
 function getRouteMappings(locObj) {
     const { routes } = locObj;
@@ -34,8 +35,8 @@ export default async function () {
 
     await (new Promise((resolve) => {
         connect({ language: store.language }, async ({ language }) => {
-            const loc = await fetch.partial(`/locale/${version}/${language}`).retry().subscribe()
-                .then(res => res.json()).catch(resolve);
+            const loc = await (fetchGetJSON.partial(`/locale/${version}/${language}`, {}).retry().subscribe())
+                .catch(resolve);
             const systemLoc = { system: { language: language.get() } };
             Object.assign(locObj, loc, systemLoc);
             Object.assign(routeMappings, getRouteMappings(locObj));

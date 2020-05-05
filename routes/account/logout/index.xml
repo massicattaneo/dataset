@@ -1,0 +1,12 @@
+<locales>
+    <locale path="@routes/href">
+        <en>/en/account/logout/</en>
+        <es>/es/cuenta/salir/</es>
+        <it>/it/utente/disconnetti/</it>
+    </locale>
+    <locale path="@routes/title">
+        <en></en>
+        <es></es>
+        <it></it>
+    </locale>
+</locales>

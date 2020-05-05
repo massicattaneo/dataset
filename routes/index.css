@@ -88,3 +88,15 @@
     padding: 4px;
     line-height: 19px;
 }
+
+.local hr:global(.i-divider) {
+    border: 4px solid var(--soft-gray-color);
+    margin: 0;
+}
+
+.local hr:global(.i-divider-thin) {
+    margin: 0 28px 0 62px;
+    border: none;
+    border-top: 1px solid var(--soft-gray-color);
+}
+

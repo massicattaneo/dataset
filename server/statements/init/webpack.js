@@ -34,6 +34,13 @@ function getDefaultConfig({ clientDir, publicPath }) {
         module: {
             rules: [
                 {
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: 'babel-loader',
+                    }
+                },
+                {
                     test: /routes\/.*.js$/,
                     exclude: [/routes\/index\.js$/],
                     use: [
