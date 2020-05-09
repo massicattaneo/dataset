@@ -7,7 +7,7 @@ const {
     cssRuleValueRegEx
 } = require('../regexp/regexp');
 
-function createChild(name, parent) {
+const createChild = (name, parent) => {
     const ret = {
         name,
         children: [],
@@ -17,9 +17,9 @@ function createChild(name, parent) {
         autoClosing: false
     };
     return ret;
-}
+};
 
-function convertValue(value) {
+const convertValue = value => {
     const ret = value.toString()
         .replace(/"/g, '')
         // .replace(/'/g, '')
@@ -28,9 +28,9 @@ function convertValue(value) {
         return `${Number(ret.replace('px', ''))}px`;
     }
     return isNaN(ret) ? ret : (Number(ret));
-}
+};
 
-function xmlToJson(svgString, root = false) {
+const xmlToJson = (svgString, root = false) => {
     const target = createChild('root');
     let ref = target;
     svgString.replace(/\n/g, '')
@@ -43,8 +43,8 @@ function xmlToJson(svgString, root = false) {
                 const attr = line.match(attributesRegEx);
                 if (attr) {
                     attr.forEach(function (a) {
-                        const [name, value = ''] = a.split('=');
-                        item.attributes[name.trim()] = convertValue(value);
+                        const [name, ...values] = a.split('=');
+                        item.attributes[name.trim()] = convertValue(values.join('='));
                     });
                 }
                 ref.children.push(item);
@@ -58,24 +58,31 @@ function xmlToJson(svgString, root = false) {
             }
         });
     return root ? target : target.children[0];
-}
+};
 
-function jsonToXml(json) {
+const jsonToXml = json => {
     const children = json.children.length ? json.children.map(jsonToXml).join('\n') : '';
-    const content = json.content.trim() ? `${json.content.trim()} `: '';
+    const content = json.content.trim() ? `${json.content.trim()} ` : '';
     return `<${json.name} ${Object.keys(json.attributes).map(n => `${n}="${json.attributes[n]}"`).join(' ')}>${content.trim()}${children.trim()}</${json.name}> `;
-}
+};
 
-function xmlToSimpleJson(xml) {
+const xmlToSimpleJson = xml => {
     const structure = xmlToJson(xml);
     return structure.children.reduce((acc, item) => {
         const content = item.content + item.children.map(jsonToXml).join('');
         return { ...acc, [item.name]: content };
     }, {});
-}
+};
+
+const findChildrenRecursive = (xmlJson, name, found = []) => {
+    if (xmlJson.name === name) return found.push(xmlJson);
+    xmlJson.children.forEach(child => findChildrenRecursive(child, name, found));
+    return found;
+};
 
 module.exports = {
     xmlToJson,
     jsonToXml,
-    xmlToSimpleJson
+    xmlToSimpleJson,
+    findChildrenRecursive
 };

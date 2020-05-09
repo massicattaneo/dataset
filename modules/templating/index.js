@@ -146,7 +146,7 @@ const templateComponents = (markup, components, formatters) => {
     while (tagNames.find(regExp => markup.match(regExp))) {
         Object.values(components).forEach(bundle => {
             const { template, tagName, selector } = bundle;
-            const match = markup.match(new RegExp(`<${tagName}[^^]*>`));
+            const match = markup.match(new RegExp(`<${tagName}[^>]*>`));
             if (!match) return markup;
             let start = match.index;
             while (start !== undefined) {
@@ -154,11 +154,12 @@ const templateComponents = (markup, components, formatters) => {
                 const toSubstitute = markup.substr(start, end - start);
                 const templateVariables = getTemplateVariables(template);
                 const params = Object.assign(templateVariables, xmlToSimpleJson(toSubstitute));
+                if (params.validations) params.validations = params.validations.replace(/"/g, '\'');
                 const [firstNode] = toSubstitute.replace(/\n∫/, '').match(tagRegEx);
                 const [attributes] = firstNode.match(attributesRegEx) || [''];
                 const taggedTemplate = template.replace('>', ` class="${selector.replace('.', '')}" ${attributes}>`);
                 markup = markup.replace(toSubstitute, templateParser(taggedTemplate, params, formatters));
-                start = (markup.match(new RegExp(`<${tagName}[^^]*>`)) || {}).index;
+                start = (markup.match(new RegExp(`<${tagName}[^>]*>`)) || {}).index;
             }
         });
     }

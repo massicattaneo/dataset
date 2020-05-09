@@ -1,5 +1,4 @@
 import { getComputed } from '../../../modules/html/html';
-import { API } from '../../../constants';
 
 export default async function () {
     const { frame, page, thread } = this;
@@ -10,15 +9,14 @@ export default async function () {
         event.stopPropagation();
         switch (event.target.pageIndex.value) {
         case '0':
-            const serverValidation = `fetchGet|${API.ACCOUNT.EXISTS}?email=$1|exists|true|notifications/warn/email-do-not-exists`;
             thread
-                .main('validate', event.target.email, ['required', 'email', serverValidation])
+                .main('form/validate', event.target, ['email'])
                 .subscribe()
                 .then(() => page.flow.iGoToPage());
             break;
         case '1':
             thread
-                .main('validate', event.target.password, ['required'])
+                .main('form/validate', event.target, ['password'])
                 .subscribe()
                 .then(() => page.flow.iGoToPage());
             break;

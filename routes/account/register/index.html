@@ -13,34 +13,60 @@
                 <iinput>
                     <type>text</type>
                     <name>firstname</name>
-                    <formatters>capitalize</formatters>
+                    <formatters>
+                        <formatter>capitalize</formatter>
+                    </formatters>
+                    <validations>
+                        <validation>required</validation>
+                    </validations>
                     <placeholder>{{account.register.index.firstname.placeholder}}</placeholder>
                 </iinput>
                 <br/>
                 <iinput>
                     <type>text</type>
                     <name>surname</name>
-                    <formatters>capitalize</formatters>
+                    <formatters>
+                        <formatter>capitalize</formatter>
+                    </formatters>
+                    <validations>
+                        <validation>required</validation>
+                    </validations>
                     <placeholder>{{account.register.index.surname.placeholder}}</placeholder>
                 </iinput>
                 <br/>
                 <iinput>
                     <type>text</type>
                     <name>email</name>
-                    <formatters>lowerCase</formatters>
                     <placeholder>{{account.register.index.email.placeholder}}</placeholder>
+                    <formatters>
+                        <formatter>lowerCase</formatter>
+                    </formatters>
+                    <validations>
+                        <validation>required</validation>
+                        <validation>email</validation>
+                        <validation href="/api/account/exists?email=$1" field="exists" value="false" path="notifications/warn/email-do-not-exists">fetchGet</validation>
+                    </validations>
                 </iinput>
                 <br/>
                 <iinput>
                     <type>password</type>
                     <name>password</name>
-                    <formatters>base64</formatters>
+                    <formatters>
+                        <formatter>base64</formatter>
+                    </formatters>
+                    <validations>
+                        <validation>required</validation>
+                        <validation min-length="8">length</validation>
+                    </validations>
                     <placeholder>{{account.register.index.password.placeholder}}</placeholder>
                 </iinput>
                 <br/>
                 <iswitcher>
                     <name>terms</name>
                     <placeholder>Terms&Conditions</placeholder>
+                    <validations>
+                        <validation>checked</validation>
+                    </validations>
                     <label>
                         <i>I Accept the</i>
                         <a data-route="account/terms-and-conditions/">Conditions</a>

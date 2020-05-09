@@ -1,4 +1,3 @@
-const { capitalize } = require('../string/string');
 const { evalString } = require('../string/string');
 export const Node = markup => {
     const innerHtml = markup.replace(/^\s*/g, '').replace(/\n/g, '');
@@ -161,31 +160,6 @@ export const getComputed = (element, type) => {
     default:
         return style[type];
     }
-};
-
-const formElementFormats = {
-    capitalize,
-    lowerCase: string => string.toLowerCase(),
-    upperCase: string => string.toUpperCase(),
-    base64: string => btoa(string)
-};
-
-export const formToJSON = formElement => {
-    return Object.keys(formElement).reduce((obj, key) => {
-        const element = formElement[key];
-        const name = element.getAttribute('name');
-        const type = element.getAttribute('type');
-        if (type === 'hidden') return obj;
-        if (!name) return obj;
-        const formatters = (element.getAttribute('data-formatters') || '')
-            .split('|')
-            .filter(string => formElementFormats[string])
-            .map(string => formElementFormats[string]);
-        return {
-            ...obj,
-            [name]: formatters.reduce((string, formatter) => formatter(string), getElementValue(element))
-        };
-    }, {});
 };
 
 export const getElementValue = element => {

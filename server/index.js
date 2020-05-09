@@ -14,6 +14,7 @@ const mainThread = Thread(parseStatements(context, '.js'));
     await mainThread.main('init/web-socket').subscribe().then(mainThread.extend);
     mainThread.main('init/session').subscribe(mainThread.extend);
     mainThread.main('init/locale').subscribe();
+    await mainThread.main('init/form-routes').subscribe().then(mainThread.extend);
     mainThread.main('api/account').subscribe();
     mainThread.main('api/rest').subscribe();
     mainThread.main('init/router').subscribe();
