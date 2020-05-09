@@ -46,8 +46,9 @@ const createHtmlElement = ({ markup = '' }, context) => {
     const array = flat(Object.values(componentsJS).map(bundle => {
         const { selector, mixin } = bundle;
         const mixer = extendMixin(mixin, context);
-        if (element.matches(selector)) mixer(element, element);
-        const selectors = Array.prototype.slice.call(element.querySelectorAll(selector));
+        const selectors = [];
+        if (element.matches(selector)) selectors.push(element);
+        selectors.push(...Array.prototype.slice.call(element.querySelectorAll(selector)));
         return selectors.map(function (child) {
             return mixer(child, element);
         });

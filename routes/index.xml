@@ -49,5 +49,15 @@
         <es>Campo " {{placeholder}} "! Minimo {{minLength}} caracters</es>
         <it>Campo " {{placeholder}} "! Minimo {{minLength}} caratteri</it>
     </locale>
+    <locale path="notifications/warn/email-do-not-exists">
+        <en>The email provided is not registered</en>
+        <es>El correo no corresponde a ninguna cuenta</es>
+        <it>L'indirizzo email non appartiene a nessuna utenza</it>
+    </locale>
+    <locale path="notifications/warn/email-exists">
+        <en>The email provided has an account</en>
+        <es>El correo ya tiene una cuenta</es>
+        <it>L'indirizzo email e' gia' registrato</it>
+    </locale>
 </locales>
 

@@ -1,16 +1,11 @@
-import { addCssClass, removeCssClass } from '../html/html';
+import { addCssClass, getElementValue, removeCssClass } from '../html/html';
 import './mixins-clickable.css';
 import { EventEmitter } from '../event-emitter/EventEmitter';
 
-const getElementValue = (element, selector) => {
-    const selected = element.querySelector(selector);
-    if (selected.value) {
-        return selected.value;
-    }
-    return selected.innerText;
-
+const getElementValueBySelector = (element, selector) => {
+    return getElementValue(element.querySelector(selector))
 };
-const setElementValue = (element, selector, text) => {
+const setElementValueBySelector = (element, selector, text) => {
     const selected = element.querySelector(selector);
     if (selected.value) {
         selected.value = text;
@@ -25,23 +20,26 @@ const setElementAttribute = (element, selector, name, value) => {
 };
 
 export const elementSetters = (element, defaultSelector) => {
-    element.iGetValue = (selector = defaultSelector) => getElementValue(element, selector);
-    element.iSetValue = (text, selector = defaultSelector) => setElementValue(element, selector, text);
+    element.iGetValue = (selector = defaultSelector) => getElementValueBySelector(element, selector);
+    element.iSetValue = (text, selector = defaultSelector) => setElementValueBySelector(element, selector, text);
     element.iSetHtml = (html, selector = defaultSelector) => element.querySelector(selector).innerHTML = html;
     element.iSetAttribute = (name, text, selector = defaultSelector) => setElementAttribute(element, selector, name, text);
 };
 
 export const elementClickable = element => {
+    const onEnd = () => {
+        element.removeEventListener('animationend', onEnd);
+        removeCssClass(element, 'i-clicked');
+    };
     const onClick = () => {
-        const onEnd = () => {
-            element.removeEventListener('animationend', onEnd);
-            removeCssClass(element, 'i-clicked');
-        };
         element.addEventListener('animationend', onEnd);
         addCssClass(element, 'i-clicked');
     };
     element.addEventListener('click', onClick);
-    return () => element.removeEventListener('click', onClick);
+    return () => {
+        element.removeEventListener('click', onClick);
+        element.removeEventListener('animationend', onEnd);
+    }
 };
 
 export const elementEmitter = element => {

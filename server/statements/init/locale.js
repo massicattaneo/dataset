@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { parseStatements } = require('../../../modules/thread/thread-utils');
 const { xmlToLocales } = require('../../../modules/localization/localization');
-const { cache } = require('../../utils/cache-middleware');
+const { cache } = require('../../utils/middlewares');
 const requireContext = require('require-context');
 const { ROUTES_PATH } = require('../../../constants');
 

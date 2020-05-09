@@ -13,24 +13,28 @@
                 <iinput>
                     <type>text</type>
                     <name>firstname</name>
+                    <formatters>capitalize</formatters>
                     <placeholder>{{account.register.index.firstname.placeholder}}</placeholder>
                 </iinput>
                 <br/>
                 <iinput>
                     <type>text</type>
                     <name>surname</name>
+                    <formatters>capitalize</formatters>
                     <placeholder>{{account.register.index.surname.placeholder}}</placeholder>
                 </iinput>
                 <br/>
                 <iinput>
                     <type>text</type>
                     <name>email</name>
+                    <formatters>lowerCase</formatters>
                     <placeholder>{{account.register.index.email.placeholder}}</placeholder>
                 </iinput>
                 <br/>
                 <iinput>
                     <type>password</type>
                     <name>password</name>
+                    <formatters>base64</formatters>
                     <placeholder>{{account.register.index.password.placeholder}}</placeholder>
                 </iinput>
                 <br/>
@@ -60,6 +64,7 @@
                 <iswitcher>
                     <name>newsletter</name>
                     <placeholder>Newsletter</placeholder>
+                    <value>checked</value>
                     <label>I want to receive updates & news from this Application.</label>
                 </iswitcher>
             </fieldset>

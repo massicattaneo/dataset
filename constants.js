@@ -25,7 +25,14 @@ const STYLE = {
 };
 
 const API = {
-    LOGIN_STATUS: '/api/login/status'
+    ACCOUNT: {
+        STATUS: '/api/account/status',
+        REGISTER: '/api/account/register',
+        EXISTS: '/api/account/exists'
+    },
+    REST: {
+        GET: '/api/rest/:table'
+    }
 };
 
 const ROUTES_PATH = 'routes/';

@@ -1,6 +1,6 @@
 const defaultHeaders = { 'Content-Type': 'application/json' };
 
-export const fetchGetJSON = (url, headers) => new Promise((resolve, reject) => {
+const sendRequest = (type, url, body = '', headers) => new Promise((resolve, reject) => {
     const request = new XMLHttpRequest();
     const headersToSent = { ...defaultHeaders, ...headers };
     request.onreadystatechange = function () {
@@ -10,10 +10,14 @@ export const fetchGetJSON = (url, headers) => new Promise((resolve, reject) => {
             reject();
         }
     };
-    request.open('GET', url, true);
+    request.open(type, url, true);
     Object.keys(headersToSent).forEach(key => {
         request.setRequestHeader(key, headersToSent[key]);
     });
-    request.send();
+    request.send(JSON.stringify(body));
 });
+
+export const fetchGetJSON = (url, headers) => sendRequest('GET', url, '', headers);
+
+export const fetchPostJSON = (url, body, headers) => sendRequest('POST', url, body, headers);
 

@@ -1,4 +1,6 @@
-import { getComputed } from '../../../modules/html/html';
+import { formToJSON, getComputed } from '../../../modules/html/html';
+import { API } from '../../../constants';
+import { fetchGetJSON, fetchPostJSON } from '../../../client/fetch-utils';
 
 export default async function () {
     const { frame, page, thread } = this;
@@ -9,18 +11,17 @@ export default async function () {
         event.stopPropagation();
         switch (event.target.pageIndex.value) {
         case '0':
+            const serverValidation = `fetchGet|${API.ACCOUNT.EXISTS}?email=$1|exists|false|notifications/warn/email-exists`;
             await thread.main('validate', event.target.firstname, ['required']).subscribe();
             await thread.main('validate', event.target.surname, ['required']).subscribe();
-            await thread.main('validate', event.target.email, ['required', 'email']).subscribe();
+            await thread.main('validate', event.target.email, ['required', 'email', serverValidation]).subscribe();
             await thread.main('validate', event.target.password, ['required', 'length|8']).subscribe();
             await thread.main('validate', event.target.terms, ['checked']).subscribe();
+            await fetchPostJSON(API.ACCOUNT.REGISTER, formToJSON(event.target));
             page.flow.iGoToPage();
             break;
         case '1':
-            thread
-                .main('validate', event.target.password, ['required'])
-                .subscribe()
-                .then(() => page.flow.iGoToPage());
+
             break;
         }
     };

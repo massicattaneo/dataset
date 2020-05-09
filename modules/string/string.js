@@ -7,7 +7,7 @@ const padLeft = (str, size, char = '0') => {
 
 const capitalize = (s) => {
     if (typeof s !== 'string') return '';
-    return s.charAt(0).toUpperCase() + s.slice(1);
+    return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
 };
 
 const toArray = string => {
@@ -41,8 +41,16 @@ const toSpaceCase = string => {
 };
 
 const objectToString = obj => {
-    const sequence = Object.keys(obj).map(key =>  `${key}: '${obj[key]}'`).join(',');
+    const sequence = Object.keys(obj).map(key => `${key}: '${obj[key]}'`).join(',');
     return `{${sequence}}`;
+};
+
+const evalString = string => {
+    if (!string) return '';
+    if (string.toString() === 'true') return true;
+    if (string.toString() === 'false') return false;
+    if (!isNaN(string)) return Number(string);
+    return string;
 };
 
 module.exports = {
@@ -52,5 +60,6 @@ module.exports = {
     toSnakeCase,
     toSpaceCase,
     capitalize,
-    objectToString
+    objectToString,
+    evalString
 };

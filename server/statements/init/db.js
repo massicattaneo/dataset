@@ -1,7 +1,7 @@
 const { MongoClient, ObjectID } = require('mongodb');
 
 const Init = {
-    NAME: `inspector`,
+    NAME: `dataset`,
     URL: `mongodb://localhost:27017/${this.NAME}`
 };
 module.exports = async function () {
@@ -20,7 +20,7 @@ module.exports = async function () {
                 return client
                     .db(Init.NAME)
                     .collection(collection)
-                    .find(Object.assign(filter, { deleted: { $exists: false } }))
+                    .find(filter)
                     .sort({ _id: -1 })
                     // .skip(0)
                     // .limit(10)
