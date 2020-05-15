@@ -24,16 +24,37 @@ const STYLE = {
     HOME_FOOTER_HEIGHT: 60
 };
 
+const API_ROOT = '/api';
 const API = {
+    ROOT: API_ROOT,
     ACCOUNT: {
-        STATUS: '/api/account/status',
-        REGISTER: '/api/account/register',
-        EXISTS: '/api/account/exists'
+        STATUS: `${API_ROOT}/account/status`,
+        REGISTER: `${API_ROOT}/account/register`,
+        EXISTS: `${API_ROOT}/account/exists`
     },
     REST: {
         GET: '/api/rest/:table'
     }
 };
+
+const HTTP_STATUSES = {
+    OK: 200,
+    CREATED: 201,
+    INVALID_VALIDATION: 422
+};
+
+const DB = {
+    TABLES: {
+        ACCOUNTS: 'accounts'
+    }
+};
+
+const WS = {
+    MESSAGES: {
+        CONNECTED: 'connected',
+        HEARTBEAT: 'heartbeat'
+    }
+}
 
 const ROUTES_PATH = 'routes/';
 const DEFAULT_LANGUAGE = 'en';
@@ -44,5 +65,8 @@ module.exports = {
     STYLE,
     API,
     ROUTES_PATH,
-    DEFAULT_LANGUAGE
+    DEFAULT_LANGUAGE,
+    HTTP_STATUSES,
+    DB,
+    WS
 };

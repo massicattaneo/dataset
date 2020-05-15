@@ -44,7 +44,7 @@
                     <validations>
                         <validation>required</validation>
                         <validation>email</validation>
-                        <validation href="/api/account/exists?email=$1" field="exists" value="false" path="notifications/warn/email-do-not-exists">fetchGet</validation>
+                        <validation>accountEmailDoNotExists</validation>
                     </validations>
                 </iinput>
                 <br/>
@@ -52,7 +52,7 @@
                     <type>password</type>
                     <name>password</name>
                     <formatters>
-                        <formatter>base64</formatter>
+                        <formatter>encoded</formatter>
                     </formatters>
                     <validations>
                         <validation>required</validation>

@@ -1,31 +1,5 @@
-import { emailRegEx } from '../../../modules/regexp/regexp';
-import { fetchGetJSON } from '../../fetch-utils';
-import { API } from '../../../constants';
 import { xmlToJson } from '../../../modules/xml/xml';
-
-const types = {
-    required: (element, params) => {
-        return !element.value ? { path: 'notifications/warn/required', ...params } : null;
-    },
-    email: (element, params) => {
-        return !element.value.match(emailRegEx) ? { path: 'notifications/warn/wrong-format', ...params } : null;
-    },
-    length: (element, params, attributes) => {
-        return element.value.toString().length < Number(attributes['min-length']) ? {
-            path: 'notifications/warn/min-length', ...params,
-            minLength: attributes['min-length']
-        } : null;
-    },
-    checked: (element, params) => {
-        return !element.checked ? { path: 'notifications/warn/wrong-format', ...params } : null;
-    },
-    fetchGet: async (element, params, attributes) => {
-        const { href, field, value, path } = attributes;
-        const url = href.replace('$1', element.value);
-        const res = await fetchGetJSON(url);
-        return res[field].toString() !== value ? { path, ...params } : null;
-    }
-};
+import { validator } from '../../../modules/validator/validator';
 
 export default async function (formElement, elementNames) {
     const elements = Object.keys(formElement)
@@ -35,14 +9,9 @@ export default async function (formElement, elementNames) {
     const errors = await Promise.all(elements.map(async element => {
         const data = (element.getAttribute('data-validations') || '').replace(/'/g, '"');
         const json = xmlToJson(`<xml>${data}</xml>`);
-        const validations = json.children;
-        const params = { placeholder: element.getAttribute('data-placeholder'), timeout: 3000 };
-        const errors = await Promise.all(validations
-            .map(({ content: fnName, attributes }) => {
-                const type = types[fnName] || (() => true);
-                return type(element, params, attributes);
-            }));
-        const valid = errors.filter(bool => bool === null).length === validations.length;
+        const validators = json.children;
+        const errors = await Promise.all(validators.map(item => validator.call(this, item, element)));
+        const valid = errors.filter(bool => bool === null).length === validators.length;
         if (valid) return {};
         return { element, error: errors.find(i => i) };
     }));

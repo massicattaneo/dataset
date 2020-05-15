@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { parseStatements } = require('../../../modules/thread/thread-utils');
-const { xmlToJson, findChildrenRecursive } = require('../../../modules/xml/xml');
+const { xmlToJson, findChildrenRecursive, xmlToSimpleJson } = require('../../../modules/xml/xml');
 const requireContext = require('require-context');
 const { ROUTES_PATH } = require('../../../constants');
 
@@ -18,14 +18,14 @@ const getFormRoutes = () => {
                 ...findChildrenRecursive(json, 'irange')
             ].map(parent => {
                 const { content: name = '' } = parent.children.find(item => item.name === 'name') || {};
-                const { content: formatters = '' } = parent.children.find(item => item.name === 'formatters') || {};
-                const { content: validations = '' } = parent.children.find(item => item.name === 'validations') || {};
+                const itemForm = parent.children.find(item => item.name === 'formatters') || { children: [] };
+                const itemVal = parent.children.find(item => item.name === 'validations') || { children: [] };
+                const formatters = itemForm.children.map(({ content, attributes }) => ({ content, attributes }));
+                const validations = itemVal.children.map(({ content, attributes }) => ({ content, attributes }));
                 return { name, formatters, validations };
             });
         }
     });
-    const xml = xmls['account/register/index'];
-    console.warn(xml[0]);
     return xmls;
 };
 

@@ -1,13 +1,6 @@
 import { getElementValue } from '../../../modules/html/html';
-import { capitalize } from '../../../modules/string/string';
 import { xmlToJson } from '../../../modules/xml/xml';
-
-const formElementFormats = {
-    capitalize,
-    lowerCase: string => string.toLowerCase(),
-    upperCase: string => string.toUpperCase(),
-    base64: string => btoa(string)
-};
+import { formatter } from '../../../modules/formatter/formatter';
 
 export default async function (formElement) {
     return Object.keys(formElement).reduce((obj, key) => {
@@ -17,13 +10,10 @@ export default async function (formElement) {
         if (type === 'hidden') return obj;
         if (!name) return obj;
         const string = element.getAttribute('data-formatters') || '';
-        const json = xmlToJson(`<xml>${string}</xml>`);
-        const formatters = json.children
-            .filter(item => formElementFormats[item.content])
-            .map(item => formElementFormats[item.content]);
+        const { children: formatters = [] } = xmlToJson(`<xml>${string}</xml>`) || {};
         return {
             ...obj,
-            [name]: formatters.reduce((string, formatter) => formatter(string), getElementValue(element))
+            [name]: formatters.reduce((string, item) => formatter(item, string), getElementValue(element))
         };
     }, {});
 };

@@ -4,10 +4,10 @@ const sendRequest = (type, url, body = '', headers) => new Promise((resolve, rej
     const request = new XMLHttpRequest();
     const headersToSent = { ...defaultHeaders, ...headers };
     request.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
+        if (this.readyState === 4 && this.status.toString().startsWith('2') ) {
             resolve(JSON.parse(request.responseText));
         } else if (this.readyState === 4) {
-            reject();
+            reject(JSON.parse(request.responseText));
         }
     };
     request.open(type, url, true);
@@ -17,7 +17,11 @@ const sendRequest = (type, url, body = '', headers) => new Promise((resolve, rej
     request.send(JSON.stringify(body));
 });
 
-export const fetchGetJSON = (url, headers) => sendRequest('GET', url, '', headers);
+const fetchGetJSON = (url, headers) => sendRequest('GET', url, '', headers);
 
-export const fetchPostJSON = (url, body, headers) => sendRequest('POST', url, body, headers);
+const fetchPostJSON = (url, body, headers) => sendRequest('POST', url, body, headers);
 
+module.exports = {
+    fetchGetJSON,
+    fetchPostJSON
+};

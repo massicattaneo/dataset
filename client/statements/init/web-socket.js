@@ -1,13 +1,9 @@
-import { SERVER } from '../../../constants';
-import { wait } from '../../../modules/wait/wait';
+import { SERVER, WS } from '../../../constants';
+
+const message = (type, data = {}) => JSON.stringify({ type, data });
 
 export default async function () {
-    const webSocket = {};
     const webSocketInstance = new WebSocket(SERVER.WSS_ORIGIN);
-
-    webSocketInstance.onmessage = function (message) {
-    };
-
     webSocketInstance.onclose = function (error) {
         console.log('Socket is closed. Reconnect will be attempted in 1 second.', error.reason);
     };
@@ -17,17 +13,24 @@ export default async function () {
         webSocketInstance.close();
     };
 
-    const openPromise = new Promise(resolve => {
-        webSocketInstance.onopen = function () {
-            // setInterval(function () {
-            //     webSocket.send(JSON.stringify({ type: 'heartbeat' }));
-            // }, 3000);
-            resolve();
-            webSocketInstance.send(JSON.stringify({ type: 'open' }));
+    webSocketInstance.onopen = function (...args) {
+        setInterval(function () {
+            webSocketInstance.send(message(WS.MESSAGES.HEARTBEAT));
+        }, 3000);
+        console.warn('PEPE', ...args);
+    };
+
+    const idPromise = new Promise(resolve => {
+        webSocketInstance.onmessage = function (message) {
+            const { data, type } = JSON.parse(message.data);
+            if (type === WS.MESSAGES.CONNECTED) resolve(data);
+            console.warn('message', type, data);
         };
     });
 
-    await Promise.race([openPromise, wait.time(1000)]);
+    const webSocket = {
+        getId: () => idPromise
+    };
 
-    return { webSocket }
+    return { webSocket };
 }

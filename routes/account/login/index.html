@@ -19,7 +19,7 @@
                     <validations>
                         <validation>required</validation>
                         <validation>email</validation>
-                        <validation href="/api/account/exists?email=$1" field="exists" value="true" path="notifications/warn/email-do-not-exists">fetchGet</validation>
+                        <validation>accountEmailExists</validation>
                     </validations>
                     <placeholder>{{account.login.index.email.placeholder}}</placeholder>
                 </iinput>
