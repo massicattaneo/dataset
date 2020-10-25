@@ -3,10 +3,12 @@ import { getElementPath } from '../../../modules/html/html';
 
 export default async function () {
     const sounds = {};
+
     const audioPlayer = {
-        playSound: (soundName, { loop = false } = {}) => {
+        playSound: (soundName, { loop = false, volume = 1 } = {}) => {
             if (!sounds[soundName]) return;
             sounds[soundName].loop = loop;
+            sounds[soundName].volume = volume;
             sounds[soundName].play();
         }
     };
@@ -20,7 +22,7 @@ export default async function () {
     window.addEventListener('click', event => {
         const path = getElementPath(event.target);
         if (path.find(item => item.tagName === 'BUTTON') || path.find(item => item.tagName === 'A')) {
-            audioPlayer.playSound('button-click');
+            audioPlayer.playSound('button-click', { volume: 0.2 });
         }
     });
 

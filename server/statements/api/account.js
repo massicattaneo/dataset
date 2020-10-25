@@ -1,3 +1,4 @@
+const { createSignature } = require('../../crypto-utils');
 const { API, HTTP_STATUSES, DB } = require('../../../constants');
 
 module.exports = async function () {
@@ -25,6 +26,21 @@ module.exports = async function () {
             if (errors.length) {
                 return response.status(HTTP_STATUSES.INVALID_VALIDATION).send(errors);
             }
-            return response.json(await db.rest.post(DB.TABLES.ACCOUNTS, requestBodyFormatted));
+            const body = { ...requestBodyFormatted, password: createSignature(requestBodyFormatted.password) };
+            return response.json(await db.rest.post(DB.TABLES.ACCOUNTS, body));
+        });
+
+
+
+    app.post(API.ACCOUNT.LOGIN,
+        async (request, response) => {
+            const formFields = formRoutes['account/login/index'];
+            const requestBodyFormatted = await thread.main('form/format', request.body, formFields).subscribe();
+            const errors = await thread.main('form/validate', requestBodyFormatted, formFields).subscribe();
+            if (errors.length) {
+                return response.status(HTTP_STATUSES.INVALID_VALIDATION).send(errors);
+            }
+            const body = { ...requestBodyFormatted, password: createSignature(requestBodyFormatted.password) };
+            return response.json(await db.rest.post(DB.TABLES.ACCOUNTS, body));
         });
 };

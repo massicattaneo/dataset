@@ -4,10 +4,14 @@ const APPLICATION = {
 };
 
 const PORT = 8095;
+// const HOSTNAME = '192.168.0.48';
+const HOSTNAME = 'localhost';
+const HOST = `${HOSTNAME}${PORT ? `:${PORT}` : ''}`;
 const SERVER = {
     ROOT: '/',
     PORT,
-    WSS_ORIGIN: `ws://192.168.0.48:${PORT}`
+    WSS_ORIGIN: `ws://${HOST}`,
+    HTTPS_ORIGIN: `http://${HOST}`
 };
 
 const STYLE = {
@@ -30,6 +34,7 @@ const API = {
     ACCOUNT: {
         STATUS: `${API_ROOT}/account/status`,
         REGISTER: `${API_ROOT}/account/register`,
+        LOGIN: `${API_ROOT}/account/login`,
         EXISTS: `${API_ROOT}/account/exists`
     },
     REST: {
@@ -40,7 +45,8 @@ const API = {
 const HTTP_STATUSES = {
     OK: 200,
     CREATED: 201,
-    INVALID_VALIDATION: 422
+    INVALID_VALIDATION: 422,
+    UNAUTHORIZED: 401
 };
 
 const DB = {

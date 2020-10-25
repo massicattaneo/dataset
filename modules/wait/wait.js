@@ -13,11 +13,11 @@ const wait = {
         setTimeout(resolve, timeout);
     }),
     cssAnimation: (element, timeout = 1000) => new Promise(resolve => {
-        const onAnimationnEnd = () => {
-            element.removeEventListener('animationend', onAnimationnEnd, false);
-             resolve()
+        const onAnimationEnd = () => {
+            element.removeEventListener('animationend', onAnimationEnd, false);
+            resolve();
         };
-        element.addEventListener('animationend', onAnimationnEnd, false);
+        element.addEventListener('animationend', onAnimationEnd, false);
         setTimeout(resolve, timeout);
     })
 };
