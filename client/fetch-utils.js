@@ -14,7 +14,7 @@ const sendRequest = (type, url, body = '', headers) => new Promise((resolve, rej
     Object.keys(headersToSent).forEach(key => {
         request.setRequestHeader(key, headersToSent[key]);
     });
-    request.send(JSON.stringify(body));
+    return request.send(JSON.stringify(body));
 });
 
 const fetchGetJSON = (url, headers) => sendRequest('GET', url, '', headers);

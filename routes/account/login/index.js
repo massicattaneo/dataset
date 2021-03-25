@@ -19,7 +19,9 @@ export default async function () {
             const body = await thread.main('form/format', event.target).subscribe();
             await fetchPostJSON(API.ACCOUNT.LOGIN, body)
                 .then(() => page.flow.iGoToPage())
-                .catch(errors => thread.main('form/server-error', event.target, errors));
+                .catch(errors => {
+                    thread.main('form/server-error', event.target, errors)
+                });
             break;
         }
     };

@@ -31,7 +31,6 @@ module.exports = async function () {
         });
 
 
-
     app.post(API.ACCOUNT.LOGIN,
         async (request, response) => {
             const formFields = formRoutes['account/login/index'];
@@ -40,7 +39,15 @@ module.exports = async function () {
             if (errors.length) {
                 return response.status(HTTP_STATUSES.INVALID_VALIDATION).send(errors);
             }
-            const body = { ...requestBodyFormatted, password: createSignature(requestBodyFormatted.password) };
-            return response.json(await db.rest.post(DB.TABLES.ACCOUNTS, body));
+            const password = createSignature(requestBodyFormatted.password);
+            const [user] = await db.rest.get(DB.TABLES.ACCOUNTS, { password });
+            if (!user) {
+                const error = 'notifications/warn/password-incorrect';
+                return response.status(HTTP_STATUSES.UNAUTHORIZED).send([{
+                    field: 'password',
+                    error: { path: error }
+                }]);
+            }
+            return response.json({});
         });
 };

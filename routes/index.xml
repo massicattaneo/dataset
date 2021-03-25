@@ -5,9 +5,9 @@
         <it>/it/</it>
     </locale>
     <locale path="@routes/title">
-        <en>Dataset - Organize and share you business</en>
-        <es>Dataset - Organiza y comparte tu business</es>
-        <it>Dataset - Organizza e condividi il tuo business</it>
+        <en>Live - Create and share you music</en>
+        <es>Live - Crea y comparte tu musica</es>
+        <it>Live - Crea e condividi la tua musica</it>
     </locale>
     <locale path="index/menu/icons/trash">
         <en>Trash</en>
@@ -58,6 +58,11 @@
         <en>The email provided has an account</en>
         <es>El correo ya tiene una cuenta</es>
         <it>L'indirizzo email e' gia' registrato</it>
+    </locale>
+    <locale path="notifications/warn/password-incorrect">
+        <en>The password is incorrect</en>
+        <es>La contraseña es incorrecta</es>
+        <it>La password e' errata</it>
     </locale>
 </locales>
 

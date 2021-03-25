@@ -1,11 +1,11 @@
 const APPLICATION = {
-    NAME: 'Dataset',
+    NAME: 'Live',
     VERSION: process.env.PRODUCT_VERSION
 };
 
 const PORT = 8095;
-// const HOSTNAME = '192.168.0.48';
-const HOSTNAME = 'localhost';
+const HOSTNAME = '192.168.0.37';
+// const HOSTNAME = 'localhost';
 const HOST = `${HOSTNAME}${PORT ? `:${PORT}` : ''}`;
 const SERVER = {
     ROOT: '/',
