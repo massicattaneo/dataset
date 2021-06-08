@@ -33,7 +33,7 @@ const publicKey = fs.readFileSync(getPrivatePath('public.key'), 'UTF8');
 
 const encrypt = data => {
     const cipher = crypto.createCipheriv(algorithm, key, iv);
-    const encrypted = cipher.update(data, 'utf8', 'hex');
+    const encrypted = cipher.update(data.toString(), 'utf8', 'hex');
     return `${encrypted}${cipher.final('hex')}`;
 };
 const decrypt = data => {
@@ -44,14 +44,14 @@ const decrypt = data => {
 
 const createSignature = data => {
     const sign = crypto.createSign('md5');
-    sign.write(data);
+    sign.write(data.toString());
     sign.end();
     return sign.sign({ key: privateKey, passphrase: secretKey }, 'hex');
 };
 
 const verifySignature = (signature, data) => {
     const verify = crypto.createVerify('md5');
-    verify.write(data);
+    verify.write(data.toString());
     verify.end();
     return verify.verify(publicKey, signature, 'hex');
 };

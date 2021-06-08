@@ -15,7 +15,16 @@ const requiresLogin = (externalValidation = () => false) => (request, response, 
     request.session.destroy(() => response.status(HTTP_STATUSES.UNAUTHORIZED).json({ message: 'Unauthorized' }));
 };
 
+const hasWebSocketSignature = ({ webSocket }) => (request, response, next) => {
+    const { headers } = request;
+    const connectionId = webSocket.getConnectionId(headers.signature);
+    const errors = { path: 'notifications/error/critical-error' };
+    if (!connectionId) return response.status(HTTP_STATUSES.INVALID_VALIDATION).send(errors);
+    next();
+}
+
 module.exports = {
     cache,
-    requiresLogin
+    requiresLogin,
+    hasWebSocketSignature
 };

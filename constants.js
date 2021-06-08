@@ -4,7 +4,7 @@ const APPLICATION = {
 };
 
 const PORT = 8095;
-const HOSTNAME = '192.168.0.37';
+const HOSTNAME = '192.168.0.51';
 // const HOSTNAME = 'localhost';
 const HOST = `${HOSTNAME}${PORT ? `:${PORT}` : ''}`;
 const SERVER = {
@@ -23,7 +23,7 @@ const STYLE = {
     SOFT_GRAY_COLOR: '#d4d1d1',
     TEXT_COLOR: '#5a616d',
     TEXT_BG_COLOR: '#e5e5e5',
-    FONT_FAMILY: 'Arial Narrow',
+    FONT_FAMILY: 'arialnarrow',
     HOME_HEADER_HEIGHT: 29,
     HOME_FOOTER_HEIGHT: 60
 };
@@ -60,7 +60,7 @@ const WS = {
         CONNECTED: 'connected',
         HEARTBEAT: 'heartbeat'
     }
-}
+};
 
 const ROUTES_PATH = 'routes/';
 const DEFAULT_LANGUAGE = 'en';

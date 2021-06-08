@@ -1,6 +1,5 @@
 import { getComputed } from '../../../modules/html/html';
 import { API } from '../../../constants';
-import { fetchPostJSON } from '../../../client/fetch-utils';
 
 export default async function () {
     const { frame, page, thread } = this;
@@ -13,7 +12,7 @@ export default async function () {
         case '0':
             await thread.main('form/validate', event.target, ['firstname', 'surname', 'email', 'password', 'terms']).subscribe();
             const body = await thread.main('form/format', event.target).subscribe();
-            await fetchPostJSON(API.ACCOUNT.REGISTER, body)
+            await thread.main('fetch/post', API.ACCOUNT.REGISTER, body).subscribe()
                 .then(() => page.flow.iGoToPage())
                 .catch(errors => {
                     thread.main('form/server-error', event.target, errors);

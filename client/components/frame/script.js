@@ -81,17 +81,17 @@ const mixin = (element, { locale }) => {
         setTop(element, availableHeight, position);
     };
 
-    element.iClose = () => {
+    element.iClose = params => {
         addCssClass(element, 'close');
         return wait.cssAnimation(element).then(() => {
             element.style.display = 'none';
             removeCssClass(element, 'close');
             element.parentNode.removeChild(element);
-            arguments[0] && emit('close');
+            arguments[0] && emit('close', params);
         });
     };
 
-    const onClose = () => element.iClose(true);
+    const onClose = () => element.iClose();
     closeElement.addEventListener('click', onClose);
     element.resize();
     addCssClass(element, 'open');

@@ -1,11 +1,4 @@
-const {
-    tagRegEx,
-    tagNameRegEx,
-    attributesRegEx,
-    cssRegEx,
-    cssRuleNameRegEx,
-    cssRuleValueRegEx
-} = require('../regexp/regexp');
+const { tagRegEx,tagNameRegEx,attributesRegEx } = require('../regexp/regexp');
 
 const createChild = (name, parent) => {
     const ret = {

@@ -34,6 +34,11 @@
         <es>Crear</es>
         <it>Crea</it>
     </locale>
+    <locale path="notifications/error/critical-error">
+        <en>Critical error</en>
+        <es>Error critico</es>
+        <it>Errore critico</it>
+    </locale>
     <locale path="notifications/warn/wrong-format">
         <en>The field " {{placeholder}} " is in a wrong format</en>
         <es>Revisa el campo " {{placeholder}} "</es>

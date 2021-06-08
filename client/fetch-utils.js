@@ -17,11 +17,4 @@ const sendRequest = (type, url, body = '', headers) => new Promise((resolve, rej
     return request.send(JSON.stringify(body));
 });
 
-const fetchGetJSON = (url, headers) => sendRequest('GET', url, '', headers);
-
-const fetchPostJSON = (url, body, headers) => sendRequest('POST', url, body, headers);
-
-module.exports = {
-    fetchGetJSON,
-    fetchPostJSON
-};
+module.exports = { sendRequest };

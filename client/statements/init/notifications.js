@@ -13,7 +13,7 @@ export default async function () {
         if (error instanceof Error) {
             return showError(home, 'error', error.toString());
         }
-        if (locale) {
+        if (locale && error.path) {
             const { path, timeout = 2000 } = error;
             delete error.path;
             delete error.timeout;

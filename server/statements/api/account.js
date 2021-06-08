@@ -1,15 +1,18 @@
 const { createSignature } = require('../../crypto-utils');
 const { API, HTTP_STATUSES, DB } = require('../../../constants');
+const { hasWebSocketSignature } = require('../../utils/middlewares');
 
 module.exports = async function () {
-    const { app, formRoutes, thread, db } = this;
+    const { app, formRoutes, thread, db, webSocket } = this;
 
     app.get(API.ACCOUNT.STATUS,
+        hasWebSocketSignature(this),
         (request, response) => {
             response.json({});
         });
 
     app.get(API.ACCOUNT.EXISTS,
+        hasWebSocketSignature(this),
         async (request, response) => {
             const { db } = this;
             const table = DB.TABLES.ACCOUNTS;
@@ -19,6 +22,7 @@ module.exports = async function () {
         });
 
     app.post(API.ACCOUNT.REGISTER,
+        hasWebSocketSignature(this),
         async (request, response) => {
             const formFields = formRoutes['account/register/index'];
             const requestBodyFormatted = await thread.main('form/format', request.body, formFields).subscribe();
@@ -32,6 +36,7 @@ module.exports = async function () {
 
 
     app.post(API.ACCOUNT.LOGIN,
+        hasWebSocketSignature(this),
         async (request, response) => {
             const formFields = formRoutes['account/login/index'];
             const requestBodyFormatted = await thread.main('form/format', request.body, formFields).subscribe();

@@ -1,5 +1,4 @@
 import { getComputed } from '../../../modules/html/html';
-import { fetchPostJSON } from '../../../client/fetch-utils';
 import { API } from '../../../constants';
 
 export default async function () {
@@ -17,7 +16,7 @@ export default async function () {
         case '1':
             await thread.main('form/validate', event.target, ['password']).subscribe();
             const body = await thread.main('form/format', event.target).subscribe();
-            await fetchPostJSON(API.ACCOUNT.LOGIN, body)
+            await thread.main('fetch/post', API.ACCOUNT.LOGIN, body).subscribe()
                 .then(() => page.flow.iGoToPage())
                 .catch(errors => {
                     thread.main('form/server-error', event.target, errors)

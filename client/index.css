@@ -12,9 +12,13 @@ body {
 a, a:visited {
     color: var(--main-color);
 }
-a:hover {
-    color: var(--accent-color);
+
+@media (hover: hover) {
+    a:hover {
+        color: var(--accent-color);
+    }
 }
+
 * fieldset {
     border: none;
 }

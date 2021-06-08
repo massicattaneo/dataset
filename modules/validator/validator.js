@@ -1,4 +1,3 @@
-const { fetchGetJSON } = require('../../client/fetch-utils');
 const { emailRegEx } = require('../regexp/regexp');
 const isNodeProcess = !global.document;
 const { DB, API } = require('../../constants');
@@ -19,25 +18,25 @@ const validators = {
     checked: (element, params) => {
         return !element.checked ? { path: 'notifications/warn/wrong-format', ...params } : null;
     },
-    accountEmailExists: async (element, params, attributes, { db }) => {
+    accountEmailExists: async function (element, params, attributes, { db, thread }) {
         const path = 'notifications/warn/email-do-not-exists';
         if (isNodeProcess) {
             const user = await db.rest.get(DB.TABLES.ACCOUNTS, { email: element.value });
             return user.length === 0 ? { path, ...params } : null;
         } else {
             const url = `${API.ACCOUNT.EXISTS}?email=${element.value}`;
-            const res = await fetchGetJSON(url);
+            const res = await thread.main('fetch/get', url).subscribe();
             return !res.exists ? { path, ...params } : null;
         }
     },
-    accountEmailDoNotExists: async (element, params, attributes, { db }) => {
+    accountEmailDoNotExists: async (element, params, attributes, { db, thread }) => {
         const path = 'notifications/warn/email-exists';
         if (isNodeProcess) {
             const user = await db.rest.get(DB.TABLES.ACCOUNTS, { email: element.value });
             return user.length > 0 ? { path, ...params } : null;
         } else {
             const url = `${API.ACCOUNT.EXISTS}?email=${element.value}`;
-            const res = await fetchGetJSON(url);
+            const res = await thread.main('fetch/get', url).subscribe();
             return res.exists ? { path, ...params } : null;
         }
     }

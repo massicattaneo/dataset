@@ -10,6 +10,12 @@ const message = (type, data = {}) => JSON.stringify({
     data
 });
 
+const getConnectionId = signature => {
+    const connection = connections.find(item => item.signature === signature);
+    if (!connection) return '';
+    return connection.id;
+}
+
 module.exports = async function () {
     const webSocketServer = new WebSocket.Server({ noServer: true });
     const { server, db } = this;
@@ -42,4 +48,10 @@ module.exports = async function () {
             });
         }
     });
+
+    return {
+        webSocket: {
+            getConnectionId
+        }
+    }
 };
