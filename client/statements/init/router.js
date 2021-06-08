@@ -34,6 +34,9 @@ export default async function () {
     appElement.appendChild(home);
 
     const showFrame = (route, { popState = false } = {}) => {
+        if (isMobile && routerStore.frames.get().length) {
+            routerStore.frames.get()[0].frame.iClose();
+        }
         const { element: frame, destroy: destroyFrame } = createHtmlElement({ markup: '<iwindow></iwindow>' }, this);
         frame.iSetValue(locale.get(`${route}/title`));
         const item = { frame, route };
@@ -57,16 +60,17 @@ export default async function () {
                 destroyBundle();
             };
             loader.stop();
-            const { href, title } = locale.get(route);
-            if (!popState) {
-                window.history.pushState({ route }, title, href);
-            }
         });
     };
 
     window.addEventListener('click', async event => {
         if (!event.custom || !event.custom.route) return;
-        if (event.custom.route === homeRoute) return;
+        if (event.custom.route === homeRoute) {
+            if (isMobile && routerStore.frames.get().length) {
+                routerStore.frames.get()[0].frame.iClose();
+            }
+            return;
+        }
         const { route } = routerStore.frames.last() || {};
         if (route && routerStore.frames.get().find(item => item.route === event.custom.route)) {
             const { frame: clickedFrame } = routerStore.frames.get().find(item => item.route === event.custom.route);
@@ -88,16 +92,6 @@ export default async function () {
     document.title = title;
     if (actualRoute !== homeRoute) showFrame(actualRoute);
 
-    window.addEventListener('popstate', event => {
-        const find = routerStore.frames.get().find(item => item.route === event.state.route);
-        if ((find || event.state.route === homeRoute) && routerStore.frames.last()) {
-            const { frame } = routerStore.frames.last();
-            frame.iClose({ popState: true });
-        } else if (event.state.route !== homeRoute) {
-            showFrame(event.state.route, { popState: true });
-        }
-    });
-
     connect(({ frames: routerStore.frames }), ({ frames }) => {
         const { route } = frames.last() || { route: homeRoute };
         frames.get().filter(el => el).forEach((el, index) => el.frame.style.zIndex = index);
@@ -106,6 +100,7 @@ export default async function () {
         const { href, title } = locale.get(route);
         document.title = title;
         home.breadcrumb.iSetHtml(createBreadcrumb(href, route, locale));
+        window.history.replaceState({ route: actualRoute }, title, href);
     });
 
     return { router, home };
