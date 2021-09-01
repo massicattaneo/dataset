@@ -2,7 +2,7 @@ import './index.css';
 import { parseStatements } from '../modules/thread/thread-utils';
 import { Thread } from '../modules/thread/Thread';
 import { FunctionalProgramming } from '../modules/functional-programming/FunctionalProgramming';
-import { logThreadMiddleware } from './middlewares';
+import { logThreadMiddleware } from './middlewares/logging';
 
 // TODO: for IE11 add:
 // missing support for css variables

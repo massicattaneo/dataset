@@ -61,4 +61,9 @@
         <es>SEGUIR</es>
         <it>AVANTI</it>
     </locale>
+    <locale path="@path/redirect">
+        <en><p>You are logged in.</p><p>You will be redirected to the home page.</p></en>
+        <es><p>Estas logeado.</p><p>En breve seras redirecionado a la pagina inicial.</p></es>
+        <it><p>Sei entrato con successo.</p><p>In breve sarai redirezionato a la pagina iniziale.</p></it>
+    </locale>
 </locales>

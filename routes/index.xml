@@ -19,6 +19,11 @@
         <es>Entra</es>
         <it>Entra</it>
     </locale>
+    <locale path="index/menu/icons/account">
+        <en>Account</en>
+        <es>Usuario</es>
+        <it>Utenza</it>
+    </locale>
     <locale path="index/menu/icons/message">
         <en>Messages</en>
         <es>Mensajes</es>

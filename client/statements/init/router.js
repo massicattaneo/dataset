@@ -1,7 +1,7 @@
 import { markup } from '../../../routes/index';
 import { addCssClass, getElementPath, hasCssClass } from '../../../modules/html/html';
 import { isMobile, touchType } from '../../../modules/device/device-client';
-import { connect, create, use } from '../../../modules/reactive/Reactive';
+import { connect, create } from '../../../modules/reactive/Reactive';
 import windowStyle from '../../components/frame/style.css';
 import { findIndex } from '../../../modules/array/array';
 import {
@@ -11,6 +11,7 @@ import {
 } from '../../../modules/templating/client';
 import { loadBundle } from '../../../modules/bundle';
 import { Thread } from '../../../modules/thread/Thread';
+import { updateMenuItems } from '../../middlewares/account';
 
 const { ROUTES_PATH } = require('../../../constants');
 
@@ -20,7 +21,7 @@ const setFrameAsActive = (routerStore, clickedFrame) => {
 }
 
 export default async function () {
-    const { locale, thread, loader } = this;
+    const { locale, thread, loader, store } = this;
     const homeRoute = `${ROUTES_PATH}index`;
     const routerStore = create({
         frames: []
@@ -33,7 +34,7 @@ export default async function () {
     document.getElementById('start-logo').style.display = 'none';
     appElement.appendChild(home);
 
-    const showFrame = (route, { popState = false } = {}) => {
+    const showFrame = route => {
         if (isMobile && routerStore.frames.get().length) {
             routerStore.frames.get()[0].frame.iClose();
         }
@@ -49,6 +50,7 @@ export default async function () {
         loader.start();
         loadBundle(route, frame, this).then(async ({ markup, bootstrap }) => {
             const frameThread = Thread(thread.getStatements(), this);
+            console.log(markup);
             const { element: page, destroy: destroyPage } = createHtmlElement({ markup }, this);
             frame.iSetContent(page);
             frameThread.extend({ frame, page, home, locale });
@@ -86,6 +88,20 @@ export default async function () {
         setFrameAsActive(routerStore, clickedFrame);
     });
 
+    window.addEventListener('popstate', async event => {
+        const { route } = event.state;
+        const find = routerStore.frames.get().find(item => item.route === route);
+        if (route === homeRoute) {
+            routerStore.frames.get().forEach(item => {
+                item.frame.iClose();
+            });
+        } else if (find) {
+            setFrameAsActive(routerStore, find.frame);
+        } else {
+            showFrame(route)
+        }
+    });
+
     let actualRoute = getRouteFromHref(locale);
     const { href, title } = locale.get(actualRoute);
     window.history.replaceState({ route: actualRoute }, title, href);
@@ -100,8 +116,24 @@ export default async function () {
         const { href, title } = locale.get(route);
         document.title = title;
         home.breadcrumb.iSetHtml(createBreadcrumb(href, route, locale));
-        window.history.replaceState({ route: actualRoute }, title, href);
+        if (window.history.state.route !== actualRoute) {
+            window.history.pushState({ route: actualRoute }, title, href);            
+        }
     });
+
+    updateMenuItems(store, home);
+
+    router.redirect = route => {
+        if (route === homeRoute) {
+            routerStore.frames.get().forEach(item => {
+                item.frame.iClose();
+            });
+            const { href, title } = locale.get(route);
+            window.history.pushState({ route: actualRoute }, title, href);
+        } else if (route !== homeRoute) {
+            showFrame(route)
+        }
+    }
 
     return { router, home };
 }

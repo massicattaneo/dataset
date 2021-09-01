@@ -1,10 +1,12 @@
 import style from './style.css';
 import template from './template.html';
-import { elementClickable } from '../../../modules/templating/mixins';
+import { elementClickable, elementReactive } from '../../../modules/templating/mixins';
 
 const mixin = element => {
-    const dispose = elementClickable(element.querySelector('.wrapper'));
+    const disposeClicks = elementClickable(element.querySelector('.wrapper'));
+    const { dispose } = elementReactive(element);
     return () => {
+        disposeClicks();
         dispose();
     };
 };

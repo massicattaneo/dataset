@@ -1,9 +1,9 @@
 import { getComputed } from '../../../modules/html/html';
-import { API } from '../../../constants';
+import { API, ROUTES_PATH } from '../../../constants';
 
 export default async function () {
     const { frame, page, thread } = this;
-    const { store } = this.sharedContext;
+    const { store, router } = this.sharedContext;
 
     const onSubmit = async event => {
         event.preventDefault();
@@ -17,7 +17,13 @@ export default async function () {
             await thread.main('form/validate', event.target, ['password']).subscribe();
             const body = await thread.main('form/format', event.target).subscribe();
             await thread.main('fetch/post', API.ACCOUNT.LOGIN, body).subscribe()
-                .then(() => page.flow.iGoToPage())
+                .then(() => {
+                    page.flow.iGoToPage();
+                    store.user.logged.set(true);
+                    setTimeout(() => {
+                        router.redirect(`${ROUTES_PATH}index`);
+                    }, 2000)
+                })
                 .catch(errors => {
                     thread.main('form/server-error', event.target, errors)
                 });
@@ -37,6 +43,7 @@ export default async function () {
     frame.addEventListener('resize', resize);
     resize();
     page.flow.iGoToPage(0);
+
     return () => {
         page.flow.removeEventListener('submit', onSubmit);
         page.flow.removeEventListener('change-page', onChangePage);

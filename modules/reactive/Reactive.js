@@ -78,7 +78,6 @@ function Reactive(entryValue) {
         is,
         reverse,
         emitChange
-
     };
 }
 
@@ -104,12 +103,19 @@ function connect(store, callback) {
 }
 
 function use(store, callback) {
-    Object.keys(store).forEach(key =>
+    Object.keys(store).forEach(key => {
         store[key].emitter.beforeEmit((key, value, next) => {
             if (key === 'get') return;
             callback(store, () => next(key, value));
         })
-    );
+    });
 }
 
-module.exports = { create, connect, use };
+const toJSON = (store) => {
+    const json = Object
+        .keys(store)
+        .reduce((data, key) => ({ ...data, [key]: store[key].get()}), {});
+        return json;
+}
+
+module.exports = { create, connect, use, toJSON };

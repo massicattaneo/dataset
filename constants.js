@@ -4,7 +4,7 @@ const APPLICATION = {
 };
 
 const PORT = 8095;
-const HOSTNAME = '192.168.0.51';
+const HOSTNAME = '192.168.0.53';
 // const HOSTNAME = 'localhost';
 const HOST = `${HOSTNAME}${PORT ? `:${PORT}` : ''}`;
 const SERVER = {
