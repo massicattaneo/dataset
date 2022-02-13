@@ -5,9 +5,9 @@
         <it>/it/</it>
     </locale>
     <locale path="@routes/title">
-        <en>Live - Create and share you music</en>
-        <es>Live - Crea y comparte tu musica</es>
-        <it>Live - Crea e condividi la tua musica</it>
+        <en>Dataset - Create and share the wellness of the bussiness</en>
+        <es>Dataset - Crea y comparte </es>
+        <it>Dataset - Crea e condividi il benessere del commercio</it>
     </locale>
     <locale path="index/menu/icons/trash">
         <en>Trash</en>

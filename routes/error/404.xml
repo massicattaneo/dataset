@@ -5,9 +5,9 @@
         <it>/it/errore/404</it>
     </locale>
     <locale path="@routes/title">
-        <en>Live - Page not found</en>
-        <es>Live - Pagina no encontrada</es>
-        <it>Live - Pagina inesistente</it>
+        <en>Dataset - Page not found</en>
+        <es>Dataset - Pagina no encontrada</es>
+        <it>Dataset - Pagina inesistente</it>
     </locale>
 </locales>
 
