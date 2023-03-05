@@ -39,6 +39,16 @@
         <es>Crear</es>
         <it>Crea</it>
     </locale>
+    <locale path="index/desktop/icons/favourites">
+        <en>My Favourites</en>
+        <es>Destacados</es>
+        <it>Favoriti</it>
+    </locale>
+    <locale path="index/desktop/icons/downloads">
+        <en>Downloads</en>
+        <es>Descargas</es>
+        <it>Scaricati</it>
+    </locale>
     <locale path="notifications/error/critical-error">
         <en>Critical error</en>
         <es>Error critico</es>

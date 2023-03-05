@@ -1,25 +1,48 @@
 <div>
     <div class="status-bar">
-        <a data-route="index"><img class="logo" src="{{assetsManifest.init.logo}}" /></a>
+        <a data-route="index"
+            ><img class="logo" src="{{assetsManifest.init.logo}}"
+        /></a>
         <ibreadcrumb data-expose-as="breadcrumb"></ibreadcrumb>
         <a data-route="settings/language/" class="right">
-            <img class="lang {{system.language}}" style="background-image: url('{{assetsManifest.init.flags}}')" />
+            <img
+                class="lang {{system.language}}"
+                style="background-image: url('{{assetsManifest.init.flags}}')"
+            />
         </a>
         <a data-route="settings/datetime/" class="datetime right"></a>
-        <a data-route="settings/" class="settings icofont-ui-settings right"></a>
+        <a
+            data-route="settings/"
+            class="settings icofont-ui-settings right"
+        ></a>
         <a data-route="settings/sounds/" class="icofont-volume-bar right"></a>
-        <a data-route="settings/bluetooth/" class="icofont-ui-bluetooth right"></a>
+        <a
+            data-route="settings/bluetooth/"
+            class="icofont-ui-bluetooth right"
+        ></a>
         <a data-route="settings/security/" class="icofont-ui-browser right"></a>
-        <a data-route="settings/location/" class="icofont-location-arrow right"></a>
+        <a
+            data-route="settings/location/"
+            class="icofont-location-arrow right"
+        ></a>
     </div>
     <inotification data-expose-as="notification"></inotification>
     <idialog data-expose-as="dialog"></idialog>
 
-    <div class="icons"></div>
+    <div class="icons">
+        <iicon data-route="messages/">
+            <icon>icofont-folder</icon>
+            <label>{{index.desktop.icons.favourites}}</label>
+        </iicon>
+        <iicon data-route="messages/">
+            <icon>icofont-folder</icon>
+            <label>{{index.desktop.icons.downloads}}</label>
+        </iicon>
+    </div>
     <div class="frames"></div>
 
     <nav class="menu">
-        <iicon data-route="account/login/">
+        <iicon data-route="account/">
             <icon>icofont-user</icon>
             <label>{{index.menu.icons.login}}</label>
         </iicon>

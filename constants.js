@@ -4,8 +4,8 @@ const APPLICATION = {
 };
 
 const PORT = 8095;
-const HOSTNAME = "192.168.0.76";
-// const HOSTNAME = 'localhost';
+// const HOSTNAME = "192.168.0.76";
+const HOSTNAME = "localhost";
 const HOST = `${HOSTNAME}${PORT ? `:${PORT}` : ""}`;
 const SERVER = {
     ROOT: "/",
@@ -16,10 +16,10 @@ const SERVER = {
 
 const STYLE = {
     WHITE_COLOR: "#ffffff",
-    MAIN_COLOR: "#80aec4",
+    MAIN_COLOR: "#edb821",
     GREEN_COLOR: "#58be55",
-    CONTRAST_COLOR: "#3e3e3e",
-    ACCENT_COLOR: "#dca34b",
+    CONTRAST_COLOR: "#590000",
+    ACCENT_COLOR: "#04a57d",
     SOFT_GRAY_COLOR: "#d4d1d1",
     TEXT_COLOR: "#5a616d",
     TEXT_BG_COLOR: "#e5e5e5",

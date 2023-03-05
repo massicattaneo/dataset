@@ -6,13 +6,15 @@ function Stack(context = {}) {
     const _exe = (...args) => {
         if (stack[0]) {
             isRunning = true;
-            return stack.shift().call(context, ...(args || []), (...nextArgs) => {
-                isRunning = false;
-                memo.length = 0;
-                memo.push(...nextArgs);
-                _exe(...nextArgs);
-                return nextArgs[0];
-            });
+            return stack
+                .shift()
+                .call(context, ...(args || []), (...nextArgs) => {
+                    isRunning = false;
+                    memo.length = 0;
+                    memo.push(...nextArgs);
+                    _exe(...nextArgs);
+                    return nextArgs[0];
+                });
         }
     };
 
